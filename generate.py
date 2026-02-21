@@ -328,7 +328,7 @@ def main():
 
     print(f"\nBuilding HTML...", flush=True)
     html = build_html(results, model_dates)
-    out_path = os.path.join(os.path.dirname(__file__), "comparison.html")
+    out_path = os.path.join(os.path.dirname(__file__), "index.html")
     with open(out_path, "w") as f:
         f.write(html)
     print(f"Output: {out_path}")
