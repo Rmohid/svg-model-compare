@@ -12,7 +12,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
-API_KEY = json.load(open(os.path.expanduser("~/.config/jobsearch/api_keys.json")))["openrouter"]
+import subprocess
+API_KEY = os.environ.get("OPENROUTER_API_KEY") or subprocess.check_output(
+    ["secrets", "get", "OPENROUTER_API_KEY"], text=True
+).strip()
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
 
@@ -57,7 +60,9 @@ MODELS = [
     ("Kimi K2.5", "moonshotai/kimi-k2.5", "Jan 2026"),
     ("Kimi K2", "moonshotai/kimi-k2", "Jul 2025"),                       # 6mo ago SOTA
     ("MiniMax M2.5", "minimax/minimax-m2.5", "Feb 2026"),
+    ("GLM-5", "z-ai/glm-5", "Feb 2026"),
     # --- Qwen: full model then smaller quantizations ---
+    ("Qwen3 Max Thinking", "qwen/qwen3-max-thinking", "Feb 2026"),
     ("Qwen 3.5 397B", "qwen/qwen3.5-397b-a17b", "Feb 2026"),
     ("Qwen3 235B (Full)", "qwen/qwen3-235b-a22b", "Apr 2025"),
     ("Qwen3 32B", "qwen/qwen3-32b", "Apr 2025"),
@@ -88,11 +93,11 @@ CATEGORIES = [
         "Grok 3", "Grok 3 Mini",
     ]),
     ("Chinese Models (current + historical)", [
-        "MiniMax M2.5", "Kimi K2.5", "Kimi K2",
+        "GLM-5", "MiniMax M2.5", "Kimi K2.5", "Kimi K2",
         "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1",
     ]),
     ("Qwen -- Full to Small", [
-        "Qwen 3.5 397B",
+        "Qwen3 Max Thinking", "Qwen 3.5 397B",
         "Qwen3 235B (Full)", "Qwen3 32B", "Qwen3 14B", "Qwen3 8B",
         "Qwen 2.5 7B",
     ]),
