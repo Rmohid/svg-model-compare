@@ -35,6 +35,7 @@ MODELS = [
     ("Claude Sonnet 4", "anthropic/claude-sonnet-4", "May 2025"),        # 3mo ago SOTA
     ("Claude Opus 4.1", "anthropic/claude-opus-4.1", "Aug 2025"),        # 6mo ago SOTA
     # --- OpenAI ---
+    ("GPT-5.4", "openai/gpt-5.4", "Mar 2026"),
     ("GPT-5.2", "openai/gpt-5.2", "Dec 2025"),
     ("GPT-5.1", "openai/gpt-5.1", "Nov 2025"),
     ("GPT-5", "openai/gpt-5", "Jun 2025"),                              # 3mo ago SOTA
@@ -54,6 +55,7 @@ MODELS = [
     ("Grok 3", "x-ai/grok-3", "Jun 2025"),
     ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),                    # 6mo ago fast
     # --- Chinese Models ---
+    ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
     ("DeepSeek R1", "deepseek/deepseek-r1", "Jan 2025"),                 # 6mo ago SOTA
@@ -80,7 +82,7 @@ CATEGORIES = [
         "Claude Sonnet 4",
     ]),
     ("OpenAI (current + historical)", [
-        "GPT-5.2", "GPT-5.1",
+        "GPT-5.4", "GPT-5.2", "GPT-5.1",
         "GPT-5", "GPT-5 Mini",
         "GPT-4.1", "GPT-4.1 Mini",
     ]),
@@ -94,7 +96,7 @@ CATEGORIES = [
     ]),
     ("Chinese Models (current + historical)", [
         "GLM-5", "MiniMax M2.5", "Kimi K2.5", "Kimi K2",
-        "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1",
+        "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1",
     ]),
     ("Qwen -- Full to Small", [
         "Qwen3 Max Thinking", "Qwen 3.5 397B",
