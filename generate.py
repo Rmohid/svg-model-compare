@@ -36,6 +36,7 @@ MODELS = [
     ("Claude Opus 4.1", "anthropic/claude-opus-4.1", "Aug 2025"),        # 6mo ago SOTA
     # --- OpenAI ---
     ("GPT-5.4", "openai/gpt-5.4", "Mar 2026"),
+    ("GPT-5.4 Mini", "openai/gpt-5.4-mini", "Mar 2026"),
     ("GPT-5.2", "openai/gpt-5.2", "Dec 2025"),
     ("GPT-5.1", "openai/gpt-5.1", "Nov 2025"),
     ("GPT-5", "openai/gpt-5", "Jun 2025"),                              # 3mo ago SOTA
@@ -44,17 +45,23 @@ MODELS = [
     ("GPT-4.1 Mini", "openai/gpt-4.1-mini", "Apr 2025"),
     # --- Google ---
     ("Gemini 3.1 Pro", "google/gemini-3.1-pro-preview", "Feb 2026"),
+    ("Gemini 3.1 Flash Lite", "google/gemini-3.1-flash-lite-preview", "Mar 2026"),
     ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),
     ("Gemini 3 Flash", "google/gemini-3-flash-preview", "Dec 2025"),
     ("Gemini 2.5 Pro", "google/gemini-2.5-pro", "Jun 2025"),
     ("Gemini 2.5 Flash", "google/gemini-2.5-flash", "Jun 2025"),
     # --- xAI / Grok ---
+    ("Grok 4.20 Beta", "x-ai/grok-4.20-beta", "Mar 2026"),
     ("Grok 4", "x-ai/grok-4", "Jul 2025"),
     ("Grok 4.1 Fast", "x-ai/grok-4.1-fast", "Nov 2025"),
     ("Grok 4 Fast", "x-ai/grok-4-fast", "Sep 2025"),
     ("Grok 3", "x-ai/grok-3", "Jun 2025"),
     ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),                    # 6mo ago fast
     # --- Chinese Models ---
+    ("MiniMax M2.7", "minimax/minimax-m2.7", "Mar 2026"),
+    ("GLM-5 Turbo", "z-ai/glm-5-turbo", "Mar 2026"),
+    ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),
+    ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
     ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
@@ -63,13 +70,21 @@ MODELS = [
     ("Kimi K2", "moonshotai/kimi-k2", "Jul 2025"),                       # 6mo ago SOTA
     ("MiniMax M2.5", "minimax/minimax-m2.5", "Feb 2026"),
     ("GLM-5", "z-ai/glm-5", "Feb 2026"),
+    # --- NVIDIA ---
+    ("Nemotron 3 Super", "nvidia/nemotron-3-super-120b-a12b", "Mar 2026"),
+    # --- Mistral ---
+    ("Mistral Small 4", "mistralai/mistral-small-2603", "Mar 2026"),
     # --- Qwen: full model then smaller quantizations ---
     ("Qwen3 Max Thinking", "qwen/qwen3-max-thinking", "Feb 2026"),
     ("Qwen 3.5 397B", "qwen/qwen3.5-397b-a17b", "Feb 2026"),
+    ("Qwen 3.5 122B", "qwen/qwen3.5-122b-a10b", "Mar 2026"),
+    ("Qwen 3.5 35B", "qwen/qwen3.5-35b-a3b", "Mar 2026"),
+    ("Qwen 3.5 27B", "qwen/qwen3.5-27b", "Mar 2026"),
     ("Qwen3 235B (Full)", "qwen/qwen3-235b-a22b", "Apr 2025"),
     ("Qwen3 32B", "qwen/qwen3-32b", "Apr 2025"),
     ("Qwen3 14B", "qwen/qwen3-14b", "Apr 2025"),
     ("Qwen3 8B", "qwen/qwen3-8b", "Apr 2025"),
+    ("Qwen 3.5 9B", "qwen/qwen3.5-9b", "Mar 2026"),
     ("Qwen 2.5 7B", "qwen/qwen-2.5-7b-instruct", "Oct 2024"),
 ]
 
@@ -82,26 +97,36 @@ CATEGORIES = [
         "Claude Sonnet 4",
     ]),
     ("OpenAI (current + historical)", [
-        "GPT-5.4", "GPT-5.2", "GPT-5.1",
+        "GPT-5.4", "GPT-5.4 Mini",
+        "GPT-5.2", "GPT-5.1",
         "GPT-5", "GPT-5 Mini",
         "GPT-4.1", "GPT-4.1 Mini",
     ]),
     ("Google", [
-        "Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 3 Flash",
+        "Gemini 3.1 Pro", "Gemini 3.1 Flash Lite",
+        "Gemini 3 Pro", "Gemini 3 Flash",
         "Gemini 2.5 Pro", "Gemini 2.5 Flash",
     ]),
     ("xAI / Grok (current + historical)", [
-        "Grok 4.1 Fast", "Grok 4", "Grok 4 Fast",
+        "Grok 4.20 Beta", "Grok 4.1 Fast", "Grok 4", "Grok 4 Fast",
         "Grok 3", "Grok 3 Mini",
     ]),
     ("Chinese Models (current + historical)", [
+        "MiniMax M2.7", "GLM-5 Turbo", "Xiaomi MiMo-V2-Pro", "ByteDance Seed 2.0",
         "GLM-5", "MiniMax M2.5", "Kimi K2.5", "Kimi K2",
         "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1",
     ]),
+    ("NVIDIA", [
+        "Nemotron 3 Super",
+    ]),
+    ("Mistral", [
+        "Mistral Small 4",
+    ]),
     ("Qwen -- Full to Small", [
-        "Qwen3 Max Thinking", "Qwen 3.5 397B",
+        "Qwen3 Max Thinking", "Qwen 3.5 397B", "Qwen 3.5 122B",
+        "Qwen 3.5 35B", "Qwen 3.5 27B",
         "Qwen3 235B (Full)", "Qwen3 32B", "Qwen3 14B", "Qwen3 8B",
-        "Qwen 2.5 7B",
+        "Qwen 3.5 9B", "Qwen 2.5 7B",
     ]),
 ]
 
