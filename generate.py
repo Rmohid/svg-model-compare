@@ -360,7 +360,8 @@ def build_html(results, model_dates):
         background: #fff;
     }}
     .svg-container svg {{
-        max-width: 100%;
+        width: 100%;
+        height: auto;
         max-height: 400px;
     }}
     .error {{
