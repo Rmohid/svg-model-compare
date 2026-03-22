@@ -30,8 +30,8 @@ MODELS = [
     # --- Anthropic ---
     ("Claude Opus 4.6", "anthropic/claude-opus-4.6", "Feb 2026"),
     ("Claude Sonnet 4.6", "anthropic/claude-sonnet-4.6", "Feb 2026"),
-    ("Claude Opus 4.5", "anthropic/claude-opus-4.5", "May 2025"),
-    ("Claude Haiku 4.5", "anthropic/claude-haiku-4.5", "Jun 2025"),
+    ("Claude Opus 4.5", "anthropic/claude-opus-4.5", "Nov 2025"),
+    ("Claude Haiku 4.5", "anthropic/claude-haiku-4.5", "Oct 2025"),
     ("Claude Sonnet 4", "anthropic/claude-sonnet-4", "May 2025"),        # 3mo ago SOTA
     ("Claude Opus 4.1", "anthropic/claude-opus-4.1", "Aug 2025"),        # 6mo ago SOTA
     # --- OpenAI ---
@@ -88,45 +88,49 @@ MODELS = [
     ("Qwen 2.5 7B", "qwen/qwen-2.5-7b-instruct", "Oct 2024"),
 ]
 
-# Categories: newest first within each section, older SOTA models at the end
+# Categories: (vendor_group, [(family_label, [model_names_newest_first]), ...])
+# Models in the same family (lineage) share a row in the timeline table.
 CATEGORIES = [
-    ("Anthropic (current + historical)", [
-        "Claude Opus 4.6", "Claude Sonnet 4.6",
-        "Claude Opus 4.5", "Claude Haiku 4.5",
-        "Claude Opus 4.1",
-        "Claude Sonnet 4",
+    ("Anthropic", [
+        ("Claude Opus", ["Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1"]),
+        ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4"]),
+        ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
-    ("OpenAI (current + historical)", [
-        "GPT-5.4", "GPT-5.4 Mini",
-        "GPT-5.2", "GPT-5.1",
-        "GPT-5", "GPT-5 Mini",
-        "GPT-4.1", "GPT-4.1 Mini",
+    ("OpenAI", [
+        ("GPT (flagship)", ["GPT-5.4", "GPT-5.2", "GPT-5.1", "GPT-5", "GPT-4.1"]),
+        ("GPT Mini", ["GPT-5.4 Mini", "GPT-5 Mini", "GPT-4.1 Mini"]),
     ]),
     ("Google", [
-        "Gemini 3.1 Pro", "Gemini 3.1 Flash Lite",
-        "Gemini 3 Pro", "Gemini 3 Flash",
-        "Gemini 2.5 Pro", "Gemini 2.5 Flash",
+        ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
+        ("Gemini Flash", ["Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
     ]),
-    ("xAI / Grok (current + historical)", [
-        "Grok 4.20 Beta", "Grok 4.1 Fast", "Grok 4", "Grok 4 Fast",
-        "Grok 3", "Grok 3 Mini",
+    ("xAI / Grok", [
+        ("Grok (flagship)", ["Grok 4.20 Beta", "Grok 4", "Grok 3"]),
+        ("Grok Fast", ["Grok 4.1 Fast", "Grok 4 Fast"]),
+        ("Grok Mini", ["Grok 3 Mini"]),
     ]),
-    ("Chinese Models (current + historical)", [
-        "MiniMax M2.7", "GLM-5 Turbo", "Xiaomi MiMo-V2-Pro", "ByteDance Seed 2.0",
-        "GLM-5", "MiniMax M2.5", "Kimi K2.5", "Kimi K2",
-        "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1",
+    ("Chinese Models", [
+        ("DeepSeek", ["DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
+        ("Kimi", ["Kimi K2.5", "Kimi K2"]),
+        ("MiniMax", ["MiniMax M2.7", "MiniMax M2.5"]),
+        ("GLM", ["GLM-5 Turbo", "GLM-5"]),
+        ("Xiaomi", ["Xiaomi MiMo-V2-Pro"]),
+        ("ByteDance", ["ByteDance Seed 2.0"]),
     ]),
     ("NVIDIA", [
-        "Nemotron 3 Super",
+        ("Nemotron", ["Nemotron 3 Super"]),
     ]),
     ("Mistral", [
-        "Mistral Small 4",
+        ("Mistral Small", ["Mistral Small 4"]),
     ]),
-    ("Qwen -- Full to Small", [
-        "Qwen3 Max Thinking", "Qwen 3.5 397B", "Qwen 3.5 122B",
-        "Qwen 3.5 35B", "Qwen 3.5 27B",
-        "Qwen3 235B (Full)", "Qwen3 32B", "Qwen3 14B", "Qwen3 8B",
-        "Qwen 3.5 9B", "Qwen 2.5 7B",
+    ("Qwen", [
+        ("Qwen Max Thinking", ["Qwen3 Max Thinking"]),
+        ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
+        ("Qwen 35B", ["Qwen 3.5 35B"]),
+        ("Qwen 27-32B", ["Qwen 3.5 27B", "Qwen3 32B"]),
+        ("Qwen 14B", ["Qwen3 14B"]),
+        ("Qwen 8-9B", ["Qwen 3.5 9B", "Qwen3 8B"]),
+        ("Qwen 7B", ["Qwen 2.5 7B"]),
     ]),
 ]
 
@@ -187,36 +191,70 @@ def call_model(name, model_id):
 
 
 def build_html(results, model_dates):
-    """Build comparison HTML from results dict."""
+    """Build per-vendor timeline tables. Each row = model family, columns = release months."""
+    from datetime import datetime
+
+    def sort_months(month_set):
+        return sorted(month_set, key=lambda d: datetime.strptime(d, "%b %Y"), reverse=True)
+
     sections_html = []
-    for cat_name, model_names in CATEGORIES:
-        cards_html = []
-        for name in model_names:
-            r = results.get(name)
-            if not r:
-                continue
-            svg, elapsed, error = r
-            date = model_dates.get(name, "")
-            if error:
-                content = f'<div class="error">Error: {error}</div>'
-            else:
-                content = f'<div class="svg-container">{svg}</div>'
-            cards_html.append(f"""
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <h3>{name}</h3>
-                        <span class="release">Released: {date}</span>
-                    </div>
-                    <span class="time">{elapsed:.1f}s</span>
-                </div>
-                {content}
-            </div>""")
+    for cat_name, families in CATEGORIES:
+        # Collect months that have at least one model in this vendor group
+        group_months = set()
+        for _, model_names in families:
+            for name in model_names:
+                if name in model_dates and name in results:
+                    group_months.add(model_dates[name])
+        if not group_months:
+            continue
+        months = sort_months(group_months)
+
+        # Header row
+        header = '<tr><th class="corner"></th>'
+        for m in months:
+            header += f"<th>{m}</th>"
+        header += "</tr>"
+
+        # Family rows
+        rows = []
+        for family_label, model_names in families:
+            cells = [f'<td class="model-name">{family_label}</td>']
+            for m in months:
+                # Find the model in this family released this month
+                matched = None
+                for name in model_names:
+                    if model_dates.get(name) == m and name in results:
+                        matched = name
+                        break
+                if matched:
+                    svg, elapsed, error = results[matched]
+                    if error:
+                        cells.append(
+                            f'<td class="svg-cell">'
+                            f'<div class="cell-label">{matched}'
+                            f' <span class="time">{elapsed:.1f}s</span></div>'
+                            f'<div class="error">Error: {error}</div></td>'
+                        )
+                    else:
+                        cells.append(
+                            f'<td class="svg-cell">'
+                            f'<div class="cell-label">{matched}'
+                            f' <span class="time">{elapsed:.1f}s</span></div>'
+                            f'<div class="svg-container">{svg}</div></td>'
+                        )
+                else:
+                    cells.append('<td class="empty-cell"></td>')
+            rows.append(f'<tr>{"".join(cells)}</tr>')
 
         sections_html.append(f"""
         <section>
             <h2>{cat_name}</h2>
-            <div class="grid">{"".join(cards_html)}</div>
+            <div class="table-wrap">
+            <table>
+            <thead>{header}</thead>
+            <tbody>{"".join(rows)}</tbody>
+            </table>
+            </div>
         </section>""")
 
     total = len(results)
@@ -258,40 +296,60 @@ def build_html(results, model_dates):
         padding-bottom: 0.5rem;
         margin-bottom: 1rem;
     }}
-    .grid {{
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-        gap: 1.5rem;
+    .table-wrap {{
+        overflow-x: auto;
     }}
-    .card {{
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 8px;
-        overflow: hidden;
+    table {{
+        border-collapse: separate;
+        border-spacing: 0;
     }}
-    .card-header {{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    thead th {{
+        background: #111;
+        color: #ccc;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.6rem 1rem;
+        border-bottom: 2px solid #444;
+        white-space: nowrap;
+        text-align: center;
+    }}
+    thead th.corner {{
+        min-width: 160px;
+        background: #111;
+    }}
+    td.model-name {{
+        background: #141414;
+        min-width: 160px;
+        max-width: 160px;
         padding: 0.75rem 1rem;
-        background: #222;
-        border-bottom: 1px solid #333;
-    }}
-    .card-header h3 {{
-        font-size: 0.95rem;
+        border-right: 2px solid #333;
+        border-bottom: 1px solid #222;
+        vertical-align: middle;
+        font-weight: 600;
+        font-size: 0.9rem;
         color: #fff;
     }}
-    .release {{
-        font-size: 0.75rem;
-        color: #666;
+    td.svg-cell {{
+        padding: 0;
+        border-bottom: 1px solid #222;
+        min-width: 380px;
+        vertical-align: top;
     }}
-    .time {{
+    .cell-label {{
+        padding: 0.4rem 0.75rem;
+        background: #222;
         font-size: 0.8rem;
+        color: #ccc;
+        border-bottom: 1px solid #333;
+        white-space: nowrap;
+    }}
+    .cell-label .time {{
         color: #888;
         background: #2a2a2a;
-        padding: 2px 8px;
-        border-radius: 4px;
-        white-space: nowrap;
+        padding: 1px 6px;
+        border-radius: 3px;
+        font-size: 0.75rem;
+        margin-left: 0.5rem;
     }}
     .svg-container {{
         padding: 1rem;
@@ -314,6 +372,14 @@ def build_html(results, model_dates):
         align-items: center;
         justify-content: center;
         text-align: center;
+        background: #1a1a1a;
+    }}
+    td.empty-cell {{
+        background: #0e0e0e;
+        border-bottom: 1px solid #222;
+        min-width: 0;
+        width: 0;
+        padding: 0;
     }}
 </style>
 </head>
