@@ -31,18 +31,22 @@ MODELS = [
     ("Claude Opus 4.6", "anthropic/claude-opus-4.6", "Feb 2026"),
     ("Claude Sonnet 4.6", "anthropic/claude-sonnet-4.6", "Feb 2026"),
     ("Claude Opus 4.5", "anthropic/claude-opus-4.5", "Nov 2025"),
+    ("Claude Sonnet 4.5", "anthropic/claude-sonnet-4.5", "Sep 2025"),
     ("Claude Haiku 4.5", "anthropic/claude-haiku-4.5", "Oct 2025"),
-    ("Claude Sonnet 4", "anthropic/claude-sonnet-4", "May 2025"),        # 3mo ago SOTA
-    ("Claude Opus 4.1", "anthropic/claude-opus-4.1", "Aug 2025"),        # 6mo ago SOTA
+    ("Claude Opus 4.1", "anthropic/claude-opus-4.1", "Aug 2025"),
+    ("Claude Sonnet 4", "anthropic/claude-sonnet-4", "May 2025"),
+    ("Claude Opus 4", "anthropic/claude-opus-4", "May 2025"),
     # --- OpenAI ---
     ("GPT-5.4", "openai/gpt-5.4", "Mar 2026"),
     ("GPT-5.4 Mini", "openai/gpt-5.4-mini", "Mar 2026"),
     ("GPT-5.2", "openai/gpt-5.2", "Dec 2025"),
     ("GPT-5.1", "openai/gpt-5.1", "Nov 2025"),
-    ("GPT-5", "openai/gpt-5", "Jun 2025"),                              # 3mo ago SOTA
-    ("GPT-5 Mini", "openai/gpt-5-mini", "Jun 2025"),                    # 6mo ago fast
+    ("GPT-5", "openai/gpt-5", "Jun 2025"),
+    ("GPT-5 Mini", "openai/gpt-5-mini", "Jun 2025"),
     ("GPT-4.1", "openai/gpt-4.1", "Apr 2025"),
     ("GPT-4.1 Mini", "openai/gpt-4.1-mini", "Apr 2025"),
+    ("o3", "openai/o3", "Apr 2025"),
+    ("o4 Mini", "openai/o4-mini", "Apr 2025"),
     # --- Google ---
     ("Gemini 3.1 Pro", "google/gemini-3.1-pro-preview", "Feb 2026"),
     ("Gemini 3.1 Flash Lite", "google/gemini-3.1-flash-lite-preview", "Mar 2026"),
@@ -70,10 +74,18 @@ MODELS = [
     ("Kimi K2", "moonshotai/kimi-k2", "Jul 2025"),                       # 6mo ago SOTA
     ("MiniMax M2.5", "minimax/minimax-m2.5", "Feb 2026"),
     ("GLM-5", "z-ai/glm-5", "Feb 2026"),
+    # --- Meta ---
+    ("Llama 4 Maverick", "meta-llama/llama-4-maverick", "Apr 2025"),
+    ("Llama 4 Scout", "meta-llama/llama-4-scout", "Apr 2025"),
     # --- NVIDIA ---
     ("Nemotron 3 Super", "nvidia/nemotron-3-super-120b-a12b", "Mar 2026"),
     # --- Mistral ---
+    ("Mistral Large 3", "mistralai/mistral-large-2512", "Dec 2025"),
     ("Mistral Small 4", "mistralai/mistral-small-2603", "Mar 2026"),
+    # --- Amazon ---
+    ("Nova Premier", "amazon/nova-premier-v1", "Oct 2025"),
+    # --- Cohere ---
+    ("Command A", "cohere/command-a", "Mar 2025"),
     # --- Qwen: full model then smaller quantizations ---
     ("Qwen3 Max Thinking", "qwen/qwen3-max-thinking", "Feb 2026"),
     ("Qwen 3.5 397B", "qwen/qwen3.5-397b-a17b", "Feb 2026"),
@@ -95,7 +107,9 @@ PRICING = {
     "Claude Opus 4.5": "$5 / $25 /M",
     "Claude Haiku 4.5": "$1 / $5 /M",
     "Claude Sonnet 4": "$3 / $15 /M",
+    "Claude Sonnet 4.5": "$3 / $15 /M",
     "Claude Opus 4.1": "$15 / $75 /M",
+    "Claude Opus 4": "$15 / $75 /M",
     "GPT-5.4": "$2.50 / $15 /M",
     "GPT-5.4 Mini": "$0.75 / $4.50 /M",
     "GPT-5.2": "$1.75 / $14 /M",
@@ -104,6 +118,8 @@ PRICING = {
     "GPT-5 Mini": "$0.25 / $2 /M",
     "GPT-4.1": "$2 / $8 /M",
     "GPT-4.1 Mini": "$0.40 / $1.60 /M",
+    "o3": "$2 / $8 /M",
+    "o4 Mini": "$1.10 / $4.40 /M",
     "Gemini 3.1 Pro": "$2 / $12 /M",
     "Gemini 3.1 Flash Lite": "$0.25 / $1.50 /M",
     "Gemini 3 Pro": "$2 / $12 /M",
@@ -128,8 +144,13 @@ PRICING = {
     "Kimi K2": "$0.50 / $2.40 /M",
     "MiniMax M2.5": "$0.30 / $1.10 /M",
     "GLM-5": "$0.95 / $2.55 /M",
+    "Llama 4 Maverick": "$0.15 / $0.60 /M",
+    "Llama 4 Scout": "$0.08 / $0.30 /M",
     "Nemotron 3 Super": "$0.10 / $0.50 /M",
+    "Mistral Large 3": "$0.50 / $1.50 /M",
     "Mistral Small 4": "$0.15 / $0.60 /M",
+    "Nova Premier": "$2.50 / $12.50 /M",
+    "Command A": "$2.50 / $10 /M",
     "Qwen3 Max Thinking": "$1.20 / $6 /M",
     "Qwen 3.5 397B": "$0.55 / $3.50 /M",
     "Qwen 3.5 122B": "$0.26 / $2.08 /M",
@@ -147,13 +168,14 @@ PRICING = {
 # Models in the same family (lineage) share a row in the timeline table.
 CATEGORIES = [
     ("Anthropic", [
-        ("Claude Opus", ["Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1"]),
-        ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4"]),
+        ("Claude Opus", ["Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
+        ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
     ("OpenAI", [
         ("GPT (flagship)", ["GPT-5.4", "GPT-5.2", "GPT-5.1", "GPT-5", "GPT-4.1"]),
         ("GPT Mini", ["GPT-5.4 Mini", "GPT-5 Mini", "GPT-4.1 Mini"]),
+        ("Reasoning", ["o3", "o4 Mini"]),
     ]),
     ("Google", [
         ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
@@ -172,11 +194,21 @@ CATEGORIES = [
         ("Xiaomi", ["Xiaomi MiMo-V2-Pro"]),
         ("ByteDance", ["ByteDance Seed 2.0"]),
     ]),
+    ("Meta", [
+        ("Llama 4", ["Llama 4 Maverick", "Llama 4 Scout"]),
+    ]),
     ("NVIDIA", [
         ("Nemotron", ["Nemotron 3 Super"]),
     ]),
     ("Mistral", [
+        ("Mistral Large", ["Mistral Large 3"]),
         ("Mistral Small", ["Mistral Small 4"]),
+    ]),
+    ("Amazon", [
+        ("Nova", ["Nova Premier"]),
+    ]),
+    ("Cohere", [
+        ("Command", ["Command A"]),
     ]),
     ("Qwen", [
         ("Qwen Max Thinking", ["Qwen3 Max Thinking"]),
