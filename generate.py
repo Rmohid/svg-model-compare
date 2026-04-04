@@ -39,6 +39,7 @@ MODELS = [
     # --- OpenAI ---
     ("GPT-5.4", "openai/gpt-5.4", "Mar 2026"),
     ("GPT-5.4 Mini", "openai/gpt-5.4-mini", "Mar 2026"),
+    ("GPT-5.4 Nano", "openai/gpt-5.4-nano", "Mar 2026"),
     ("GPT-5.2", "openai/gpt-5.2", "Dec 2025"),
     ("GPT-5.1", "openai/gpt-5.1", "Nov 2025"),
     ("GPT-5", "openai/gpt-5", "Jun 2025"),
@@ -54,6 +55,9 @@ MODELS = [
     ("Gemini 3 Flash", "google/gemini-3-flash-preview", "Dec 2025"),
     ("Gemini 2.5 Pro", "google/gemini-2.5-pro", "Jun 2025"),
     ("Gemini 2.5 Flash", "google/gemini-2.5-flash", "Jun 2025"),
+    # --- Google (Open Weight) ---
+    ("Gemma 4 31B", "google/gemma-4-31b-it", "Apr 2026"),
+    ("Gemma 4 26B-A4B", "google/gemma-4-26b-a4b-it", "Apr 2026"),
     # --- xAI / Grok ---
     ("Grok 4.20 Beta", "x-ai/grok-4.20-beta", "Mar 2026"),
     ("Grok 4", "x-ai/grok-4", "Jul 2025"),
@@ -63,6 +67,7 @@ MODELS = [
     ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),                    # 6mo ago fast
     # --- Chinese Models ---
     ("MiniMax M2.7", "minimax/minimax-m2.7", "Mar 2026"),
+    ("GLM-5V-Turbo", "z-ai/glm-5v-turbo", "Apr 2026"),
     ("GLM-5 Turbo", "z-ai/glm-5-turbo", "Mar 2026"),
     ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),
     ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
@@ -87,6 +92,7 @@ MODELS = [
     # --- Cohere ---
     ("Command A", "cohere/command-a", "Mar 2025"),
     # --- Qwen: full model then smaller quantizations ---
+    ("Qwen 3.6 Plus", "qwen/qwen3.6-plus:free", "Apr 2026"),
     ("Qwen3 Max Thinking", "qwen/qwen3-max-thinking", "Feb 2026"),
     ("Qwen 3.5 397B", "qwen/qwen3.5-397b-a17b", "Feb 2026"),
     ("Qwen 3.5 122B", "qwen/qwen3.5-122b-a10b", "Mar 2026"),
@@ -112,6 +118,7 @@ PRICING = {
     "Claude Opus 4": "$15 / $75 /M",
     "GPT-5.4": "$2.50 / $15 /M",
     "GPT-5.4 Mini": "$0.75 / $4.50 /M",
+    "GPT-5.4 Nano": "$0.20 / $1.25 /M",
     "GPT-5.2": "$1.75 / $14 /M",
     "GPT-5.1": "$1.25 / $10 /M",
     "GPT-5": "$1.25 / $10 /M",
@@ -126,6 +133,8 @@ PRICING = {
     "Gemini 3 Flash": "$0.50 / $3 /M",
     "Gemini 2.5 Pro": "$1.25 / $10 /M",
     "Gemini 2.5 Flash": "$0.30 / $2.50 /M",
+    "Gemma 4 31B": "$0.14 / $0.40 /M",
+    "Gemma 4 26B-A4B": "$0.13 / $0.40 /M",
     "Grok 4.20 Beta": "$2 / $6 /M",
     "Grok 4": "$3 / $15 /M",
     "Grok 4.1 Fast": "$0.20 / $0.50 /M",
@@ -133,6 +142,7 @@ PRICING = {
     "Grok 3": "$3 / $15 /M",
     "Grok 3 Mini": "$0.30 / $0.50 /M",
     "MiniMax M2.7": "$0.30 / $1.20 /M",
+    "GLM-5V-Turbo": "$1.20 / $4.00 /M",
     "GLM-5 Turbo": "$0.96 / $3.20 /M",
     "Xiaomi MiMo-V2-Pro": "$1 / $3 /M",
     "ByteDance Seed 2.0": "$0.25 / $2 /M",
@@ -151,6 +161,7 @@ PRICING = {
     "Mistral Small 4": "$0.15 / $0.60 /M",
     "Nova Premier": "$2.50 / $12.50 /M",
     "Command A": "$2.50 / $10 /M",
+    "Qwen 3.6 Plus": "Free /M",
     "Qwen3 Max Thinking": "$1.20 / $6 /M",
     "Qwen 3.5 397B": "$0.55 / $3.50 /M",
     "Qwen 3.5 122B": "$0.26 / $2.08 /M",
@@ -174,12 +185,13 @@ CATEGORIES = [
     ]),
     ("OpenAI", [
         ("GPT (flagship)", ["GPT-5.4", "GPT-5.2", "GPT-5.1", "GPT-5", "GPT-4.1"]),
-        ("GPT Mini", ["GPT-5.4 Mini", "GPT-5 Mini", "GPT-4.1 Mini"]),
+        ("GPT Mini", ["GPT-5.4 Mini", "GPT-5.4 Nano", "GPT-5 Mini", "GPT-4.1 Mini"]),
         ("Reasoning", ["o3", "o4 Mini"]),
     ]),
     ("Google", [
         ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
         ("Gemini Flash", ["Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
+        ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
         ("Grok (flagship)", ["Grok 4.20 Beta", "Grok 4", "Grok 3"]),
@@ -190,7 +202,7 @@ CATEGORIES = [
         ("DeepSeek", ["DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
         ("Kimi", ["Kimi K2.5", "Kimi K2"]),
         ("MiniMax", ["MiniMax M2.7", "MiniMax M2.5"]),
-        ("GLM", ["GLM-5 Turbo", "GLM-5"]),
+        ("GLM", ["GLM-5V-Turbo", "GLM-5 Turbo", "GLM-5"]),
         ("Xiaomi", ["Xiaomi MiMo-V2-Pro"]),
         ("ByteDance", ["ByteDance Seed 2.0"]),
     ]),
@@ -211,6 +223,7 @@ CATEGORIES = [
         ("Command", ["Command A"]),
     ]),
     ("Qwen", [
+        ("Qwen Plus", ["Qwen 3.6 Plus"]),
         ("Qwen Max Thinking", ["Qwen3 Max Thinking"]),
         ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
         ("Qwen 35B", ["Qwen 3.5 35B"]),
