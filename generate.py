@@ -37,6 +37,8 @@ MODELS = [
     ("Claude Sonnet 4", "anthropic/claude-sonnet-4", "May 2025"),
     ("Claude Opus 4", "anthropic/claude-opus-4", "May 2025"),
     # --- OpenAI ---
+    ("GPT-5.5 Pro", "openai/gpt-5.5-pro", "Apr 2026"),
+    ("GPT-5.5", "openai/gpt-5.5", "Apr 2026"),
     ("GPT-5.4", "openai/gpt-5.4", "Mar 2026"),
     ("GPT-5.4 Mini", "openai/gpt-5.4-mini", "Mar 2026"),
     ("GPT-5.4 Nano", "openai/gpt-5.4-nano", "Mar 2026"),
@@ -69,12 +71,20 @@ MODELS = [
     ("MiniMax M2.7", "minimax/minimax-m2.7", "Mar 2026"),
     ("GLM-5V-Turbo", "z-ai/glm-5v-turbo", "Apr 2026"),
     ("GLM-5 Turbo", "z-ai/glm-5-turbo", "Mar 2026"),
+    ("Xiaomi MiMo-V2.5-Pro", "xiaomi/mimo-v2.5-pro", "Apr 2026"),
+    ("Xiaomi MiMo-V2.5", "xiaomi/mimo-v2.5", "Apr 2026"),
     ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),
     ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
+    ("Tencent Hy3 Preview", "tencent/hy3-preview:free", "Apr 2026"),
+    ("Ling 2.6 1T", "inclusionai/ling-2.6-1t:free", "Apr 2026"),
+    ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash:free", "Apr 2026"),
+    ("DeepSeek V4 Pro", "deepseek/deepseek-v4-pro", "Apr 2026"),
+    ("DeepSeek V4 Flash", "deepseek/deepseek-v4-flash", "Apr 2026"),
     ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
     ("DeepSeek R1", "deepseek/deepseek-r1", "Jan 2025"),                 # 6mo ago SOTA
+    ("Kimi K2.6", "moonshotai/kimi-k2.6", "Apr 2026"),
     ("Kimi K2.5", "moonshotai/kimi-k2.5", "Jan 2026"),
     ("Kimi K2", "moonshotai/kimi-k2", "Jul 2025"),                       # 6mo ago SOTA
     ("MiniMax M2.5", "minimax/minimax-m2.5", "Feb 2026"),
@@ -116,6 +126,8 @@ PRICING = {
     "Claude Sonnet 4.5": "$3 / $15 /M",
     "Claude Opus 4.1": "$15 / $75 /M",
     "Claude Opus 4": "$15 / $75 /M",
+    "GPT-5.5 Pro": "$30 / $180 /M",
+    "GPT-5.5": "$5 / $30 /M",
     "GPT-5.4": "$2.50 / $15 /M",
     "GPT-5.4 Mini": "$0.75 / $4.50 /M",
     "GPT-5.4 Nano": "$0.20 / $1.25 /M",
@@ -144,12 +156,20 @@ PRICING = {
     "MiniMax M2.7": "$0.30 / $1.20 /M",
     "GLM-5V-Turbo": "$1.20 / $4.00 /M",
     "GLM-5 Turbo": "$0.96 / $3.20 /M",
+    "Xiaomi MiMo-V2.5-Pro": "$1 / $3 /M",
+    "Xiaomi MiMo-V2.5": "$0.40 / $2 /M",
     "Xiaomi MiMo-V2-Pro": "$1 / $3 /M",
     "ByteDance Seed 2.0": "$0.25 / $2 /M",
+    "Tencent Hy3 Preview": "Free /M",
+    "Ling 2.6 1T": "Free /M",
+    "Ling 2.6 Flash": "Free /M",
+    "DeepSeek V4 Pro": "$1.74 / $3.48 /M",
+    "DeepSeek V4 Flash": "$0.14 / $0.28 /M",
     "DeepSeek V3.2 Speciale": "$0.40 / $1.20 /M",
     "DeepSeek V3.2": "$0.25 / $0.40 /M",
     "DeepSeek V3.1": "$0.19 / $0.87 /M",
     "DeepSeek R1": "$0.70 / $2.50 /M",
+    "Kimi K2.6": "$0.74 / $4.66 /M",
     "Kimi K2.5": "$0.45 / $2.20 /M",
     "Kimi K2": "$0.50 / $2.40 /M",
     "MiniMax M2.5": "$0.30 / $1.10 /M",
@@ -184,7 +204,8 @@ CATEGORIES = [
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
     ("OpenAI", [
-        ("GPT (flagship)", ["GPT-5.4", "GPT-5.2", "GPT-5.1", "GPT-5", "GPT-4.1"]),
+        ("GPT Pro", ["GPT-5.5 Pro"]),
+        ("GPT (flagship)", ["GPT-5.5", "GPT-5.4", "GPT-5.2", "GPT-5.1", "GPT-5", "GPT-4.1"]),
         ("GPT Mini", ["GPT-5.4 Mini", "GPT-5.4 Nano", "GPT-5 Mini", "GPT-4.1 Mini"]),
         ("Reasoning", ["o3", "o4 Mini"]),
     ]),
@@ -199,12 +220,17 @@ CATEGORIES = [
         ("Grok Mini", ["Grok 3 Mini"]),
     ]),
     ("Chinese Models", [
-        ("DeepSeek", ["DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
-        ("Kimi", ["Kimi K2.5", "Kimi K2"]),
+        ("DeepSeek", ["DeepSeek V4 Pro", "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
+        ("DeepSeek Flash", ["DeepSeek V4 Flash"]),
+        ("Kimi", ["Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
         ("MiniMax", ["MiniMax M2.7", "MiniMax M2.5"]),
         ("GLM", ["GLM-5V-Turbo", "GLM-5 Turbo", "GLM-5"]),
-        ("Xiaomi", ["Xiaomi MiMo-V2-Pro"]),
+        ("Xiaomi Pro", ["Xiaomi MiMo-V2.5-Pro", "Xiaomi MiMo-V2-Pro"]),
+        ("Xiaomi", ["Xiaomi MiMo-V2.5"]),
         ("ByteDance", ["ByteDance Seed 2.0"]),
+        ("Tencent", ["Tencent Hy3 Preview"]),
+        ("inclusionAI Ling (1T)", ["Ling 2.6 1T"]),
+        ("inclusionAI Ling (Flash)", ["Ling 2.6 Flash"]),
     ]),
     ("Meta", [
         ("Llama 4", ["Llama 4 Maverick", "Llama 4 Scout"]),
@@ -267,7 +293,8 @@ def call_model(name, model_id):
         with urlopen(req, timeout=300) as resp:
             data = json.loads(resp.read())
         elapsed = time.time() - start
-        content = data["choices"][0]["message"]["content"]
+        msg = data["choices"][0]["message"]
+        content = msg.get("content") or msg.get("reasoning") or ""
         # Strip markdown fences if present
         content = re.sub(r"```(?:svg|xml|html)?\s*\n?", "", content)
         content = content.replace("```", "")
