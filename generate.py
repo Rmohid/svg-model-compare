@@ -28,6 +28,7 @@ Start with <svg and end with </svg>."""
 # (display_name, model_id, release_date_str)
 MODELS = [
     # --- Anthropic ---
+    ("Claude Opus 4.7", "anthropic/claude-opus-4.7", "Apr 2026"),
     ("Claude Opus 4.6", "anthropic/claude-opus-4.6", "Feb 2026"),
     ("Claude Sonnet 4.6", "anthropic/claude-sonnet-4.6", "Feb 2026"),
     ("Claude Opus 4.5", "anthropic/claude-opus-4.5", "Nov 2025"),
@@ -118,6 +119,7 @@ MODELS = [
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
 PRICING = {
+    "Claude Opus 4.7": "$5 / $25 /M",
     "Claude Opus 4.6": "$5 / $25 /M",
     "Claude Sonnet 4.6": "$3 / $15 /M",
     "Claude Opus 4.5": "$5 / $25 /M",
@@ -195,11 +197,109 @@ PRICING = {
     "Qwen 2.5 7B": "$0.04 / $0.10 /M",
 }
 
+# Intelligence / price / speed data sourced from the Artificial Analysis leaderboard.
+# (intel_index, blended_price_usd_per_Mtok, output_tokens_per_sec)
+# Models not in this dict are simply not plotted on the Chart view.
+AA_SNAPSHOT_DATE = "2026-04-24"
+INTEL_DATA = {
+    "Claude Opus 4.7":         (57, 10.00, 46),
+    "Claude Sonnet 4.6":       (52, 6.00, 51),
+    "Claude Haiku 4.5":        (37, 2.00, 98),
+    "GPT-5.5":                 (60, 11.25, None),
+    "GPT-5.5 Pro":             (60, 67.50, None, "est"),  # Same model tier as GPT-5.5 xhigh; OR-blended pricing
+    "GPT-5.4":                 (57, 5.63, 79),
+    "GPT-5.4 Mini":            (49, 1.69, 162),
+    "GPT-5.4 Nano":            (44, 0.46, 157),
+    "o3":                      (38, 3.50, 93),
+    "Gemini 3.1 Pro":          (57, 4.50, 130),
+    "Gemini 3.1 Flash Lite":   (34, 0.56, 321),
+    "Gemini 3 Pro":            (41, 4.50, None),
+    "Gemini 3 Flash":          (46, 1.13, 176),
+    "Gemini 2.5 Flash":        (30, 0.26, 250, "est"),  # Historical AA numbers; kept as Google Flash exception
+    "Gemma 4 31B":             (39, 0.00, 35),
+    "Gemma 4 26B-A4B":         (31, 0.20, None),
+    "Grok 4.20 Beta":          (49, 3.00, 163),
+    "Grok 4.1 Fast":           (39, 0.28, 142),
+    "Grok 3 Mini":             (32, 0.35, 207),
+    "MiniMax M2.7":            (50, 0.53, 51),
+    "DeepSeek V4 Pro":         (52, 2.17, 33),
+    "DeepSeek V4 Flash":       (47, 0.17, 84),
+    "DeepSeek V3.2":           (42, 0.32, 63),
+    "DeepSeek V3.2 Speciale":  (29, None, None),
+    "Kimi K2.6":               (54, 1.71, 112),
+    "Kimi K2.5":               (37, 1.20, 38),
+    "GLM-5":                   (50, 1.55, 68),
+    "Xiaomi MiMo-V2-Pro":      (49, None, None),
+    "Xiaomi MiMo-V2.5-Pro":    (54, 1.50, 60),
+    "Ling 2.6 1T":             (34, 0.85, 68),
+    "Ling 2.6 Flash":          (26, 0.15, 199),
+    "Llama 4 Maverick":        (18, 0.47, 112),
+    "Llama 4 Scout":           (14, 0.29, 143),
+    "Nemotron 3 Super":        (36, 0.41, 154),
+    "Mistral Large 3":         (23, 0.75, 50),
+    "Mistral Small 4":         (28, 0.26, 151),
+    "Nova Premier":            (19, 5.00, 26),
+    "Command A":               (13, 4.38, 40),
+    "Qwen 3.6 Plus":           (50, 1.13, 53),
+    "Qwen 3.5 397B":           (45, 1.35, 53),
+    "Qwen 3.5 122B":           (42, 1.10, 142),
+    "Qwen 3.5 35B":            (31, 0.69, 154),
+    "Qwen 3.5 9B":             (32, 0.11, 48),
+}
+
+# Models marked Free on OpenRouter snap to this x-value so log scale still works.
+FREE_PRICE_SENTINEL = 0.01
+
+def model_provider(name):
+    if name.startswith("Claude"): return "Anthropic"
+    if name.startswith(("GPT", "o3", "o4")): return "OpenAI"
+    if name.startswith(("Gemini", "Gemma")): return "Google"
+    if name.startswith("Grok"): return "xAI"
+    if name.startswith("Llama"): return "Meta"
+    if name.startswith("DeepSeek"): return "DeepSeek"
+    if name.startswith("Qwen"): return "Alibaba"
+    if name.startswith("GLM"): return "Z AI"
+    if name.startswith("Mistral"): return "Mistral"
+    if name.startswith("MiniMax"): return "MiniMax"
+    if name.startswith("Kimi"): return "Kimi"
+    if name.startswith("Command"): return "Cohere"
+    if name.startswith("Nova"): return "Amazon"
+    if name.startswith("Nemotron"): return "NVIDIA"
+    if name.startswith("Xiaomi"): return "Xiaomi"
+    if name.startswith("Ling"): return "inclusionAI"
+    if name.startswith("Tencent"): return "Tencent"
+    if name.startswith("ByteDance"): return "ByteDance"
+    return "Other"
+
+PROVIDER_COLORS = {
+    # Western vendors — distinctive primary hues
+    "Anthropic":   "#D97757",  # terracotta (brand)
+    "OpenAI":      "#10A37F",  # jade teal (brand)
+    "Google":      "#4285F4",  # Google blue (brand)
+    "Meta":        "#8B5CF6",  # violet (differentiated from Google blue)
+    "xAI":         "#FFD700",  # gold
+    "Amazon":      "#FF9900",  # amazon orange (brand)
+    "NVIDIA":      "#76B900",  # nvidia green (brand)
+    "Mistral":     "#FA520F",  # vermillion (brand)
+    "Cohere":      "#39594D",  # forest green (brand)
+    # Chinese & other vendors — no orange to avoid colliding with Anthropic/Amazon
+    "Alibaba":     "#C026D3",  # magenta-purple (was orange)
+    "DeepSeek":    "#4D6BFE",  # royal blue (brand)
+    "Z AI":        "#7B68EE",  # medium purple
+    "MiniMax":     "#E91E63",  # hot pink
+    "Kimi":        "#A78BFA",  # lavender
+    "Xiaomi":      "#DC2626",  # deep red (was orange)
+    "inclusionAI": "#00BCD4",  # cyan
+    "Tencent":     "#00A1E0",  # sky blue
+    "ByteDance":   "#FF3366",  # rose
+    "Other":       "#888888",
+}
+
 # Categories: (vendor_group, [(family_label, [model_names_newest_first]), ...])
 # Models in the same family (lineage) share a row in the timeline table.
 CATEGORIES = [
     ("Anthropic", [
-        ("Claude Opus", ["Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
+        ("Claude Opus", ["Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
         ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
@@ -428,6 +528,163 @@ def build_html(results, model_dates):
             <div class="grid">{"".join(cards_html)}</div>
         </section>""")
 
+    # --- Chart view (intelligence vs cost scatter) ---
+    def openrouter_blended(model_name):
+        """Parse '$X / $Y /M' → (3X + Y)/4. Returns None for 'Free' or malformed."""
+        s = PRICING.get(model_name, "")
+        m = re.match(r"\$([\d.]+)\s*/\s*\$([\d.]+)", s)
+        if not m:
+            return None
+        inp, out = float(m.group(1)), float(m.group(2))
+        return (inp * 3 + out) / 4
+
+    # Speed stats exclude None
+    speeds_present = [row[2] for row in INTEL_DATA.values() if row[2] is not None]
+    max_speed = max(speeds_present) if speeds_present else 1
+    default_speed = sum(speeds_present) / len(speeds_present) if speeds_present else 50
+
+    by_provider = {}
+    plotted_points = []  # flat list for Pareto
+    for name, row in INTEL_DATA.items():
+        intel, price, speed = row[0], row[1], row[2]
+        est = (len(row) > 3 and row[3] == "est")
+        is_free_on_openrouter = "Free" in PRICING.get(name, "")
+
+        # Choose x (price) — AA first, then OR blended fallback, then sentinel for free
+        if is_free_on_openrouter:
+            x = FREE_PRICE_SENTINEL
+            display_free = True
+        elif price is not None and price > 0:
+            x = price
+            display_free = False
+        else:
+            # AA says 0 or None: use OR blended if we have it
+            or_price = openrouter_blended(name)
+            if or_price is not None and or_price > 0:
+                x = or_price
+                display_free = False
+            else:
+                # No usable price anywhere — skip rather than pretend
+                continue
+
+        prov = model_provider(name)
+        eff_speed = speed if speed is not None else default_speed
+        r = 6 + 22 * (eff_speed / max_speed) ** 0.5
+        by_provider.setdefault(prov, []).append({
+            "x": x,
+            "y": intel,
+            "r": r,
+            "label": name,
+            "price_raw": price if (price is not None and price > 0) else None,
+            "speed_raw": speed,
+            "free": display_free,
+            "est": est,
+        })
+        plotted_points.append((x, intel))
+
+    plotted = sum(len(v) for v in by_provider.values())
+
+    # Pareto frontier: sorted by price ascending, keeping points that raise the max intel.
+    sorted_pts = sorted(plotted_points, key=lambda p: p[0])
+    frontier = []
+    best_y = -1
+    for x, y in sorted_pts:
+        if y > best_y:
+            frontier.append({"x": x, "y": y})
+            best_y = y
+
+    datasets_js = []
+    for prov, pts in sorted(by_provider.items(), key=lambda kv: kv[0]):
+        color = PROVIDER_COLORS.get(prov, "#888")
+        datasets_js.append({
+            "label": prov,
+            "type": "bubble",
+            "data": pts,
+            "backgroundColor": color + "CC",
+            "borderColor": color,
+            "borderWidth": 1.5,
+        })
+
+    # Pareto frontier — drawn as a dashed line behind the bubbles.
+    frontier_dataset = {
+        "label": "Best-value frontier",
+        "type": "line",
+        "data": frontier,
+        "borderColor": "rgba(255,255,255,0.35)",
+        "borderDash": [6, 4],
+        "borderWidth": 1.5,
+        "pointRadius": 0,
+        "fill": False,
+        "tension": 0,
+        "order": 99,
+    }
+    chart_payload = json.dumps([frontier_dataset] + datasets_js)
+
+    chart_html = f"""
+    <div class="chart-meta">
+      Data from <a href="https://artificialanalysis.ai/leaderboards/models" target="_blank" rel="noopener">Artificial Analysis</a>
+      (snapshot {AA_SNAPSHOT_DATE}).
+      X = blended price USD/Mtok (log). Y = intelligence index. Bubble area = output tokens/sec.
+      Free-on-OpenRouter models are plotted at $0.01 so they remain visible on a log scale.
+      Showing {plotted} of {len(results)} models that have AA intel + price.
+    </div>
+    <div class="chart-wrap"><canvas id="value-chart"></canvas></div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {{
+      var datasets = {chart_payload};
+      var ctx = document.getElementById('value-chart').getContext('2d');
+      new Chart(ctx, {{
+        type: 'bubble',
+        data: {{ datasets: datasets }},
+        options: {{
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {{
+            x: {{
+              type: 'logarithmic',
+              title: {{ display: true, text: 'Blended price (USD / Mtok, log)', color: '#ccc' }},
+              ticks: {{
+                color: '#aaa',
+                callback: function(v) {{
+                  var allowed = [0.01, 0.1, 0.3, 1, 3, 10, 30, 100];
+                  return allowed.indexOf(v) >= 0 ? (v === 0.01 ? 'Free' : '$' + v) : '';
+                }}
+              }},
+              grid: {{ color: 'rgba(255,255,255,0.06)' }}
+            }},
+            y: {{
+              title: {{ display: true, text: 'Intelligence Index (AA)', color: '#ccc' }},
+              ticks: {{ color: '#aaa' }},
+              grid: {{ color: 'rgba(255,255,255,0.06)' }}
+            }}
+          }},
+          plugins: {{
+            legend: {{
+              position: 'right',
+              labels: {{
+                color: '#ddd', usePointStyle: true, boxWidth: 8,
+                filter: function(item) {{ return item.text !== 'Best-value frontier'; }}
+              }}
+            }},
+            tooltip: {{
+              filter: function(ctx) {{ return ctx.dataset.type !== 'line'; }},
+              callbacks: {{
+                label: function(ctx) {{
+                  var p = ctx.raw;
+                  var price = p.free ? 'Free'
+                    : (p.price_raw == null ? '$' + p.x.toFixed(2) + '/Mtok (OR)' : '$' + p.price_raw.toFixed(2) + '/Mtok');
+                  var sp = p.speed_raw == null ? 'speed: n/a' : p.speed_raw + ' tok/s';
+                  var suffix = p.est ? '  (est.)' : '';
+                  return p.label + ' · intel ' + p.y + ' · ' + price + ' · ' + sp + suffix;
+                }}
+              }}
+            }}
+          }}
+        }}
+      }});
+    }});
+    </script>"""
+
     total = len(results)
     success = sum(1 for v in results.values() if v[2] is None)
 
@@ -649,6 +906,24 @@ def build_html(results, model_dates):
         border-radius: 4px;
         white-space: nowrap;
     }}
+    /* Chart view */
+    .chart-meta {{
+        max-width: 980px;
+        margin: 0 auto 1rem;
+        font-size: 0.85rem;
+        color: #aaa;
+        line-height: 1.5;
+    }}
+    .chart-meta a {{ color: #7aa9ff; }}
+    .chart-wrap {{
+        max-width: 1400px;
+        height: 700px;
+        margin: 0 auto;
+        padding: 1rem;
+        background: #141414;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+    }}
 </style>
 </head>
 <body>
@@ -658,19 +933,25 @@ def build_html(results, model_dates):
     Generated {time.strftime('%Y-%m-%d %H:%M')}
 </p>
 <div class="view-controls">
-    <button class="view-btn active" data-view="gallery">Gallery</button>
+    <button class="view-btn active" data-view="chart">Chart</button>
+    <button class="view-btn" data-view="gallery">Gallery</button>
     <button class="view-btn" data-view="timeline">Timeline</button>
+</div>
+<div id="chart-view">
+{chart_html}
+</div>
+<div id="gallery-view" style="display: none;">
+{"".join(gallery_sections)}
 </div>
 <div id="timeline-view" style="display: none;">
 {timeline_html}
 </div>
-<div id="gallery-view">
-{"".join(gallery_sections)}
-</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {{
     var btns = document.querySelectorAll('.view-btn');
     var views = {{
+        chart: document.getElementById('chart-view'),
         timeline: document.getElementById('timeline-view'),
         gallery: document.getElementById('gallery-view')
     }};
