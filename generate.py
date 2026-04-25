@@ -491,11 +491,12 @@ def build_html(results, model_dates):
         </table>
         </div>"""
 
-    # --- Gallery view (card grid) ---
+    # --- Gallery view (mirrors timeline rows: one row per family) ---
     gallery_sections = []
     for cat_name, families in CATEGORIES:
-        cards_html = []
-        for _, model_names in families:
+        family_rows = []
+        for family_label, model_names in families:
+            cards_html = []
             for name in model_names:
                 r = results.get(name)
                 if not r:
@@ -519,11 +520,17 @@ def build_html(results, model_dates):
                 </div>
                 {content}
             </div>""")
-        if cards_html:
+            if cards_html:
+                family_rows.append(f"""
+        <div class="family-row">
+            <div class="family-label">{family_label}</div>
+            <div class="grid">{"".join(cards_html)}</div>
+        </div>""")
+        if family_rows:
             gallery_sections.append(f"""
         <section>
             <h2>{cat_name}</h2>
-            <div class="grid">{"".join(cards_html)}</div>
+            {"".join(family_rows)}
         </section>""")
 
     # --- Chart view (intelligence vs cost scatter) ---
@@ -864,6 +871,19 @@ def build_html(results, model_dates):
         border-top: 2px solid #333;
     }}
     /* Gallery view */
+    .family-row {{
+        margin-bottom: 1.5rem;
+    }}
+    .family-label {{
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #ccc;
+        padding: 0.4rem 0.75rem;
+        background: #1a1a1a;
+        border-left: 3px solid #444;
+        border-bottom: 1px solid #2a2a2a;
+        margin-bottom: 0.75rem;
+    }}
     .grid {{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
