@@ -13,8 +13,8 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
 import subprocess
-API_KEY = os.environ.get("OPENROUTER_API_KEY") or subprocess.check_output(
-    ["secrets", "get", "OPENROUTER_API_KEY"], text=True
+API_KEY = os.environ.get("OPENROUTER_911_API_KEY") or subprocess.check_output(
+    ["secrets", "get", "OPENROUTER_911_API_KEY"], text=True
 ).strip()
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
@@ -71,6 +71,7 @@ MODELS = [
     # --- Chinese Models ---
     ("MiniMax M2.7", "minimax/minimax-m2.7", "Mar 2026"),
     ("GLM-5V-Turbo", "z-ai/glm-5v-turbo", "Apr 2026"),
+    ("GLM-5.1", "z-ai/glm-5.1", "Apr 2026"),
     ("GLM-5 Turbo", "z-ai/glm-5-turbo", "Mar 2026"),
     ("Xiaomi MiMo-V2.5-Pro", "xiaomi/mimo-v2.5-pro", "Apr 2026"),
     ("Xiaomi MiMo-V2.5", "xiaomi/mimo-v2.5", "Apr 2026"),
@@ -157,6 +158,7 @@ PRICING = {
     "Grok 3 Mini": "$0.30 / $0.50 /M",
     "MiniMax M2.7": "$0.30 / $1.20 /M",
     "GLM-5V-Turbo": "$1.20 / $4.00 /M",
+    "GLM-5.1": "$0.95 / $3.15 /M",
     "GLM-5 Turbo": "$0.96 / $3.20 /M",
     "Xiaomi MiMo-V2.5-Pro": "$1 / $3 /M",
     "Xiaomi MiMo-V2.5": "$0.40 / $2 /M",
@@ -324,7 +326,7 @@ CATEGORIES = [
         ("DeepSeek Flash", ["DeepSeek V4 Flash"]),
         ("Kimi", ["Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
         ("MiniMax", ["MiniMax M2.7", "MiniMax M2.5"]),
-        ("GLM", ["GLM-5V-Turbo", "GLM-5 Turbo", "GLM-5"]),
+        ("GLM", ["GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5"]),
         ("Xiaomi Pro", ["Xiaomi MiMo-V2.5-Pro", "Xiaomi MiMo-V2-Pro"]),
         ("Xiaomi", ["Xiaomi MiMo-V2.5"]),
         ("ByteDance", ["ByteDance Seed 2.0"]),
@@ -390,7 +392,7 @@ def call_model(name, model_id):
     req.add_header("HTTP-Referer", "https://localhost")
 
     try:
-        with urlopen(req, timeout=300) as resp:
+        with urlopen(req, timeout=600) as resp:
             data = json.loads(resp.read())
         elapsed = time.time() - start
         msg = data["choices"][0]["message"]
@@ -980,16 +982,20 @@ def main():
     cache = load_cache()
     results = {}
     to_call = {}
+    cached_names = set()
 
     for name, mid in model_map.items():
         if name in cache and cache[name].get("svg"):
-            print(f"  [{name}] Using cached result", flush=True)
             results[name] = (cache[name]["svg"], cache[name]["elapsed"], None)
+            cached_names.add(name)
         else:
             to_call[name] = mid
 
+    print(f"Cache: {len(cached_names)} pelicans already cached, will NOT be re-generated", flush=True)
     if to_call:
-        print(f"Calling {len(to_call)} models ({len(results)} cached)...", flush=True)
+        print(f"To call: {len(to_call)} models -> {sorted(to_call.keys())}", flush=True)
+
+    if to_call:
         with ThreadPoolExecutor(max_workers=6) as pool:
             futures = {pool.submit(call_model, name, mid): name for name, mid in to_call.items()}
             for future in as_completed(futures):
@@ -997,7 +1003,7 @@ def main():
                 results[name] = (svg, elapsed, error)
                 if svg and not error:
                     cache[name] = {"svg": svg, "elapsed": elapsed}
-        save_cache(cache)
+                    save_cache(cache)
     else:
         print("All models cached, building HTML...", flush=True)
 
@@ -1013,8 +1019,9 @@ def main():
     for name in model_map:
         if name in results:
             svg, elapsed, error = results[name]
+            source = "CACHED" if name in cached_names else "api   "
             status = "OK" if not error else f"FAIL: {error[:60]}"
-            print(f"  {name:25s} {elapsed:6.1f}s  {status}")
+            print(f"  [{source}] {name:25s} {elapsed:6.1f}s  {status}")
 
 
 if __name__ == "__main__":

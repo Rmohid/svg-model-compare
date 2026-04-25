@@ -239,8 +239,8 @@
 <body>
 <h1>Animated SVG: Pelican Riding a Bicycle</h1>
 <p class="subtitle">
-    Same prompt sent to 76 models via OpenRouter (74 returned valid SVG)<br>
-    Generated 2026-04-24 16:37
+    Same prompt sent to 77 models via OpenRouter (77 returned valid SVG)<br>
+    Generated 2026-04-25 16:06
 </p>
 <div class="view-controls">
     <button class="view-btn active" data-view="chart">Chart</button>
@@ -254,7 +254,7 @@
       (snapshot 2026-04-24).
       X = blended price USD/Mtok (log). Y = intelligence index. Bubble area = output tokens/sec.
       Free-on-OpenRouter models are plotted at $0.01 so they remain visible on a log scale.
-      Showing 43 of 76 models that have AA intel + price.
+      Showing 43 of 77 models that have AA intel + price.
     </div>
     <div class="chart-wrap"><canvas id="value-chart"></canvas></div>
     <script>
@@ -4621,9 +4621,220 @@
                         <h3>DeepSeek V4 Pro</h3>
                         <span class="release">Released: Apr 2026</span>
                     </div>
-                    <div class="card-meta"><span class="time">0.3s</span><span class="price">$1.74 / $3.48 /M</span></div>
+                    <div class="card-meta"><span class="time">414.5s</span><span class="price">$1.74 / $3.48 /M</span></div>
                 </div>
-                <div class="error">Error: HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"deepseek/deepseek-v4-pro is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your </div>
+                <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <style>
+      .sky { fill: #81D4FA; }
+      .sun { fill: #FFD54F; }
+      .sun-ray { fill: #FFEB3B; opacity: 0.4; }
+      .cloud { fill: #FFFFFF; opacity: 0.9; }
+      .grass { fill: #66BB6A; }
+      .road { fill: #455A64; }
+      .road-line { stroke: #ECEFF1; stroke-width: 6; stroke-linecap: round; }
+      .motion-line { stroke: #FFFFFF; stroke-width: 4; stroke-linecap: round; opacity: 0.6; }
+      .frame { stroke: #FF5722; stroke-linecap: round; stroke-linejoin: round; }
+      .frame-fork { stroke: #9E9E9E; stroke-linecap: round; }
+      .tire { fill: none; stroke: #263238; }
+      .spoke { stroke: #B0BEC5; stroke-width: 1.5; }
+      .hub { fill: #90A4AE; }
+      .chainring { fill: none; stroke: #607D8B; }
+      .chain-bg { fill: none; stroke: #607D8B; stroke-width: 6; }
+      .chain-fg { fill: none; stroke: #90A4AE; stroke-width: 4; stroke-dasharray: 5,5; }
+      .sprocket { fill: #546E7A; }
+      .crank-arm { stroke: #263238; stroke-width: 10; stroke-linecap: round; }
+      .pedal { fill: #424242; }
+      .pedal-reflector { fill: #FFD54F; }
+      .seat-post { stroke: #9E9E9E; stroke-width: 8; stroke-linecap: round; }
+      .seat { fill: #263238; }
+      .handlebar-post { stroke: #9E9E9E; stroke-width: 8; stroke-linecap: round; }
+      .handlebar { stroke: #263238; stroke-width: 8; fill: none; stroke-linecap: round; }
+      .pelican-body { fill: #FFFFFF; stroke: #BDBDBD; stroke-width: 4; }
+      .pelican-beak-upper { fill: #FFCA28; stroke: #FF8F00; stroke-width: 3; stroke-linejoin: round; }
+      .pelican-beak-lower { fill: #FFA000; stroke: #FF8F00; stroke-width: 2; stroke-linejoin: round; }
+      .pelican-eye { fill: #263238; }
+      .pelican-hat { fill: #263238; }
+      .pelican-hat-band { fill: #E53935; }
+    </style>
+  </defs>
+
+  <!-- Background Environment -->
+  <rect class="sky" width="800" height="600" />
+  <circle class="sun" cx="100" cy="100" r="40" />
+  <circle class="sun-ray" cx="100" cy="100" r="60" />
+  
+  <!-- Clouds -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="20 0" dur="6s" repeatCount="indefinite" />
+    <path class="cloud" d="M 200 120 Q 240 90 280 120 Q 320 100 350 130 Q 380 140 360 160 L 190 160 Q 170 140 200 120 Z" />
+    <path class="cloud" d="M 550 80 Q 580 60 610 80 Q 640 70 660 90 Q 680 100 660 110 L 540 110 Q 520 100 550 80 Z" />
+  </g>
+
+  <rect class="grass" y="480" width="800" height="120" />
+  <rect class="road" y="500" width="800" height="60" />
+  <rect class="road" y="520" width="800" height="20" fill="#37474F" />
+  
+  <!-- Road Lines -->
+  <path d="M 50 530 L 150 530 M 350 530 L 450 530 M 650 530 L 750 530" class="road-line" />
+
+  <!-- Motion Lines -->
+  <line class="motion-line" x1="80" y1="450" x2="160" y2="450" />
+  <line class="motion-line" x1="40" y1="430" x2="100" y2="430" />
+  <line class="motion-line" x1="100" y1="470" x2="150" y2="470" />
+
+  <!-- ================= BICYCLE ================= -->
+  <!-- Frame Beach (Background lines for frame joints) -->
+  <line x1="200" y1="450" x2="400" y2="450" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="200" y1="450" x2="320" y2="320" class="frame" opacity="0.4" stroke-width="10" />
+  <line x1="400" y1="450" x2="320" y2="320" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="400" y1="450" x2="580" y2="380" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="320" y1="320" x2="560" y2="310" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="600" y1="450" x2="580" y2="380" class="frame-fork" opacity="0.4" stroke-width="10" />
+
+  <!-- Back Wheel -->
+  <!-- Center: 200, 450 -->
+  <g id="back-wheel">
+    <animateTransform attributeName="transform" type="rotate" from="0 200 450" to="360 200 450" dur="0.8s" repeatCount="indefinite" />
+    <circle class="tire" cx="200" cy="450" r="80" stroke-width="14" />
+    <circle class="tire" cx="200" cy="450" r="73" stroke-width="4" />
+    <!-- Spokes -->
+    <line x1="200" y1="370" x2="200" y2="530" class="spoke" />
+    <line x1="120" y1="450" x2="280" y2="450" class="spoke" />
+    <line x1="143" y1="393" x2="257" y2="507" class="spoke" />
+    <line x1="257" y1="393" x2="143" y2="507" class="spoke" />
+    <line x1="174" y1="378" x2="226" y2="522" class="spoke" />
+    <line x1="226" y1="378" x2="174" y2="522" class="spoke" />
+    <line x1="155" y1="413" x2="245" y2="487" class="spoke" />
+    <line x1="245" y1="413" x2="155" y2="487" class="spoke" />
+    <!-- Hub -->
+    <circle cx="200" cy="450" r="12" class="hub" />
+    <!-- Valve Stem -->
+    <circle cx="200" cy="380" r="4" fill="#546E7A" />
+    <line x1="200" y1="380" x2="200" y2="370" stroke="#546E7A" stroke-width="2" />
+  </g>
+
+  <!-- Front Wheel -->
+  <!-- Center: 600, 450 -->
+  <g id="front-wheel">
+    <animateTransform attributeName="transform" type="rotate" from="0 600 450" to="360 600 450" dur="0.8s" repeatCount="indefinite" />
+    <circle class="tire" cx="600" cy="450" r="80" stroke-width="14" />
+    <circle class="tire" cx="600" cy="450" r="73" stroke-width="4" />
+    <!-- Spokes -->
+    <line x1="600" y1="370" x2="600" y2="530" class="spoke" />
+    <line x1="520" y1="450" x2="680" y2="450" class="spoke" />
+    <line x1="543" y1="393" x2="657" y2="507" class="spoke" />
+    <line x1="657" y1="393" x2="543" y2="507" class="spoke" />
+    <line x1="574" y1="378" x2="626" y2="522" class="spoke" />
+    <line x1="626" y1="378" x2="574" y2="522" class="spoke" />
+    <line x1="555" y1="413" x2="645" y2="487" class="spoke" />
+    <line x1="645" y1="413" x2="555" y2="487" class="spoke" />
+    <!-- Hub -->
+    <circle cx="600" cy="450" r="12" class="hub" />
+    <!-- Valve Stem -->
+    <circle cx="600" cy="380" r="4" fill="#546E7A" />
+    <line x1="600" y1="380" x2="600" y2="370" stroke="#546E7A" stroke-width="2" />
+  </g>
+
+  <!-- Frame Foreground -->
+  <line x1="200" y1="450" x2="400" y2="450" class="frame" stroke-width="10" />
+  <line x1="200" y1="450" x2="320" y2="320" class="frame" stroke-width="8" />
+  <line x1="400" y1="450" x2="320" y2="320" class="frame" stroke-width="10" />
+  <line x1="400" y1="450" x2="580" y2="380" class="frame" stroke-width="10" />
+  <line x1="320" y1="320" x2="560" y2="310" class="frame" stroke-width="10" />
+  <line x1="600" y1="450" x2="580" y2="380" class="frame-fork" stroke-width="8" />
+
+  <!-- Handlebars -->
+  <line x1="560" y1="310" x2="575" y2="270" class="handlebar-post" />
+  <path d="M 550 270 Q 565 250 580 270" class="handlebar" />
+
+  <!-- Seat -->
+  <line x1="320" y1="310" x2="320" y2="285" class="seat-post" />
+  <ellipse class="seat" cx="320" cy="285" rx="35" ry="12" />
+  <path d="M 290 285 L 295 295 M 350 285 L 345 295" stroke="#263238" stroke-width="6" stroke-linecap="round" fill="none" />
+
+  <!-- Chain -->
+  <path class="chain-bg" d="M 200 435 L 400 422 A 28 28 0 0 1 400 478 L 200 465 A 14 14 0 0 1 200 435" />
+  <path class="chain-fg" d="M 200 435 L 400 422 A 28 28 0 0 1 400 478 L 200 465 A 14 14 0 0 1 200 435">
+    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="0.1s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Drivetrain (Crankset and Pedals) -->
+  <!-- Center: 400, 450 -->
+  <g id="crankset">
+    <animateTransform attributeName="transform" type="rotate" from="0 400 450" to="360 400 450" dur="1.6s" repeatCount="indefinite" />
+    
+    <!-- Bottom Bracket Shell -->
+    <circle cx="400" cy="450" r="15" class="hub" />
+    
+    <!-- Chainring -->
+    <circle class="chainring" cx="400" cy="450" r="28" stroke-width="6" />
+    
+    <!-- Right Crank & Pedal -->
+    <line x1="400" y1="450" x2="430" y2="450" class="crank-arm" />
+    <rect class="pedal" x="425" y="440" width="20" height="10" rx="2" />
+    <rect class="pedal-reflector" x="430" y="440" width="6" height="10" rx="1" />
+    
+    <!-- Left Crank & Pedal -->
+    <line x1="400" y1="450" x2="370" y2="450" class="crank-arm" />
+    <rect class="pedal" x="355" y="440" width="20" height="10" rx="2" />
+    <rect class="pedal-reflector" x="372" y="440" width="6" height="10" rx="1" />
+  </g>
+
+  <!-- ================= PELICAN ================= -->
+  <!-- The entire Pelican group bobs up and down to simulate pedaling energy -->
+  <g id="pelican">
+    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-8; 0,0; 0,8; 0,0" dur="1.6s" repeatCount="indefinite" />
+    
+    <!-- Pelican Legs -->
+    <!-- Left Leg -->
+    <path d="M 310 320 L 340 400 L 370 450" fill="none" stroke="#BDBDBD" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 310 320 L 340 400 L 370 450" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Right Leg -->
+    <path d="M 330 320 L 380 400 L 430 450" fill="none" stroke="#BDBDBD" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 330 320 L 380 400 L 430 450" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Pelican Tail -->
+    <path class="pelican-body" d="M 270 250 L 200 320 L 240 240 Z" stroke-linejoin="round" />
+    
+    <!-- Pelican Body -->
+    <ellipse class="pelican-body" cx="330" cy="240" rx="70" ry="90" />
+    
+    <!-- Pelican Wing (Flapping) -->
+    <g id="wing">
+      <animateTransform attributeName="transform" type="rotate" values="-10 330 240; 15 330 240; -10 330 240" dur="1.6s" repeatCount="indefinite" />
+      <path d="M 270 190 Q 370 180 400 270 Q 300 240 270 190" fill="#EEEEEE" stroke="#BDBDBD" stroke-width="3" stroke-linejoin="round" />
+      <!-- Wing Arm reaching to Handlebar -->
+      <path d="M 380 250 Q 470 280 565 275" fill="none" stroke="#BDBDBD" stroke-width="15" stroke-linecap="round" />
+      <path d="M 380 250 Q 470 280 565 275" fill="none" stroke="#EEEEEE" stroke-width="9" stroke-linecap="round" />
+    </g>
+
+    <!-- Pelican Neck (Bottom layer for outline) -->
+    <path d="M 380 200 Q 470 140 510 160" fill="none" stroke="#BDBDBD" stroke-width="50" stroke-linecap="round" />
+    <!-- Pelican Neck (Top layer for fill) -->
+    <path d="M 380 200 Q 470 140 510 160" fill="none" stroke="#FFFFFF" stroke-width="44" stroke-linecap="round" />
+
+    <!-- Pelican Head -->
+    <circle class="pelican-body" cx="510" cy="160" r="32" />
+    
+    <!-- Pelican Eye -->
+    <circle class="pelican-eye" cx="525" cy="150" r="6" />
+    <circle fill="#FFFFFF" cx="527" cy="148" r="1.5" />
+
+    <!-- Pelican Beak -->
+    <!-- Upper Beak -->
+    <path class="pelican-beak-upper" d="M 525 150 C 600 140, 680 150, 730 180 C 680 170, 600 180, 525 180 Z" />
+    <!-- Beak Mouth Line -->
+    <path d="M 525 165 Q 620 160 720 180" fill="none" stroke="#E65100" stroke-width="2" />
+    <!-- Lower Beak (Pouch) -->
+    <path class="pelican-beak-lower" d="M 525 180 C 580 260, 680 250, 720 180 C 660 200, 580 200, 525 190 Z" />
+
+    <!-- Top Hat -->
+    <rect class="pelican-hat" x="490" y="110" width="40" height="30" rx="2" />
+    <rect class="pelican-hat" x="480" y="135" width="60" height="5" rx="2" />
+    <rect class="pelican-hat-band" x="485" y="125" width="50" height="10" />
+  </g>
+</svg></div>
             </div>
             <div class="card">
                 <div class="card-header">
@@ -4968,9 +5179,9 @@
                         <h3>DeepSeek V4 Flash</h3>
                         <span class="release">Released: Apr 2026</span>
                     </div>
-                    <div class="card-meta"><span class="time">0.1s</span><span class="price">$0.14 / $0.28 /M</span></div>
+                    <div class="card-meta"><span class="time">11.1s</span><span class="price">$0.14 / $0.28 /M</span></div>
                 </div>
-                <div class="error">Error: HTTP 404: {"error":{"message":"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy","code":404}}</div>
+                <div class="svg-container"><svg` and end with `</svg></div>
             </div>
             <div class="card">
                 <div class="card-header">
@@ -5753,6 +5964,162 @@
       <line x1="230" y1="280" x2="205" y2="280" stroke="#2C3E50" stroke-width="6" stroke-linecap="round"/>
       <rect x="197" y="276" width="16" height="8" rx="2" fill="#95A5A6" stroke="#2C3E50" stroke-width="2"/>
     </g>
+  </g>
+
+</svg></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>GLM-5.1</h3>
+                        <span class="release">Released: Apr 2026</span>
+                    </div>
+                    <div class="card-meta"><span class="time">384.9s</span><span class="price">$0.95 / $3.15 /M</span></div>
+                </div>
+                <div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#AED6F1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D6EAF8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect x="0" y="0" width="800" height="480" fill="url(#skyGrad)"/>
+
+  <!-- Sun -->
+  <circle cx="700" cy="80" r="60" fill="#F9E79F" opacity="0.3"/>
+  <circle cx="700" cy="80" r="50" fill="#F9E79F"/>
+
+  <!-- Clouds -->
+  <g opacity="0.8">
+    <ellipse cx="150" cy="100" rx="60" ry="30" fill="white"/>
+    <ellipse cx="180" cy="90" rx="40" ry="25" fill="white"/>
+    <ellipse cx="120" cy="95" rx="35" ry="20" fill="white"/>
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-800 0" dur="20s" repeatCount="indefinite"/>
+  </g>
+  <g opacity="0.8">
+    <ellipse cx="650" cy="150" rx="50" ry="25" fill="white"/>
+    <ellipse cx="680" cy="140" rx="30" ry="20" fill="white"/>
+    <ellipse cx="620" cy="145" rx="40" ry="20" fill="white"/>
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-800 0" dur="25s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Ground -->
+  <rect x="0" y="480" width="800" height="120" fill="#95A5A6"/>
+  <line x1="-50" y1="480" x2="800" y2="480" stroke="#F1C40F" stroke-width="4" stroke-dasharray="30, 20">
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-50 0" dur="0.15s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Rear Wheel -->
+  <g>
+    <circle cx="250" cy="400" r="80" stroke="#2C3E50" stroke-width="6" fill="none"/>
+    <circle cx="250" cy="400" r="10" fill="#2C3E50"/>
+    <g stroke="#7F8C8D" stroke-width="2">
+      <line x1="250" y1="320" x2="250" y2="480"/>
+      <line x1="170" y1="400" x2="330" y2="400"/>
+      <line x1="193" y1="343" x2="307" y2="457"/>
+      <line x1="307" y1="343" x2="193" y2="457"/>
+    </g>
+    <animateTransform attributeName="transform" type="rotate" from="0 250 400" to="360 250 400" dur="1.5s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Frame -->
+  <g stroke="#E67E22" stroke-width="8" stroke-linecap="round" fill="none">
+    <line x1="350" y1="400" x2="250" y2="400"/> <!-- Chainstay -->
+    <line x1="320" y1="290" x2="250" y2="400"/> <!-- Seatstay -->
+    <line x1="320" y1="290" x2="350" y2="400"/> <!-- Seat tube -->
+    <line x1="520" y1="290" x2="350" y2="400"/> <!-- Down tube -->
+    <line x1="320" y1="290" x2="520" y2="290"/> <!-- Top tube -->
+    <line x1="520" y1="290" x2="550" y2="400"/> <!-- Fork -->
+  </g>
+
+  <!-- Front Wheel -->
+  <g>
+    <circle cx="550" cy="400" r="80" stroke="#2C3E50" stroke-width="6" fill="none"/>
+    <circle cx="550" cy="400" r="10" fill="#2C3E50"/>
+    <g stroke="#7F8C8D" stroke-width="2">
+      <line x1="550" y1="320" x2="550" y2="480"/>
+      <line x1="470" y1="400" x2="630" y2="400"/>
+      <line x1="493" y1="343" x2="607" y2="457"/>
+      <line x1="607" y1="343" x2="493" y2="457"/>
+    </g>
+    <animateTransform attributeName="transform" type="rotate" from="0 550 400" to="360 550 400" dur="1.5s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Handlebars -->
+  <g stroke="#2C3E50" stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="520" y1="290" x2="520" y2="275"/> <!-- Stem -->
+    <path d="M 505,275 Q 520,265 535,275"/> <!-- Bar -->
+  </g>
+
+  <!-- Seat -->
+  <rect x="305" y="282" width="30" height="8" rx="4" fill="#2C3E50"/>
+
+  <!-- Crank & Pedals -->
+  <g>
+    <circle cx="350" cy="400" r="8" fill="#7F8C8D"/>
+    <line x1="350" y1="360" x2="350" y2="440" stroke="#7F8C8D" stroke-width="5"/>
+    <rect x="338" y="354" width="24" height="6" rx="2" fill="#2C3E50"/>
+    <rect x="338" y="440" width="24" height="6" rx="2" fill="#2C3E50"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 350 400" to="360 350 400" dur="1.5s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Pelican Legs -->
+  <!-- Leg 1 (Right) -->
+  <path fill="none" stroke="#F39C12" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" dur="1.5s" repeatCount="indefinite"
+      values="M 370,285 Q 340,320 350,360 l -8,5 l 16,0;
+              M 370,285 Q 410,340 390,400 l -5,-8 l 0,16;
+              M 370,285 Q 390,360 350,440 l -8,-5 l 16,0;
+              M 370,285 Q 330,340 310,400 l 5,-8 l 0,16;
+              M 370,285 Q 340,320 350,360 l -8,5 l 16,0"/>
+  </path>
+  <!-- Leg 2 (Left) -->
+  <path fill="none" stroke="#F39C12" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" dur="1.5s" repeatCount="indefinite"
+      values="M 370,285 Q 390,360 350,440 l -8,-5 l 16,0;
+              M 370,285 Q 330,340 310,400 l 5,-8 l 0,16;
+              M 370,285 Q 340,320 350,360 l -8,5 l 16,0;
+              M 370,285 Q 410,340 390,400 l -5,-8 l 0,16;
+              M 370,285 Q 390,360 350,440 l -8,-5 l 16,0"/>
+  </path>
+
+  <!-- Pelican Body -->
+  <g>
+    <!-- Tail -->
+    <path d="M 310,245 Q 270,220 290,270 Z" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Body -->
+    <ellipse cx="380" cy="245" rx="75" ry="45" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Wing -->
+    <path d="M 360,235 Q 340,270 380,285 L 420,275 Q 400,240 360,235 Z" fill="#ECF0F1" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Neck -->
+    <path d="M 430,225 C 460,190 480,170 475,140 L 505,140 C 510,170 490,210 450,235 Z" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Head -->
+    <ellipse cx="490" cy="130" rx="28" ry="22" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Eye -->
+    <circle cx="498" cy="125" r="5" fill="white"/>
+    <circle cx="499" cy="125" r="3" fill="black"/>
+    <circle cx="500" cy="124" r="1" fill="white"/>
+    <!-- Beak Upper -->
+    <path d="M 515,120 L 600,132 L 515,140 Z" fill="#F1C40F" stroke="#D4AC0D" stroke-width="2"/>
+    <!-- Beak Lower/Pouch -->
+    <path fill="#E67E22" stroke="#D4AC0D" stroke-width="2">
+      <animate attributeName="d" dur="1.5s" repeatCount="indefinite"
+        values="M 515,140 Q 555,170 515,155 Z;
+                M 515,140 Q 575,190 515,155 Z;
+                M 515,140 Q 555,170 515,155 Z"/>
+    </path>
+    <!-- Fish in Pouch -->
+    <path d="M 545,160 l 10,-5 l 0,10 Z" fill="#5DADE2">
+      <animateTransform attributeName="transform" type="rotate" values="-10 545 160; 10 545 160; -10 545 160" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Pelican Arm (Wing tip holding handlebar) -->
+  <g>
+    <path d="M 430,250 C 460,260 500,250 520,275" fill="none" stroke="#D5D8DC" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 515,268 L 525,275 L 515,282" fill="none" stroke="#BDC3C7" stroke-width="2" stroke-linecap="round"/>
   </g>
 
 </svg></div>
@@ -11546,7 +11913,218 @@
     <line x1="-20" y1="20" x2="-20" y2="50" stroke="black" stroke-width="3"/>
     <line x1="20" y1="20" x2="20" y2="50" stroke="black" stroke-width="3"/>
   </g>
-</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="group-header" colspan="17">Chinese Models</td></tr><tr><td class="model-name">DeepSeek</td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Pro <span class="time">0.3s</span> <span class="price">$1.74 / $3.48 /M</span></div><div class="error">Error: HTTP 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"deepseek/deepseek-v4-pro is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your </div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">DeepSeek V3.2 Speciale <span class="time">360.5s</span> <span class="price">$0.40 / $1.20 /M</span></div><div class="svg-container"><svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="group-header" colspan="17">Chinese Models</td></tr><tr><td class="model-name">DeepSeek</td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Pro <span class="time">414.5s</span> <span class="price">$1.74 / $3.48 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <style>
+      .sky { fill: #81D4FA; }
+      .sun { fill: #FFD54F; }
+      .sun-ray { fill: #FFEB3B; opacity: 0.4; }
+      .cloud { fill: #FFFFFF; opacity: 0.9; }
+      .grass { fill: #66BB6A; }
+      .road { fill: #455A64; }
+      .road-line { stroke: #ECEFF1; stroke-width: 6; stroke-linecap: round; }
+      .motion-line { stroke: #FFFFFF; stroke-width: 4; stroke-linecap: round; opacity: 0.6; }
+      .frame { stroke: #FF5722; stroke-linecap: round; stroke-linejoin: round; }
+      .frame-fork { stroke: #9E9E9E; stroke-linecap: round; }
+      .tire { fill: none; stroke: #263238; }
+      .spoke { stroke: #B0BEC5; stroke-width: 1.5; }
+      .hub { fill: #90A4AE; }
+      .chainring { fill: none; stroke: #607D8B; }
+      .chain-bg { fill: none; stroke: #607D8B; stroke-width: 6; }
+      .chain-fg { fill: none; stroke: #90A4AE; stroke-width: 4; stroke-dasharray: 5,5; }
+      .sprocket { fill: #546E7A; }
+      .crank-arm { stroke: #263238; stroke-width: 10; stroke-linecap: round; }
+      .pedal { fill: #424242; }
+      .pedal-reflector { fill: #FFD54F; }
+      .seat-post { stroke: #9E9E9E; stroke-width: 8; stroke-linecap: round; }
+      .seat { fill: #263238; }
+      .handlebar-post { stroke: #9E9E9E; stroke-width: 8; stroke-linecap: round; }
+      .handlebar { stroke: #263238; stroke-width: 8; fill: none; stroke-linecap: round; }
+      .pelican-body { fill: #FFFFFF; stroke: #BDBDBD; stroke-width: 4; }
+      .pelican-beak-upper { fill: #FFCA28; stroke: #FF8F00; stroke-width: 3; stroke-linejoin: round; }
+      .pelican-beak-lower { fill: #FFA000; stroke: #FF8F00; stroke-width: 2; stroke-linejoin: round; }
+      .pelican-eye { fill: #263238; }
+      .pelican-hat { fill: #263238; }
+      .pelican-hat-band { fill: #E53935; }
+    </style>
+  </defs>
+
+  <!-- Background Environment -->
+  <rect class="sky" width="800" height="600" />
+  <circle class="sun" cx="100" cy="100" r="40" />
+  <circle class="sun-ray" cx="100" cy="100" r="60" />
+  
+  <!-- Clouds -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="20 0" dur="6s" repeatCount="indefinite" />
+    <path class="cloud" d="M 200 120 Q 240 90 280 120 Q 320 100 350 130 Q 380 140 360 160 L 190 160 Q 170 140 200 120 Z" />
+    <path class="cloud" d="M 550 80 Q 580 60 610 80 Q 640 70 660 90 Q 680 100 660 110 L 540 110 Q 520 100 550 80 Z" />
+  </g>
+
+  <rect class="grass" y="480" width="800" height="120" />
+  <rect class="road" y="500" width="800" height="60" />
+  <rect class="road" y="520" width="800" height="20" fill="#37474F" />
+  
+  <!-- Road Lines -->
+  <path d="M 50 530 L 150 530 M 350 530 L 450 530 M 650 530 L 750 530" class="road-line" />
+
+  <!-- Motion Lines -->
+  <line class="motion-line" x1="80" y1="450" x2="160" y2="450" />
+  <line class="motion-line" x1="40" y1="430" x2="100" y2="430" />
+  <line class="motion-line" x1="100" y1="470" x2="150" y2="470" />
+
+  <!-- ================= BICYCLE ================= -->
+  <!-- Frame Beach (Background lines for frame joints) -->
+  <line x1="200" y1="450" x2="400" y2="450" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="200" y1="450" x2="320" y2="320" class="frame" opacity="0.4" stroke-width="10" />
+  <line x1="400" y1="450" x2="320" y2="320" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="400" y1="450" x2="580" y2="380" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="320" y1="320" x2="560" y2="310" class="frame" opacity="0.4" stroke-width="12" />
+  <line x1="600" y1="450" x2="580" y2="380" class="frame-fork" opacity="0.4" stroke-width="10" />
+
+  <!-- Back Wheel -->
+  <!-- Center: 200, 450 -->
+  <g id="back-wheel">
+    <animateTransform attributeName="transform" type="rotate" from="0 200 450" to="360 200 450" dur="0.8s" repeatCount="indefinite" />
+    <circle class="tire" cx="200" cy="450" r="80" stroke-width="14" />
+    <circle class="tire" cx="200" cy="450" r="73" stroke-width="4" />
+    <!-- Spokes -->
+    <line x1="200" y1="370" x2="200" y2="530" class="spoke" />
+    <line x1="120" y1="450" x2="280" y2="450" class="spoke" />
+    <line x1="143" y1="393" x2="257" y2="507" class="spoke" />
+    <line x1="257" y1="393" x2="143" y2="507" class="spoke" />
+    <line x1="174" y1="378" x2="226" y2="522" class="spoke" />
+    <line x1="226" y1="378" x2="174" y2="522" class="spoke" />
+    <line x1="155" y1="413" x2="245" y2="487" class="spoke" />
+    <line x1="245" y1="413" x2="155" y2="487" class="spoke" />
+    <!-- Hub -->
+    <circle cx="200" cy="450" r="12" class="hub" />
+    <!-- Valve Stem -->
+    <circle cx="200" cy="380" r="4" fill="#546E7A" />
+    <line x1="200" y1="380" x2="200" y2="370" stroke="#546E7A" stroke-width="2" />
+  </g>
+
+  <!-- Front Wheel -->
+  <!-- Center: 600, 450 -->
+  <g id="front-wheel">
+    <animateTransform attributeName="transform" type="rotate" from="0 600 450" to="360 600 450" dur="0.8s" repeatCount="indefinite" />
+    <circle class="tire" cx="600" cy="450" r="80" stroke-width="14" />
+    <circle class="tire" cx="600" cy="450" r="73" stroke-width="4" />
+    <!-- Spokes -->
+    <line x1="600" y1="370" x2="600" y2="530" class="spoke" />
+    <line x1="520" y1="450" x2="680" y2="450" class="spoke" />
+    <line x1="543" y1="393" x2="657" y2="507" class="spoke" />
+    <line x1="657" y1="393" x2="543" y2="507" class="spoke" />
+    <line x1="574" y1="378" x2="626" y2="522" class="spoke" />
+    <line x1="626" y1="378" x2="574" y2="522" class="spoke" />
+    <line x1="555" y1="413" x2="645" y2="487" class="spoke" />
+    <line x1="645" y1="413" x2="555" y2="487" class="spoke" />
+    <!-- Hub -->
+    <circle cx="600" cy="450" r="12" class="hub" />
+    <!-- Valve Stem -->
+    <circle cx="600" cy="380" r="4" fill="#546E7A" />
+    <line x1="600" y1="380" x2="600" y2="370" stroke="#546E7A" stroke-width="2" />
+  </g>
+
+  <!-- Frame Foreground -->
+  <line x1="200" y1="450" x2="400" y2="450" class="frame" stroke-width="10" />
+  <line x1="200" y1="450" x2="320" y2="320" class="frame" stroke-width="8" />
+  <line x1="400" y1="450" x2="320" y2="320" class="frame" stroke-width="10" />
+  <line x1="400" y1="450" x2="580" y2="380" class="frame" stroke-width="10" />
+  <line x1="320" y1="320" x2="560" y2="310" class="frame" stroke-width="10" />
+  <line x1="600" y1="450" x2="580" y2="380" class="frame-fork" stroke-width="8" />
+
+  <!-- Handlebars -->
+  <line x1="560" y1="310" x2="575" y2="270" class="handlebar-post" />
+  <path d="M 550 270 Q 565 250 580 270" class="handlebar" />
+
+  <!-- Seat -->
+  <line x1="320" y1="310" x2="320" y2="285" class="seat-post" />
+  <ellipse class="seat" cx="320" cy="285" rx="35" ry="12" />
+  <path d="M 290 285 L 295 295 M 350 285 L 345 295" stroke="#263238" stroke-width="6" stroke-linecap="round" fill="none" />
+
+  <!-- Chain -->
+  <path class="chain-bg" d="M 200 435 L 400 422 A 28 28 0 0 1 400 478 L 200 465 A 14 14 0 0 1 200 435" />
+  <path class="chain-fg" d="M 200 435 L 400 422 A 28 28 0 0 1 400 478 L 200 465 A 14 14 0 0 1 200 435">
+    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="0.1s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Drivetrain (Crankset and Pedals) -->
+  <!-- Center: 400, 450 -->
+  <g id="crankset">
+    <animateTransform attributeName="transform" type="rotate" from="0 400 450" to="360 400 450" dur="1.6s" repeatCount="indefinite" />
+    
+    <!-- Bottom Bracket Shell -->
+    <circle cx="400" cy="450" r="15" class="hub" />
+    
+    <!-- Chainring -->
+    <circle class="chainring" cx="400" cy="450" r="28" stroke-width="6" />
+    
+    <!-- Right Crank & Pedal -->
+    <line x1="400" y1="450" x2="430" y2="450" class="crank-arm" />
+    <rect class="pedal" x="425" y="440" width="20" height="10" rx="2" />
+    <rect class="pedal-reflector" x="430" y="440" width="6" height="10" rx="1" />
+    
+    <!-- Left Crank & Pedal -->
+    <line x1="400" y1="450" x2="370" y2="450" class="crank-arm" />
+    <rect class="pedal" x="355" y="440" width="20" height="10" rx="2" />
+    <rect class="pedal-reflector" x="372" y="440" width="6" height="10" rx="1" />
+  </g>
+
+  <!-- ================= PELICAN ================= -->
+  <!-- The entire Pelican group bobs up and down to simulate pedaling energy -->
+  <g id="pelican">
+    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-8; 0,0; 0,8; 0,0" dur="1.6s" repeatCount="indefinite" />
+    
+    <!-- Pelican Legs -->
+    <!-- Left Leg -->
+    <path d="M 310 320 L 340 400 L 370 450" fill="none" stroke="#BDBDBD" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 310 320 L 340 400 L 370 450" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Right Leg -->
+    <path d="M 330 320 L 380 400 L 430 450" fill="none" stroke="#BDBDBD" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 330 320 L 380 400 L 430 450" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    
+    <!-- Pelican Tail -->
+    <path class="pelican-body" d="M 270 250 L 200 320 L 240 240 Z" stroke-linejoin="round" />
+    
+    <!-- Pelican Body -->
+    <ellipse class="pelican-body" cx="330" cy="240" rx="70" ry="90" />
+    
+    <!-- Pelican Wing (Flapping) -->
+    <g id="wing">
+      <animateTransform attributeName="transform" type="rotate" values="-10 330 240; 15 330 240; -10 330 240" dur="1.6s" repeatCount="indefinite" />
+      <path d="M 270 190 Q 370 180 400 270 Q 300 240 270 190" fill="#EEEEEE" stroke="#BDBDBD" stroke-width="3" stroke-linejoin="round" />
+      <!-- Wing Arm reaching to Handlebar -->
+      <path d="M 380 250 Q 470 280 565 275" fill="none" stroke="#BDBDBD" stroke-width="15" stroke-linecap="round" />
+      <path d="M 380 250 Q 470 280 565 275" fill="none" stroke="#EEEEEE" stroke-width="9" stroke-linecap="round" />
+    </g>
+
+    <!-- Pelican Neck (Bottom layer for outline) -->
+    <path d="M 380 200 Q 470 140 510 160" fill="none" stroke="#BDBDBD" stroke-width="50" stroke-linecap="round" />
+    <!-- Pelican Neck (Top layer for fill) -->
+    <path d="M 380 200 Q 470 140 510 160" fill="none" stroke="#FFFFFF" stroke-width="44" stroke-linecap="round" />
+
+    <!-- Pelican Head -->
+    <circle class="pelican-body" cx="510" cy="160" r="32" />
+    
+    <!-- Pelican Eye -->
+    <circle class="pelican-eye" cx="525" cy="150" r="6" />
+    <circle fill="#FFFFFF" cx="527" cy="148" r="1.5" />
+
+    <!-- Pelican Beak -->
+    <!-- Upper Beak -->
+    <path class="pelican-beak-upper" d="M 525 150 C 600 140, 680 150, 730 180 C 680 170, 600 180, 525 180 Z" />
+    <!-- Beak Mouth Line -->
+    <path d="M 525 165 Q 620 160 720 180" fill="none" stroke="#E65100" stroke-width="2" />
+    <!-- Lower Beak (Pouch) -->
+    <path class="pelican-beak-lower" d="M 525 180 C 580 260, 680 250, 720 180 C 660 200, 580 200, 525 190 Z" />
+
+    <!-- Top Hat -->
+    <rect class="pelican-hat" x="490" y="110" width="40" height="30" rx="2" />
+    <rect class="pelican-hat" x="480" y="135" width="60" height="5" rx="2" />
+    <rect class="pelican-hat-band" x="485" y="125" width="50" height="10" />
+  </g>
+</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">DeepSeek V3.2 Speciale <span class="time">360.5s</span> <span class="price">$0.40 / $1.20 /M</span></div><div class="svg-container"><svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
   <rect width="400" height="200" fill="lightblue"/>
   <line x1="0" y1="130" x2="400" y2="130" stroke="brown" stroke-width="5"/>
   <g transform="translate(100,100)">
@@ -11843,7 +12421,7 @@
   
   <!-- Seat -->
   <path d="M150,120 Q160,100 170,120" stroke="#333" stroke-width="4" fill="none"/>
-</svg></div></td><td class="empty-cell"></td></tr><tr><td class="model-name">DeepSeek Flash</td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Flash <span class="time">0.1s</span> <span class="price">$0.14 / $0.28 /M</span></div><div class="error">Error: HTTP 404: {"error":{"message":"No endpoints available matching your guardrail restrictions and data policy. Configure: https://openrouter.ai/settings/privacy","code":404}}</div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="model-name">Kimi</td><td class="svg-cell"><div class="cell-label">Kimi K2.6 <span class="time">182.4s</span> <span class="price">$0.74 / $4.66 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+</svg></div></td><td class="empty-cell"></td></tr><tr><td class="model-name">DeepSeek Flash</td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Flash <span class="time">11.1s</span> <span class="price">$0.14 / $0.28 /M</span></div><div class="svg-container"><svg` and end with `</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="model-name">Kimi</td><td class="svg-cell"><div class="cell-label">Kimi K2.6 <span class="time">182.4s</span> <span class="price">$0.74 / $4.66 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#87CEEB"/>
