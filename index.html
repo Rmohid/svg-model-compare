@@ -240,7 +240,7 @@
 <h1>Animated SVG: Pelican Riding a Bicycle</h1>
 <p class="subtitle">
     Same prompt sent to 77 models via OpenRouter (77 returned valid SVG)<br>
-    Generated 2026-04-25 16:06
+    Generated 2026-04-25 16:40
 </p>
 <div class="view-controls">
     <button class="view-btn active" data-view="chart">Chart</button>
@@ -259,7 +259,7 @@
     <div class="chart-wrap"><canvas id="value-chart"></canvas></div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var datasets = [{"label": "Best-value frontier", "type": "line", "data": [{"x": 0.01, "y": 34}, {"x": 0.01, "y": 50}, {"x": 1.5, "y": 54}, {"x": 4.5, "y": 57}, {"x": 11.25, "y": 60}], "borderColor": "rgba(255,255,255,0.35)", "borderDash": [6, 4], "borderWidth": 1.5, "pointRadius": 0, "fill": false, "tension": 0, "order": 99}, {"label": "Alibaba", "type": "bubble", "data": [{"x": 0.01, "y": 50, "r": 14.93939441940391, "label": "Qwen 3.6 Plus", "price_raw": 1.13, "speed_raw": 53, "free": true, "est": false}, {"x": 1.35, "y": 45, "r": 14.93939441940391, "label": "Qwen 3.5 397B", "price_raw": 1.35, "speed_raw": 53, "free": false, "est": false}, {"x": 1.1, "y": 42, "r": 20.6323586274775, "label": "Qwen 3.5 122B", "price_raw": 1.1, "speed_raw": 142, "free": false, "est": false}, {"x": 0.69, "y": 31, "r": 21.23808967512137, "label": "Qwen 3.5 35B", "price_raw": 0.69, "speed_raw": 154, "free": false, "est": false}, {"x": 0.11, "y": 32, "r": 14.507281103601839, "label": "Qwen 3.5 9B", "price_raw": 0.11, "speed_raw": 48, "free": false, "est": false}], "backgroundColor": "#C026D3CC", "borderColor": "#C026D3", "borderWidth": 1.5}, {"label": "Amazon", "type": "bubble", "data": [{"x": 5.0, "y": 19, "r": 12.261189360803424, "label": "Nova Premier", "price_raw": 5.0, "speed_raw": 26, "free": false, "est": false}], "backgroundColor": "#FF9900CC", "borderColor": "#FF9900", "borderWidth": 1.5}, {"label": "Anthropic", "type": "bubble", "data": [{"x": 10.0, "y": 57, "r": 14.328160388207793, "label": "Claude Opus 4.7", "price_raw": 10.0, "speed_raw": 46, "free": false, "est": false}, {"x": 6.0, "y": 52, "r": 14.76910464424289, "label": "Claude Sonnet 4.6", "price_raw": 6.0, "speed_raw": 51, "free": false, "est": false}, {"x": 2.0, "y": 37, "r": 18.155790384643417, "label": "Claude Haiku 4.5", "price_raw": 2.0, "speed_raw": 98, "free": false, "est": false}], "backgroundColor": "#D97757CC", "borderColor": "#D97757", "borderWidth": 1.5}, {"label": "Cohere", "type": "bubble", "data": [{"x": 4.38, "y": 13, "r": 13.766049605800287, "label": "Command A", "price_raw": 4.38, "speed_raw": 40, "free": false, "est": false}], "backgroundColor": "#39594DCC", "borderColor": "#39594D", "borderWidth": 1.5}, {"label": "DeepSeek", "type": "bubble", "data": [{"x": 2.17, "y": 52, "r": 13.053864851681976, "label": "DeepSeek V4 Pro", "price_raw": 2.17, "speed_raw": 33, "free": false, "est": false}, {"x": 0.17, "y": 47, "r": 17.25407506672479, "label": "DeepSeek V4 Flash", "price_raw": 0.17, "speed_raw": 84, "free": false, "est": false}, {"x": 0.32, "y": 42, "r": 15.746314903880721, "label": "DeepSeek V3.2", "price_raw": 0.32, "speed_raw": 63, "free": false, "est": false}, {"x": 0.6000000000000001, "y": 29, "r": 18.786443524209965, "label": "DeepSeek V3.2 Speciale", "price_raw": null, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#4D6BFECC", "borderColor": "#4D6BFE", "borderWidth": 1.5}, {"label": "Google", "type": "bubble", "data": [{"x": 4.5, "y": 57, "r": 20.000445030754914, "label": "Gemini 3.1 Pro", "price_raw": 4.5, "speed_raw": 130, "free": false, "est": false}, {"x": 0.56, "y": 34, "r": 28.0, "label": "Gemini 3.1 Flash Lite", "price_raw": 0.56, "speed_raw": 321, "free": false, "est": false}, {"x": 4.5, "y": 41, "r": 18.786443524209965, "label": "Gemini 3 Pro", "price_raw": 4.5, "speed_raw": null, "free": false, "est": false}, {"x": 1.13, "y": 46, "r": 22.290203083783314, "label": "Gemini 3 Flash", "price_raw": 1.13, "speed_raw": 176, "free": false, "est": false}, {"x": 0.26, "y": 30, "r": 25.415124014500716, "label": "Gemini 2.5 Flash", "price_raw": 0.26, "speed_raw": 250, "free": false, "est": true}, {"x": 0.20500000000000002, "y": 39, "r": 13.264474218398874, "label": "Gemma 4 31B", "price_raw": null, "speed_raw": 35, "free": false, "est": false}, {"x": 0.2, "y": 31, "r": 18.786443524209965, "label": "Gemma 4 26B-A4B", "price_raw": 0.2, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#4285F4CC", "borderColor": "#4285F4", "borderWidth": 1.5}, {"label": "Kimi", "type": "bubble", "data": [{"x": 1.71, "y": 54, "r": 18.99508653850763, "label": "Kimi K2.6", "price_raw": 1.71, "speed_raw": 112, "free": false, "est": false}, {"x": 1.2, "y": 37, "r": 13.569408837932013, "label": "Kimi K2.5", "price_raw": 1.2, "speed_raw": 38, "free": false, "est": false}], "backgroundColor": "#A78BFACC", "borderColor": "#A78BFA", "borderWidth": 1.5}, {"label": "Meta", "type": "bubble", "data": [{"x": 0.47, "y": 18, "r": 18.99508653850763, "label": "Llama 4 Maverick", "price_raw": 0.47, "speed_raw": 112, "free": false, "est": false}, {"x": 0.29, "y": 14, "r": 20.683790626575586, "label": "Llama 4 Scout", "price_raw": 0.29, "speed_raw": 143, "free": false, "est": false}], "backgroundColor": "#8B5CF6CC", "borderColor": "#8B5CF6", "borderWidth": 1.5}, {"label": "MiniMax", "type": "bubble", "data": [{"x": 0.53, "y": 50, "r": 14.76910464424289, "label": "MiniMax M2.7", "price_raw": 0.53, "speed_raw": 51, "free": false, "est": false}], "backgroundColor": "#E91E63CC", "borderColor": "#E91E63", "borderWidth": 1.5}, {"label": "Mistral", "type": "bubble", "data": [{"x": 0.75, "y": 23, "r": 14.682707417602442, "label": "Mistral Large 3", "price_raw": 0.75, "speed_raw": 50, "free": false, "est": false}, {"x": 0.26, "y": 28, "r": 21.08893675714294, "label": "Mistral Small 4", "price_raw": 0.26, "speed_raw": 151, "free": false, "est": false}], "backgroundColor": "#FA520FCC", "borderColor": "#FA520F", "borderWidth": 1.5}, {"label": "NVIDIA", "type": "bubble", "data": [{"x": 0.41, "y": 36, "r": 21.23808967512137, "label": "Nemotron 3 Super", "price_raw": 0.41, "speed_raw": 154, "free": false, "est": false}], "backgroundColor": "#76B900CC", "borderColor": "#76B900", "borderWidth": 1.5}, {"label": "OpenAI", "type": "bubble", "data": [{"x": 11.25, "y": 60, "r": 18.786443524209965, "label": "GPT-5.5", "price_raw": 11.25, "speed_raw": null, "free": false, "est": false}, {"x": 67.5, "y": 60, "r": 18.786443524209965, "label": "GPT-5.5 Pro", "price_raw": 67.5, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 57, "r": 16.91399398925562, "label": "GPT-5.4", "price_raw": 5.63, "speed_raw": 79, "free": false, "est": false}, {"x": 1.69, "y": 49, "r": 21.628873351684394, "label": "GPT-5.4 Mini", "price_raw": 1.69, "speed_raw": 162, "free": false, "est": false}, {"x": 0.46, "y": 44, "r": 21.385796743523613, "label": "GPT-5.4 Nano", "price_raw": 0.46, "speed_raw": 157, "free": false, "est": false}, {"x": 3.5, "y": 38, "r": 17.841634138302894, "label": "o3", "price_raw": 3.5, "speed_raw": 93, "free": false, "est": false}], "backgroundColor": "#10A37FCC", "borderColor": "#10A37F", "borderWidth": 1.5}, {"label": "Xiaomi", "type": "bubble", "data": [{"x": 1.5, "y": 49, "r": 18.786443524209965, "label": "Xiaomi MiMo-V2-Pro", "price_raw": null, "speed_raw": null, "free": false, "est": false}, {"x": 1.5, "y": 54, "r": 15.511429425676571, "label": "Xiaomi MiMo-V2.5-Pro", "price_raw": 1.5, "speed_raw": 60, "free": false, "est": false}], "backgroundColor": "#DC2626CC", "borderColor": "#DC2626", "borderWidth": 1.5}, {"label": "Z AI", "type": "bubble", "data": [{"x": 1.55, "y": 50, "r": 16.12568985381126, "label": "GLM-5", "price_raw": 1.55, "speed_raw": 68, "free": false, "est": false}], "backgroundColor": "#7B68EECC", "borderColor": "#7B68EE", "borderWidth": 1.5}, {"label": "inclusionAI", "type": "bubble", "data": [{"x": 0.01, "y": 34, "r": 16.12568985381126, "label": "Ling 2.6 1T", "price_raw": 0.85, "speed_raw": 68, "free": true, "est": false}, {"x": 0.01, "y": 26, "r": 23.32194689510276, "label": "Ling 2.6 Flash", "price_raw": 0.15, "speed_raw": 199, "free": true, "est": false}], "backgroundColor": "#00BCD4CC", "borderColor": "#00BCD4", "borderWidth": 1.5}, {"label": "xAI", "type": "bubble", "data": [{"x": 3.0, "y": 49, "r": 21.677036403765364, "label": "Grok 4.20 Beta", "price_raw": 3.0, "speed_raw": 163, "free": false, "est": false}, {"x": 0.28, "y": 39, "r": 20.6323586274775, "label": "Grok 4.1 Fast", "price_raw": 0.28, "speed_raw": 142, "free": false, "est": false}, {"x": 0.35, "y": 32, "r": 23.666696055932764, "label": "Grok 3 Mini", "price_raw": 0.35, "speed_raw": 207, "free": false, "est": false}], "backgroundColor": "#FFD700CC", "borderColor": "#FFD700", "borderWidth": 1.5}];
+      var datasets = [{"label": "Best-value frontier", "type": "line", "data": [{"x": 0.01, "y": 34}, {"x": 0.01, "y": 50}, {"x": 1.5, "y": 54}, {"x": 4.5, "y": 57}, {"x": 11.25, "y": 60}], "borderColor": "rgba(255,255,255,0.35)", "borderDash": [6, 4], "borderWidth": 1.5, "pointRadius": 0, "fill": false, "tension": 0, "order": 99}, {"label": "Alibaba", "type": "bubble", "data": [{"x": 0.01, "y": 50, "r": 14.93939441940391, "label": "Qwen 3.6 Plus", "price_raw": 1.13, "speed_raw": 53, "free": true, "est": false}, {"x": 1.35, "y": 45, "r": 14.93939441940391, "label": "Qwen 3.5 397B", "price_raw": 1.35, "speed_raw": 53, "free": false, "est": false}, {"x": 1.1, "y": 42, "r": 20.6323586274775, "label": "Qwen 3.5 122B", "price_raw": 1.1, "speed_raw": 142, "free": false, "est": false}, {"x": 0.69, "y": 31, "r": 21.23808967512137, "label": "Qwen 3.5 35B", "price_raw": 0.69, "speed_raw": 154, "free": false, "est": false}, {"x": 0.11, "y": 32, "r": 14.507281103601839, "label": "Qwen 3.5 9B", "price_raw": 0.11, "speed_raw": 48, "free": false, "est": false}], "backgroundColor": "#C026D3CC", "borderColor": "#C026D3", "borderWidth": 1.5}, {"label": "Amazon", "type": "bubble", "data": [{"x": 5.0, "y": 19, "r": 12.261189360803424, "label": "Nova Premier", "price_raw": 5.0, "speed_raw": 26, "free": false, "est": false}], "backgroundColor": "#FF9900CC", "borderColor": "#FF9900", "borderWidth": 1.5}, {"label": "Anthropic", "type": "bubble", "data": [{"x": 10.0, "y": 57, "r": 14.328160388207793, "label": "Claude Opus 4.7", "price_raw": 10.0, "speed_raw": 46, "free": false, "est": false}, {"x": 6.0, "y": 52, "r": 14.76910464424289, "label": "Claude Sonnet 4.6", "price_raw": 6.0, "speed_raw": 51, "free": false, "est": false}, {"x": 2.0, "y": 37, "r": 18.155790384643417, "label": "Claude Haiku 4.5", "price_raw": 2.0, "speed_raw": 98, "free": false, "est": false}], "backgroundColor": "#D97757CC", "borderColor": "#D97757", "borderWidth": 1.5}, {"label": "Cohere", "type": "bubble", "data": [{"x": 4.38, "y": 13, "r": 13.766049605800287, "label": "Command A", "price_raw": 4.38, "speed_raw": 40, "free": false, "est": false}], "backgroundColor": "#39594DCC", "borderColor": "#39594D", "borderWidth": 1.5}, {"label": "DeepSeek", "type": "bubble", "data": [{"x": 2.17, "y": 52, "r": 13.053864851681976, "label": "DeepSeek V4 Pro", "price_raw": 2.17, "speed_raw": 33, "free": false, "est": false}, {"x": 0.17, "y": 47, "r": 17.25407506672479, "label": "DeepSeek V4 Flash", "price_raw": 0.17, "speed_raw": 84, "free": false, "est": false}, {"x": 0.32, "y": 42, "r": 15.746314903880721, "label": "DeepSeek V3.2", "price_raw": 0.32, "speed_raw": 63, "free": false, "est": false}, {"x": 0.6000000000000001, "y": 29, "r": 18.786443524209965, "label": "DeepSeek V3.2 Speciale", "price_raw": null, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#1E3A8ACC", "borderColor": "#1E3A8A", "borderWidth": 1.5}, {"label": "Google", "type": "bubble", "data": [{"x": 4.5, "y": 57, "r": 20.000445030754914, "label": "Gemini 3.1 Pro", "price_raw": 4.5, "speed_raw": 130, "free": false, "est": false}, {"x": 0.56, "y": 34, "r": 28.0, "label": "Gemini 3.1 Flash Lite", "price_raw": 0.56, "speed_raw": 321, "free": false, "est": false}, {"x": 4.5, "y": 41, "r": 18.786443524209965, "label": "Gemini 3 Pro", "price_raw": 4.5, "speed_raw": null, "free": false, "est": false}, {"x": 1.13, "y": 46, "r": 22.290203083783314, "label": "Gemini 3 Flash", "price_raw": 1.13, "speed_raw": 176, "free": false, "est": false}, {"x": 0.26, "y": 30, "r": 25.415124014500716, "label": "Gemini 2.5 Flash", "price_raw": 0.26, "speed_raw": 250, "free": false, "est": true}, {"x": 0.20500000000000002, "y": 39, "r": 13.264474218398874, "label": "Gemma 4 31B", "price_raw": null, "speed_raw": 35, "free": false, "est": false}, {"x": 0.2, "y": 31, "r": 18.786443524209965, "label": "Gemma 4 26B-A4B", "price_raw": 0.2, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#4285F4CC", "borderColor": "#4285F4", "borderWidth": 1.5}, {"label": "Kimi", "type": "bubble", "data": [{"x": 1.71, "y": 54, "r": 18.99508653850763, "label": "Kimi K2.6", "price_raw": 1.71, "speed_raw": 112, "free": false, "est": false}, {"x": 1.2, "y": 37, "r": 13.569408837932013, "label": "Kimi K2.5", "price_raw": 1.2, "speed_raw": 38, "free": false, "est": false}], "backgroundColor": "#A78BFACC", "borderColor": "#A78BFA", "borderWidth": 1.5}, {"label": "Meta", "type": "bubble", "data": [{"x": 0.47, "y": 18, "r": 18.99508653850763, "label": "Llama 4 Maverick", "price_raw": 0.47, "speed_raw": 112, "free": false, "est": false}, {"x": 0.29, "y": 14, "r": 20.683790626575586, "label": "Llama 4 Scout", "price_raw": 0.29, "speed_raw": 143, "free": false, "est": false}], "backgroundColor": "#8B5CF6CC", "borderColor": "#8B5CF6", "borderWidth": 1.5}, {"label": "MiniMax", "type": "bubble", "data": [{"x": 0.53, "y": 50, "r": 14.76910464424289, "label": "MiniMax M2.7", "price_raw": 0.53, "speed_raw": 51, "free": false, "est": false}], "backgroundColor": "#E91E63CC", "borderColor": "#E91E63", "borderWidth": 1.5}, {"label": "Mistral", "type": "bubble", "data": [{"x": 0.75, "y": 23, "r": 14.682707417602442, "label": "Mistral Large 3", "price_raw": 0.75, "speed_raw": 50, "free": false, "est": false}, {"x": 0.26, "y": 28, "r": 21.08893675714294, "label": "Mistral Small 4", "price_raw": 0.26, "speed_raw": 151, "free": false, "est": false}], "backgroundColor": "#FA520FCC", "borderColor": "#FA520F", "borderWidth": 1.5}, {"label": "NVIDIA", "type": "bubble", "data": [{"x": 0.41, "y": 36, "r": 21.23808967512137, "label": "Nemotron 3 Super", "price_raw": 0.41, "speed_raw": 154, "free": false, "est": false}], "backgroundColor": "#76B900CC", "borderColor": "#76B900", "borderWidth": 1.5}, {"label": "OpenAI", "type": "bubble", "data": [{"x": 11.25, "y": 60, "r": 18.786443524209965, "label": "GPT-5.5", "price_raw": 11.25, "speed_raw": null, "free": false, "est": false}, {"x": 67.5, "y": 60, "r": 18.786443524209965, "label": "GPT-5.5 Pro", "price_raw": 67.5, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 57, "r": 16.91399398925562, "label": "GPT-5.4", "price_raw": 5.63, "speed_raw": 79, "free": false, "est": false}, {"x": 1.69, "y": 49, "r": 21.628873351684394, "label": "GPT-5.4 Mini", "price_raw": 1.69, "speed_raw": 162, "free": false, "est": false}, {"x": 0.46, "y": 44, "r": 21.385796743523613, "label": "GPT-5.4 Nano", "price_raw": 0.46, "speed_raw": 157, "free": false, "est": false}, {"x": 3.5, "y": 38, "r": 17.841634138302894, "label": "o3", "price_raw": 3.5, "speed_raw": 93, "free": false, "est": false}], "backgroundColor": "#10A37FCC", "borderColor": "#10A37F", "borderWidth": 1.5}, {"label": "Xiaomi", "type": "bubble", "data": [{"x": 1.5, "y": 49, "r": 18.786443524209965, "label": "Xiaomi MiMo-V2-Pro", "price_raw": null, "speed_raw": null, "free": false, "est": false}, {"x": 1.5, "y": 54, "r": 15.511429425676571, "label": "Xiaomi MiMo-V2.5-Pro", "price_raw": 1.5, "speed_raw": 60, "free": false, "est": false}], "backgroundColor": "#DC2626CC", "borderColor": "#DC2626", "borderWidth": 1.5}, {"label": "Z AI", "type": "bubble", "data": [{"x": 1.55, "y": 50, "r": 16.12568985381126, "label": "GLM-5", "price_raw": 1.55, "speed_raw": 68, "free": false, "est": false}], "backgroundColor": "#7B68EECC", "borderColor": "#7B68EE", "borderWidth": 1.5}, {"label": "inclusionAI", "type": "bubble", "data": [{"x": 0.01, "y": 34, "r": 16.12568985381126, "label": "Ling 2.6 1T", "price_raw": 0.85, "speed_raw": 68, "free": true, "est": false}, {"x": 0.01, "y": 26, "r": 23.32194689510276, "label": "Ling 2.6 Flash", "price_raw": 0.15, "speed_raw": 199, "free": true, "est": false}], "backgroundColor": "#00BCD4CC", "borderColor": "#00BCD4", "borderWidth": 1.5}, {"label": "xAI", "type": "bubble", "data": [{"x": 3.0, "y": 49, "r": 21.677036403765364, "label": "Grok 4.20 Beta", "price_raw": 3.0, "speed_raw": 163, "free": false, "est": false}, {"x": 0.28, "y": 39, "r": 20.6323586274775, "label": "Grok 4.1 Fast", "price_raw": 0.28, "speed_raw": 142, "free": false, "est": false}, {"x": 0.35, "y": 32, "r": 23.666696055932764, "label": "Grok 3 Mini", "price_raw": 0.35, "speed_raw": 207, "free": false, "est": false}], "backgroundColor": "#FFD700CC", "borderColor": "#FFD700", "borderWidth": 1.5}];
       var ctx = document.getElementById('value-chart').getContext('2d');
       new Chart(ctx, {
         type: 'bubble',
@@ -5179,9 +5179,208 @@
                         <h3>DeepSeek V4 Flash</h3>
                         <span class="release">Released: Apr 2026</span>
                     </div>
-                    <div class="card-meta"><span class="time">11.1s</span><span class="price">$0.14 / $0.28 /M</span></div>
+                    <div class="card-meta"><span class="time">231.8s</span><span class="price">$0.14 / $0.28 /M</span></div>
                 </div>
-                <div class="svg-container"><svg` and end with `</svg></div>
+                <div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky Gradient -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#81d4fa" />
+      <stop offset="100%" stop-color="#e1f5fe" />
+    </linearGradient>
+    <!-- Ground Gradient -->
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#81c784" />
+      <stop offset="100%" stop-color="#4caf50" />
+    </linearGradient>
+    <!-- Wheel Definition -->
+    <g id="wheel">
+      <!-- Tire -->
+      <circle cx="0" cy="0" r="60" fill="none" stroke="#333" stroke-width="8" />
+      <!-- Spokes Hub Animation -->
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite" />
+        <circle cx="0" cy="0" r="55" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="8 8" />
+        <circle cx="0" cy="0" r="40" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5 15" />
+        <circle cx="0" cy="0" r="25" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="10 20" />
+        <circle cx="0" cy="0" r="10" fill="#555" />
+      </g>
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#skyGrad)" />
+  
+  <!-- Sun -->
+  <circle cx="100" cy="100" r="50" fill="#ffd54f" />
+  
+  <!-- Clouds -->
+  <path d="M 150,120 Q 170,100 190,120 Q 210,110 230,130 Q 240,150 220,160 L 150,160 Q 130,150 140,130 Z" fill="#fff" opacity="0.8" />
+  <path d="M 600,180 Q 620,160 640,180 Q 660,170 680,190 Q 690,210 670,220 L 600,220 Q 580,210 590,190 Z" fill="#fff" opacity="0.8" />
+  
+  <!-- Ground -->
+  <rect x="0" y="500" width="800" height="100" fill="url(#groundGrad)" />
+  
+  <!-- Road Line (Animated for motion) -->
+  <line x1="0" y1="520" x2="800" y2="520" stroke="#fff" stroke-width="4" stroke-dasharray="30 15">
+    <animate attributeName="stroke-dashoffset" from="0" to="-45" dur="2s" repeatCount="indefinite" />
+  </line>
+
+  <!-- Speed / Motion Lines -->
+  <line x1="160" y1="420" x2="120" y2="420" stroke="#aaa" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="transform" type="translate" values="0,0; -60,0" dur="0.5s" repeatCount="indefinite" />
+  </line>
+  <line x1="620" y1="460" x2="580" y2="460" stroke="#aaa" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="transform" type="translate" values="0,0; -60,0" dur="0.7s" repeatCount="indefinite" />
+  </line>
+  <line x1="240" y1="380" x2="200" y2="380" stroke="#aaa" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="transform" type="translate" values="0,0; -60,0" dur="0.6s" repeatCount="indefinite" />
+  </line>
+
+  <!-- Pelican Shadow -->
+  <ellipse cx="360" cy="500" rx="80" ry="15" fill="#000" opacity="0.2" />
+
+  <!-- BICYCLE FRAME (Back parts) -->
+  <g fill="none" stroke="#00bcd4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Chainstay -->
+    <line x1="200" y1="440" x2="300" y2="440" />
+    <!-- Seatstay -->
+    <line x1="200" y1="440" x2="400" y2="280" />
+  </g>
+
+  <!-- Rear Wheel -->
+  <use href="#wheel" x="200" y="440" />
+
+  <!-- CHAIN & CHAINRING -->
+  <circle cx="300" cy="440" r="25" fill="#555" />
+  <path d="M 200,430 L 300,415 A 25 25 0 0 1 300,465 L 200,450 A 10 10 0 0 1 200,430" fill="none" stroke="#777" stroke-width="6" stroke-dasharray="10 4">
+    <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- CRANK & PEDALS (With Pelican Feet) -->
+  <g id="crank">
+    <animateTransform attributeName="transform" type="rotate" from="0 300 440" to="360 300 440" dur="2s" repeatCount="indefinite" />
+    
+    <!-- Right Crank Arm -->
+    <line x1="300" y1="440" x2="300" y2="480" stroke="#777" stroke-width="10" stroke-linecap="round" />
+    
+    <!-- Right Pedal & Foot -->
+    <g transform="translate(300, 480)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="2s" repeatCount="indefinite" />
+        <!-- Pedal -->
+        <rect x="-20" y="-5" width="40" height="10" rx="3" fill="#333" />
+        <!-- Right Webbed Foot -->
+        <path d="M -15,5 L -25,25 L 25,25 L 15,5 Z" fill="#fbc02d" />
+        <path d="M -25,25 L -30,30 M 0,25 L 0,32 M 25,25 L 30,30" stroke="#fbc02d" stroke-width="3" stroke-linecap="round" />
+      </g>
+    </g>
+
+    <!-- Left Crank Arm -->
+    <line x1="300" y1="440" x2="300" y2="400" stroke="#777" stroke-width="10" stroke-linecap="round" />
+    
+    <!-- Left Pedal & Foot -->
+    <g transform="translate(300, 400)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="2s" repeatCount="indefinite" />
+        <!-- Pedal -->
+        <rect x="-20" y="-5" width="40" height="10" rx="3" fill="#333" />
+        <!-- Left Webbed Foot -->
+        <path d="M -15,5 L -25,25 L 25,25 L 15,5 Z" fill="#fbc02d" />
+        <path d="M -25,25 L -30,30 M 0,25 L 0,32 M 25,25 L 30,30" stroke="#fbc02d" stroke-width="3" stroke-linecap="round" />
+      </g>
+    </g>
+  </g>
+
+  <!-- BICYCLE FRAME (Front parts) -->
+  <g fill="none" stroke="#00bcd4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Seat tube -->
+    <line x1="300" y1="440" x2="400" y2="280" />
+    <!-- Downtube -->
+    <line x1="300" y1="440" x2="540" y2="440" />
+    <!-- Top tube -->
+    <line x1="400" y1="280" x2="520" y2="300" />
+    <!-- Fork -->
+    <line x1="520" y1="300" x2="580" y2="440" />
+  </g>
+
+  <!-- Front Wheel -->
+  <use href="#wheel" x="580" y="440" />
+
+  <!-- Handlebars & Seat -->
+  <path d="M 520,300 L 510,270 C 510,260 490,260 480,270" fill="none" stroke="#555" stroke-width="8" stroke-linecap="round" />
+  <line x1="480" y1="270" x2="475" y2="275" stroke="#000" stroke-width="12" stroke-linecap="round" />
+  <line x1="400" y1="280" x2="400" y2="260" stroke="#aaa" stroke-width="8" />
+  <path d="M 370,260 C 370,245 420,245 430,260 C 420,275 370,275 370,260" fill="#333" />
+
+  <!-- PELICAN LEGS (Animated Paths) -->
+  <!-- Right Leg -->
+  <path fill="none" stroke="#fbc02d" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" 
+             values="M 380,220 L 350,320 L 300,480; 
+                     M 380,220 L 370,300 L 340,440; 
+                     M 380,220 L 350,280 L 300,400; 
+                     M 380,220 L 330,320 L 260,440; 
+                     M 380,220 L 350,320 L 300,480" 
+             dur="2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Left Leg -->
+  <path fill="none" stroke="#fbc02d" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" 
+             values="M 380,220 L 330,280 L 300,400; 
+                     M 380,220 L 350,300 L 260,440; 
+                     M 380,220 L 330,320 L 300,480; 
+                     M 380,220 L 310,300 L 340,440; 
+                     M 380,220 L 330,280 L 300,400" 
+             dur="2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- PELICAN BODY (With Bobbing Animation) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-15; 0,0; 0,15; 0,0" dur="2s" keyTimes="0; 0.25; 0.5; 0.75; 1" repeatCount="indefinite" />
+    
+    <!-- Body -->
+    <ellipse cx="360" cy="220" rx="80" ry="60" fill="#fff" stroke="#d0d0d0" stroke-width="3" />
+    
+    <!-- Tail -->
+    <path d="M 280,220 Q 220,190 210,240 Q 250,260 280,250" fill="#fff" stroke="#d0d0d0" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Wing -->
+    <path d="M 330,200 Q 380,170 420,210 Q 380,240 330,220" fill="#e0e0e0" stroke="#ccc" stroke-width="2" />
+    <path d="M 400,190 Q 430,200 440,220 Q 410,230 390,220" fill="#333" />
+    <path d="M 340,210 Q 360,200 380,215" fill="none" stroke="#ccc" stroke-width="2" />
+    <path d="M 350,225 Q 370,215 390,230" fill="none" stroke="#ccc" stroke-width="2" />
+    
+    <!-- Neck -->
+    <path d="M 380,200 Q 480,180 480,90" fill="none" stroke="#d0d0d0" stroke-width="36" stroke-linecap="round" />
+    <path d="M 380,200 Q 480,180 480,90" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round" />
+    
+    <!-- Head -->
+    <circle cx="480" cy="90" r="30" fill="#fff" stroke="#d0d0d0" stroke-width="3" />
+    
+    <!-- Beak Upper -->
+    <path d="M 500,90 L 590,100 L 500,110 Z" fill="#fbc02d" stroke="#f57f17" stroke-width="2" stroke-linejoin="round" />
+    
+    <!-- Beak Lower / Pouch -->
+    <path d="M 500,110 Q 560,150 590,100" fill="#f9a825" stroke="#f57f17" stroke-width="3" stroke-linejoin="round" />
+    <path d="M 520,110 Q 530,130 540,120" fill="none" stroke="#f57f17" stroke-width="2" />
+    <path d="M 530,115 Q 540,135 550,125" fill="none" stroke="#f57f17" stroke-width="2" />
+    
+    <!-- Eye -->
+    <circle cx="490" cy="80" r="6" fill="#000" />
+    <circle cx="492" cy="78" r="2" fill="#fff" />
+    
+    <!-- Cycling Cap -->
+    <path d="M 460,65 Q 480,55 500,70 L 490,80 L 460,75 Z" fill="#e53935" />
+    <path d="M 500,70 Q 520,65 525,75 Q 510,75 500,70" fill="#000" />
+    
+    <!-- Sweat Drop -->
+    <path d="M 460,95 Q 465,105 460,110 Q 455,105 460,95" fill="#4fc3f7">
+      <animate attributeName="opacity" values="0; 1; 1; 0" dur="2s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg></div>
             </div>
             <div class="card">
                 <div class="card-header">
@@ -10558,6 +10757,263 @@
       </g>
     </g>
   </g>
+</svg></div><div class="cell-label">GPT-5.4 Nano <span class="time">19.6s</span> <span class="price">$0.20 / $1.25 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" width="900" height="450" viewBox="0 0 900 450">
+  <defs>
+    <style>
+      .stroke { fill: none; stroke: #1b1b1b; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { stroke-width: 4; }
+      .wheel-stroke { stroke-width: 7; }
+      .rib { stroke: #1b1b1b; stroke-width: 4; opacity: 0.65; }
+      .bike { fill: none; }
+      .body { fill: #f4f1e8; stroke: #1b1b1b; stroke-width: 5; }
+      .beak { fill: #f2b22e; stroke: #1b1b1b; stroke-width: 4; }
+      .pouch { fill: #f6d7a6; stroke: #1b1b1b; stroke-width: 4; }
+      .dark { fill: #c56a1a; stroke: #1b1b1b; stroke-width: 4; }
+      .eye { fill: #111; }
+      .feather { fill: #fbf7ee; stroke: #1b1b1b; stroke-width: 4; }
+      .shadow { fill: #000; opacity: 0.12; }
+    </style>
+
+    <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6fd0ff" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#2aa4e6" stop-opacity="0.15"/>
+    </linearGradient>
+
+    <!-- Wheel spin duration -->
+    <animate id="spinA" attributeName="dummy" from="0" to="0" dur="0s" begin="0s" fill="freeze"/>
+  </defs>
+
+  <!-- Sky -->
+  <rect x="0" y="0" width="900" height="450" fill="url(#groundGrad)"/>
+
+  <!-- Ground -->
+  <path d="M0,360 C120,330 230,390 360,360 C480,333 560,390 690,360 C790,336 840,362 900,350 L900,450 L0,450 Z" fill="#55b870" opacity="0.55"/>
+  <path d="M0,370 C140,340 260,402 380,372 C520,338 610,405 740,372 C820,352 860,366 900,358" stroke="#0d6f33" stroke-width="6" opacity="0.35" fill="none"/>
+
+  <!-- Ground shadow -->
+  <ellipse cx="455" cy="388" rx="210" ry="22" class="shadow">
+    <animate attributeName="rx" values="210;205;210" dur="1s" repeatCount="indefinite"/>
+    <animate attributeName="ry" values="22;18;22" dur="1s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Bike group -->
+  <g id="scene" transform="translate(0,0)">
+    <!-- Wheels -->
+    <g id="wheels" transform="translate(0,0)">
+      <!-- Rear wheel -->
+      <g id="rearWheel" transform="translate(225,300)">
+        <circle r="78" class="stroke wheel-stroke" fill="#d9f4ff"/>
+        <circle r="58" class="stroke thin" fill="none" opacity="0.85"/>
+        <circle r="8" cx="0" cy="0" fill="#1b1b1b"/>
+        <!-- spokes -->
+        <g>
+          <g class="rib">
+            <line x1="0" y1="-58" x2="0" y2="58"/>
+            <line x1="-58" y1="0" x2="58" y2="0"/>
+            <line x1="-40" y1="-40" x2="40" y2="40"/>
+            <line x1="-40" y1="40" x2="40" y2="-40"/>
+            <line x1="-58" y1="-10" x2="58" y2="10"/>
+            <line x1="-10" y1="-58" x2="10" y2="58"/>
+          </g>
+        </g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.75s" repeatCount="indefinite"/>
+      </g>
+
+      <!-- Front wheel -->
+      <g id="frontWheel" transform="translate(675,300)">
+        <circle r="78" class="stroke wheel-stroke" fill="#d9f4ff"/>
+        <circle r="58" class="stroke thin" fill="none" opacity="0.85"/>
+        <circle r="8" cx="0" cy="0" fill="#1b1b1b"/>
+        <!-- spokes -->
+        <g class="rib">
+          <line x1="0" y1="-58" x2="0" y2="58"/>
+          <line x1="-58" y1="0" x2="58" y2="0"/>
+          <line x1="-40" y1="-40" x2="40" y2="40"/>
+          <line x1="-40" y1="40" x2="40" y2="-40"/>
+          <line x1="-58" y1="-10" x2="58" y2="10"/>
+          <line x1="-10" y1="-58" x2="10" y2="58"/>
+        </g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.75s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- Frame -->
+    <g id="frame" stroke="#1b1b1b" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- main triangle -->
+      <path d="M285,300 L435,190 L610,300" />
+      <!-- seat tube -->
+      <path d="M435,190 L465,190" />
+      <!-- seat -->
+      <path d="M455,180 C490,170 520,172 545,180" stroke-width="5"/>
+      <line x1="450" y1="190" x2="468" y2="190" stroke-width="7"/>
+      <line x1="465" y1="190" x2="545" y2="180" stroke-width="5"/>
+
+      <!-- handlebar -->
+      <path d="M610,300 L655,270" />
+      <path d="M655,270 L695,260" />
+      <line x1="695" y1="260" x2="720" y2="280" />
+      <line x1="695" y1="260" x2="720" y2="242" />
+
+      <!-- down tube to rear -->
+      <path d="M285,300 L355,240" />
+      <path d="M355,240 L435,190" />
+      <!-- fork -->
+      <path d="M610,300 L660,300" />
+      <path d="M660,300 L675,300" />
+      <!-- chain stays -->
+      <path d="M335,300 L610,300" opacity="0.95" />
+    </g>
+
+    <!-- Crank and pedals -->
+    <g id="crank" transform="translate(450,300)">
+      <!-- bottom bracket -->
+      <circle r="10" fill="#1b1b1b"/>
+      <!-- crank arm -->
+      <g id="crankArm" transform="rotate(0)">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.75s" repeatCount="indefinite"/>
+        <line x1="0" y1="0" x2="70" y2="-12" stroke="#1b1b1b" stroke-width="7" stroke-linecap="round"/>
+        <line x1="0" y1="0" x2="70" y2="12" stroke="#1b1b1b" stroke-width="7" stroke-linecap="round" opacity="0.35"/>
+        <!-- pedals -->
+        <g id="pedal1" transform="translate(70,-12)">
+          <rect x="-16" y="-8" width="32" height="16" rx="6" fill="#f1c66a" stroke="#1b1b1b" stroke-width="4"/>
+          <path d="M-12,0 C-4,-12 4,-12 12,0 C4,12 -4,12 -12,0 Z" fill="#ffd98e" opacity="0.9" stroke="#1b1b1b" stroke-width="3"/>
+        </g>
+        <g id="pedal2" transform="translate(-12,70) rotate(90 0 0)" opacity="0">
+          <!-- kept invisible; visual handled by rotation arm -->
+        </g>
+      </g>
+
+      <!-- Second crank arm offset via rotated duplicates -->
+      <g transform="rotate(180)">
+        <line x1="0" y1="0" x2="70" y2="-12" stroke="#1b1b1b" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+      </g>
+
+      <!-- chain -->
+      <path d="M345,262 C400,290 425,300 450,300 C475,300 520,290 595,262" fill="none" stroke="#1b1b1b" stroke-width="4" opacity="0.55"/>
+      <!-- helper animate line dash -->
+      <path d="M345,262 C400,290 425,300 450,300 C475,300 520,290 595,262" fill="none" stroke="#1b1b1b" stroke-width="4" opacity="0.55" stroke-dasharray="10 10">
+        <animate attributeName="stroke-dashoffset" from="0" to="-40" dur="0.75s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Seat rider group -->
+    <g id="pelican" transform="translate(0,0)">
+      <!-- bobbing -->
+      <animateTransform attributeName="transform" type="translate" additive="replace" dur="0.75s" repeatCount="indefinite"
+                        values="0,-2;0,2;0,-2"/>
+      <!-- Place pelican relative to bike -->
+      <g transform="translate(0,0)">
+        <!-- Pelican shadow near seat -->
+        <ellipse cx="505" cy="330" rx="22" ry="10" class="shadow">
+          <animate attributeName="rx" values="22;20;22" dur="0.75s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="10;8;10" dur="0.75s" repeatCount="indefinite"/>
+        </ellipse>
+
+        <!-- Body (sitting on seat) -->
+        <g transform="translate(470,175)">
+          <!-- Legs -->
+          <g id="legs">
+            <!-- left leg -->
+            <path d="M-25,55 C-10,70 -8,92 -18,112" class="stroke thin" stroke="#1b1b1b"/>
+            <path d="M-18,112 C-22,122 -25,126 -20,132" class="stroke thin" stroke="#1b1b1b"/>
+            <!-- right leg to chainring area -->
+            <path d="M25,55 C40,70 38,92 28,112" class="stroke thin"/>
+            <path d="M28,112 C24,122 21,126 26,132" class="stroke thin"/>
+
+            <!-- foot wobble -->
+            <g transform="rotate(0 -18 128)">
+              <animateTransform attributeName="transform" type="rotate"
+                                 values="0 -18 128;12 -18 128;-2 -18 128;0 -18 128"
+                                 dur="0.75s" repeatCount="indefinite"/>
+            </g>
+          </g>
+
+          <!-- Pelican body -->
+          <path class="body" d="M-45,65
+                                 C-60,35 -30,5 5,0
+                                 C40,-5 65,20 60,48
+                                 C55,78 25,95 -5,95
+                                 C-25,95 -35,88 -45,65 Z"/>
+          <!-- belly pouch -->
+          <path class="pouch" d="M-10,62
+                                  C-3,52 10,49 22,53
+                                  C34,58 35,75 25,86
+                                  C15,98 0,96 -10,84
+                                  C-20,74 -22,69 -10,62 Z"/>
+          <!-- wing -->
+          <path class="feather" d="M-40,55
+                                   C-62,58 -78,78 -70,95
+                                   C-58,122 -20,114 0,96
+                                   C-6,82 -18,63 -40,55 Z"/>
+          <!-- wing lines -->
+          <path d="M-67,93 C-58,76 -38,70 -25,69" stroke="#1b1b1b" stroke-width="4" fill="none" opacity="0.75"/>
+          <path d="M-60,103 C-50,90 -35,86 -22,84" stroke="#1b1b1b" stroke-width="4" fill="none" opacity="0.55"/>
+
+          <!-- head -->
+          <g id="head" transform="translate(30,-5)">
+            <path d="M0,-10
+                     C20,-26 55,-8 56,15
+                     C57,36 35,46 16,34
+                     C-2,23 -8,2 0,-10 Z"
+                  fill="#f7f0e2" stroke="#1b1b1b" stroke-width="5" stroke-linejoin="round"/>
+            <!-- eye -->
+            <circle class="eye" cx="28" cy="8" r="4.5"/>
+            <circle cx="29.7" cy="6.8" r="1.2" fill="#fff" opacity="0.8"/>
+            <!-- beak -->
+            <path class="beak" d="M50,8
+                                  C75,10 92,24 95,36
+                                  C98,50 83,56 70,49
+                                  C58,42 47,26 50,8 Z"/>
+            <path class="dark" d="M68,36
+                                  C79,42 89,43 92,35
+                                  C95,28 85,20 75,19
+                                  C69,18 64,25 68,36 Z"/>
+            <!-- neck bob -->
+            <animateTransform attributeName="transform" type="rotate" values="-2 30 -5;2 30 -5;-2 30 -5" dur="0.75s" repeatCount="indefinite"/>
+            <!-- beak tip pulse -->
+            <path d="M78,44 C86,48 92,48 96,44" stroke="#1b1b1b" stroke-width="3" fill="none" opacity="0.6">
+              <animate attributeName="opacity" values="0.45;0.75;0.45" dur="0.5s" repeatCount="indefinite"/>
+            </path>
+          </g>
+
+          <!-- arms/handles -->
+          <g id="arms">
+            <path d="M-5,70 C-2,60 10,55 22,58" class="stroke thin"/>
+            <path d="M22,58 C40,63 55,62 72,55" class="stroke thin"/>
+            <animateTransform attributeName="transform" type="rotate"
+                               values="-3;3;-3" dur="0.75s" repeatCount="indefinite" additive="sum"/>
+          </g>
+
+          <!-- pedal grasp indication -->
+          <g opacity="0.9">
+            <path d="M-20,95 C-5,88 5,88 18,95" stroke="#1b1b1b" stroke-width="4" fill="none" opacity="0.35"/>
+          </g>
+        </g>
+
+        <!-- Hands on handlebars (simple) -->
+        <g transform="translate(640,195)">
+          <circle cx="-6" cy="8" r="8" fill="#f4f1e8" stroke="#1b1b1b" stroke-width="4"/>
+          <path d="M-6,15 C-10,25 -18,35 -30,40" stroke="#1b1b1b" stroke-width="5" fill="none"/>
+          <animateTransform attributeName="transform" type="translate" additive="sum"
+                             values="0 0;0 -1;0 0" dur="0.75s" repeatCount="indefinite"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- Tiny motion: handlebars shimmer -->
+    <g opacity="0.9">
+      <animate attributeName="opacity" values="0.92;1;0.92" dur="0.75s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- Optional: front wheel rim highlight -->
+  <g opacity="0.35">
+    <g transform="translate(675,300)">
+      <circle r="70" fill="none" stroke="#ffffff" stroke-width="6" stroke-dasharray="14 22">
+        <animate attributeName="stroke-dashoffset" from="0" to="-160" dur="0.75s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
 </svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">GPT-5 Mini <span class="time">47.0s</span> <span class="price">$0.25 / $2 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
   <!-- Background -->
   <rect width="100%" height="100%" fill="#cfeaff"/>
@@ -10831,6 +11287,55 @@
       <circle cx="5" cy="-3" r="3" fill="#000"/>
       <polygon points="15,0 40,5 15,10" fill="#ffbe0b" stroke="#333" stroke-width="2"/>
     </g>
+  </g>
+</svg></div><div class="cell-label">o4 Mini <span class="time">38.8s</span> <span class="price">$1.10 / $4.40 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <g id="wheel-back">
+    <circle cx="100" cy="150" r="40" fill="none" stroke="#333" stroke-width="3"/>
+    <line x1="100" y1="150" x2="140" y2="150" stroke="#333" stroke-width="1"/>
+    <line x1="100" y1="150" x2="128.3" y2="178.3" stroke="#333" stroke-width="1"/>
+    <line x1="100" y1="150" x2="100" y2="190" stroke="#333" stroke-width="1"/>
+    <line x1="100" y1="150" x2="71.7" y2="178.3" stroke="#333" stroke-width="1"/>
+    <line x1="100" y1="150" x2="60" y2="150" stroke="#333" stroke-width="1"/>
+    <line x1="100" y1="150" x2="71.7" y2="121.7" stroke="#333" stroke-width="1"/>
+    <line x1="100" y1="150" x2="100" y2="110" stroke="#333" stroke-width="1"/>
+    <line x1="100" y1="150" x2="128.3" y2="121.7" stroke="#333" stroke-width="1"/>
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 150" to="360 100 150" dur="2s" repeatCount="indefinite"/>
+  </g>
+  <g id="wheel-front">
+    <circle cx="300" cy="150" r="40" fill="none" stroke="#333" stroke-width="3"/>
+    <line x1="300" y1="150" x2="340" y2="150" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="150" x2="328.3" y2="178.3" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="150" x2="300" y2="190" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="150" x2="271.7" y2="178.3" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="150" x2="260" y2="150" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="150" x2="271.7" y2="121.7" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="150" x2="300" y2="110" stroke="#333" stroke-width="1"/>
+    <line x1="300" y1="150" x2="328.3" y2="121.7" stroke="#333" stroke-width="1"/>
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 300 150" to="360 300 150" dur="2s" repeatCount="indefinite"/>
+  </g>
+  <g id="frame" stroke="#333" stroke-width="3" fill="none">
+    <line x1="100" y1="150" x2="140" y2="110"/>
+    <line x1="140" y1="110" x2="240" y2="100"/>
+    <line x1="100" y1="150" x2="240" y2="100"/>
+    <line x1="140" y1="110" x2="140" y2="150"/>
+    <line x1="140" y1="110" x2="300" y2="150"/>
+    <line x1="240" y1="100" x2="300" y2="150"/>
+  </g>
+  <g id="pedals" transform="rotate(0 100 150)">
+    <line x1="100" y1="150" x2="115" y2="150" stroke="#333" stroke-width="3"/>
+    <line x1="100" y1="150" x2="85" y2="150" stroke="#333" stroke-width="3"/>
+    <circle cx="115" cy="150" r="5" fill="#333"/>
+    <circle cx="85" cy="150" r="5" fill="#333"/>
+    <circle cx="100" cy="150" r="4" fill="#555"/>
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 150" to="360 100 150" dur="2s" repeatCount="indefinite"/>
+  </g>
+  <g id="pelican">
+    <ellipse cx="160" cy="80" rx="30" ry="18" fill="white" stroke="black" stroke-width="2"/>
+    <path d="M150,75 q-20,10 0,20" fill="lightgray" stroke="black" stroke-width="1"/>
+    <circle cx="185" cy="60" r="10" fill="white" stroke="black" stroke-width="2"/>
+    <path d="M170,80 Q180,60 185,70" fill="none" stroke="black" stroke-width="2"/>
+    <circle cx="188" cy="57" r="2" fill="black"/>
+    <polygon points="195,60 220,55 220,65" fill="orange" stroke="black" stroke-width="1"/>
   </g>
 </svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="group-header" colspan="17">Google</td></tr><tr><td class="model-name">Gemini Pro</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">Gemini 3.1 Pro <span class="time">150.2s</span> <span class="price">$2 / $12 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
   <defs>
@@ -11424,6 +11929,67 @@
         <animateTransform attributeName="transform" type="rotate" values="180 170 150; 540 170 150" dur="1s" repeatCount="indefinite" />
       </line>
     </g>
+  </g>
+</svg></div><div class="cell-label">Gemma 4 26B-A4B <span class="time">81.8s</span> <span class="price">$0.13 / $0.40 /M</span></div><div class="svg-container"><svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#87CEEB" />
+  <rect y="250" width="400" height="50" fill="#90EE90" />
+
+  <!-- Bicycle Group -->
+  <g transform="translate(150, 200)">
+    <!-- Wheels -->
+    <g>
+      <circle cx="0" cy="50" r="30" fill="none" stroke="#333" stroke-width="4" />
+      <circle cx="0" cy="50" r="25" fill="none" stroke="#ccc" stroke-width="1" />
+      <line x1="-25" y1="50" x2="25" y2="50" stroke="#333" stroke-width="2" />
+      <line x1="0" y1="25" x2="0" y2="75" stroke="#333" stroke-width="2" />
+      <animateTransform attributeName="transform" type="rotate" from="0 0 50" to="360 0 50" dur="1s" repeatCount="indefinite" additive="replace" />
+    </g>
+    
+    <g>
+      <circle cx="100" cy="50" r="30" fill="none" stroke="#333" stroke-width="4" />
+      <circle cx="100" cy="50" r="25" fill="none" stroke="#ccc" stroke-width="1" />
+      <line x1="75" y1="50" x2="125" y2="50" stroke="#333" stroke-width="2" />
+      <line x1="100" y1="25" x2="100" y2="75" stroke="#333" stroke-width="2" />
+      <animateTransform attributeName="transform" type="rotate" from="0 100 50" to="360 100 50" dur="1s" repeatCount="indefinite" additive="replace" />
+    </g>
+
+    <!-- Frame -->
+    <path d="M0 50 L40 50 L70 10 L40 10 Z" fill="none" stroke="#E63946" stroke-width="4" />
+    <line x1="0" y1="50" x2="70" y2="10" stroke="#E63946" stroke-width="4" />
+    <line x1="100" y1="50" x2="70" y2="10" stroke="#E63946" stroke-width="4" />
+    <line x1="40" y1="50" x2="40" y2="10" stroke="#E63946" stroke-width="4" />
+    
+    <!-- Pedals/Legs Animation -->
+    <g>
+      <circle cx="40" cy="50" r="5" fill="#333" />
+      <line id="leg" x1="40" y1="50" x2="40" y2="20" stroke="#FFD700" stroke-width="6" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate" from="0 40 50" to="360 40 50" dur="1s" repeatCount="indefinite" />
+      </line>
+    </g>
+  </g>
+
+  <!-- Pelican Group -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-5; 0,0" dur="0.5s" repeatCount="indefinite" />
+    
+    <!-- Body -->
+    <ellipse cx="210" cy="140" rx="30" ry="25" fill="white" />
+    
+    <!-- Neck -->
+    <path d="M235 130 Q260 130 250 90" fill="none" stroke="white" stroke-width="15" stroke-linecap="round" />
+    
+    <!-- Head -->
+    <circle cx="250" cy="90" r="18" fill="white" />
+    
+    <!-- Eye -->
+    <circle cx="258" cy="85" r="3" fill="black" />
+    
+    <!-- Beak (Large Pelican Beak) -->
+    <path d="M265 85 L300 95 Q300 115 265 105 Z" fill="#FFB347" />
+    
+    <!-- Wing -->
+    <ellipse cx="200" cy="140" rx="15" ry="10" fill="#F0F0F0" />
   </g>
 </svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="group-header" colspan="17">xAI / Grok</td></tr><tr><td class="model-name">Grok (flagship)</td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">Grok 4.20 Beta <span class="time">10.1s</span> <span class="price">$2 / $6 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
   <!-- Ground -->
@@ -12421,7 +12987,206 @@
   
   <!-- Seat -->
   <path d="M150,120 Q160,100 170,120" stroke="#333" stroke-width="4" fill="none"/>
-</svg></div></td><td class="empty-cell"></td></tr><tr><td class="model-name">DeepSeek Flash</td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Flash <span class="time">11.1s</span> <span class="price">$0.14 / $0.28 /M</span></div><div class="svg-container"><svg` and end with `</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="model-name">Kimi</td><td class="svg-cell"><div class="cell-label">Kimi K2.6 <span class="time">182.4s</span> <span class="price">$0.74 / $4.66 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+</svg></div></td><td class="empty-cell"></td></tr><tr><td class="model-name">DeepSeek Flash</td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Flash <span class="time">231.8s</span> <span class="price">$0.14 / $0.28 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Sky Gradient -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#81d4fa" />
+      <stop offset="100%" stop-color="#e1f5fe" />
+    </linearGradient>
+    <!-- Ground Gradient -->
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#81c784" />
+      <stop offset="100%" stop-color="#4caf50" />
+    </linearGradient>
+    <!-- Wheel Definition -->
+    <g id="wheel">
+      <!-- Tire -->
+      <circle cx="0" cy="0" r="60" fill="none" stroke="#333" stroke-width="8" />
+      <!-- Spokes Hub Animation -->
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite" />
+        <circle cx="0" cy="0" r="55" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="8 8" />
+        <circle cx="0" cy="0" r="40" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="5 15" />
+        <circle cx="0" cy="0" r="25" fill="none" stroke="#888" stroke-width="2" stroke-dasharray="10 20" />
+        <circle cx="0" cy="0" r="10" fill="#555" />
+      </g>
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#skyGrad)" />
+  
+  <!-- Sun -->
+  <circle cx="100" cy="100" r="50" fill="#ffd54f" />
+  
+  <!-- Clouds -->
+  <path d="M 150,120 Q 170,100 190,120 Q 210,110 230,130 Q 240,150 220,160 L 150,160 Q 130,150 140,130 Z" fill="#fff" opacity="0.8" />
+  <path d="M 600,180 Q 620,160 640,180 Q 660,170 680,190 Q 690,210 670,220 L 600,220 Q 580,210 590,190 Z" fill="#fff" opacity="0.8" />
+  
+  <!-- Ground -->
+  <rect x="0" y="500" width="800" height="100" fill="url(#groundGrad)" />
+  
+  <!-- Road Line (Animated for motion) -->
+  <line x1="0" y1="520" x2="800" y2="520" stroke="#fff" stroke-width="4" stroke-dasharray="30 15">
+    <animate attributeName="stroke-dashoffset" from="0" to="-45" dur="2s" repeatCount="indefinite" />
+  </line>
+
+  <!-- Speed / Motion Lines -->
+  <line x1="160" y1="420" x2="120" y2="420" stroke="#aaa" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="transform" type="translate" values="0,0; -60,0" dur="0.5s" repeatCount="indefinite" />
+  </line>
+  <line x1="620" y1="460" x2="580" y2="460" stroke="#aaa" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="transform" type="translate" values="0,0; -60,0" dur="0.7s" repeatCount="indefinite" />
+  </line>
+  <line x1="240" y1="380" x2="200" y2="380" stroke="#aaa" stroke-width="3" stroke-linecap="round">
+    <animate attributeName="transform" type="translate" values="0,0; -60,0" dur="0.6s" repeatCount="indefinite" />
+  </line>
+
+  <!-- Pelican Shadow -->
+  <ellipse cx="360" cy="500" rx="80" ry="15" fill="#000" opacity="0.2" />
+
+  <!-- BICYCLE FRAME (Back parts) -->
+  <g fill="none" stroke="#00bcd4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Chainstay -->
+    <line x1="200" y1="440" x2="300" y2="440" />
+    <!-- Seatstay -->
+    <line x1="200" y1="440" x2="400" y2="280" />
+  </g>
+
+  <!-- Rear Wheel -->
+  <use href="#wheel" x="200" y="440" />
+
+  <!-- CHAIN & CHAINRING -->
+  <circle cx="300" cy="440" r="25" fill="#555" />
+  <path d="M 200,430 L 300,415 A 25 25 0 0 1 300,465 L 200,450 A 10 10 0 0 1 200,430" fill="none" stroke="#777" stroke-width="6" stroke-dasharray="10 4">
+    <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- CRANK & PEDALS (With Pelican Feet) -->
+  <g id="crank">
+    <animateTransform attributeName="transform" type="rotate" from="0 300 440" to="360 300 440" dur="2s" repeatCount="indefinite" />
+    
+    <!-- Right Crank Arm -->
+    <line x1="300" y1="440" x2="300" y2="480" stroke="#777" stroke-width="10" stroke-linecap="round" />
+    
+    <!-- Right Pedal & Foot -->
+    <g transform="translate(300, 480)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="2s" repeatCount="indefinite" />
+        <!-- Pedal -->
+        <rect x="-20" y="-5" width="40" height="10" rx="3" fill="#333" />
+        <!-- Right Webbed Foot -->
+        <path d="M -15,5 L -25,25 L 25,25 L 15,5 Z" fill="#fbc02d" />
+        <path d="M -25,25 L -30,30 M 0,25 L 0,32 M 25,25 L 30,30" stroke="#fbc02d" stroke-width="3" stroke-linecap="round" />
+      </g>
+    </g>
+
+    <!-- Left Crank Arm -->
+    <line x1="300" y1="440" x2="300" y2="400" stroke="#777" stroke-width="10" stroke-linecap="round" />
+    
+    <!-- Left Pedal & Foot -->
+    <g transform="translate(300, 400)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="2s" repeatCount="indefinite" />
+        <!-- Pedal -->
+        <rect x="-20" y="-5" width="40" height="10" rx="3" fill="#333" />
+        <!-- Left Webbed Foot -->
+        <path d="M -15,5 L -25,25 L 25,25 L 15,5 Z" fill="#fbc02d" />
+        <path d="M -25,25 L -30,30 M 0,25 L 0,32 M 25,25 L 30,30" stroke="#fbc02d" stroke-width="3" stroke-linecap="round" />
+      </g>
+    </g>
+  </g>
+
+  <!-- BICYCLE FRAME (Front parts) -->
+  <g fill="none" stroke="#00bcd4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Seat tube -->
+    <line x1="300" y1="440" x2="400" y2="280" />
+    <!-- Downtube -->
+    <line x1="300" y1="440" x2="540" y2="440" />
+    <!-- Top tube -->
+    <line x1="400" y1="280" x2="520" y2="300" />
+    <!-- Fork -->
+    <line x1="520" y1="300" x2="580" y2="440" />
+  </g>
+
+  <!-- Front Wheel -->
+  <use href="#wheel" x="580" y="440" />
+
+  <!-- Handlebars & Seat -->
+  <path d="M 520,300 L 510,270 C 510,260 490,260 480,270" fill="none" stroke="#555" stroke-width="8" stroke-linecap="round" />
+  <line x1="480" y1="270" x2="475" y2="275" stroke="#000" stroke-width="12" stroke-linecap="round" />
+  <line x1="400" y1="280" x2="400" y2="260" stroke="#aaa" stroke-width="8" />
+  <path d="M 370,260 C 370,245 420,245 430,260 C 420,275 370,275 370,260" fill="#333" />
+
+  <!-- PELICAN LEGS (Animated Paths) -->
+  <!-- Right Leg -->
+  <path fill="none" stroke="#fbc02d" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" 
+             values="M 380,220 L 350,320 L 300,480; 
+                     M 380,220 L 370,300 L 340,440; 
+                     M 380,220 L 350,280 L 300,400; 
+                     M 380,220 L 330,320 L 260,440; 
+                     M 380,220 L 350,320 L 300,480" 
+             dur="2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Left Leg -->
+  <path fill="none" stroke="#fbc02d" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" 
+             values="M 380,220 L 330,280 L 300,400; 
+                     M 380,220 L 350,300 L 260,440; 
+                     M 380,220 L 330,320 L 300,480; 
+                     M 380,220 L 310,300 L 340,440; 
+                     M 380,220 L 330,280 L 300,400" 
+             dur="2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- PELICAN BODY (With Bobbing Animation) -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-15; 0,0; 0,15; 0,0" dur="2s" keyTimes="0; 0.25; 0.5; 0.75; 1" repeatCount="indefinite" />
+    
+    <!-- Body -->
+    <ellipse cx="360" cy="220" rx="80" ry="60" fill="#fff" stroke="#d0d0d0" stroke-width="3" />
+    
+    <!-- Tail -->
+    <path d="M 280,220 Q 220,190 210,240 Q 250,260 280,250" fill="#fff" stroke="#d0d0d0" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Wing -->
+    <path d="M 330,200 Q 380,170 420,210 Q 380,240 330,220" fill="#e0e0e0" stroke="#ccc" stroke-width="2" />
+    <path d="M 400,190 Q 430,200 440,220 Q 410,230 390,220" fill="#333" />
+    <path d="M 340,210 Q 360,200 380,215" fill="none" stroke="#ccc" stroke-width="2" />
+    <path d="M 350,225 Q 370,215 390,230" fill="none" stroke="#ccc" stroke-width="2" />
+    
+    <!-- Neck -->
+    <path d="M 380,200 Q 480,180 480,90" fill="none" stroke="#d0d0d0" stroke-width="36" stroke-linecap="round" />
+    <path d="M 380,200 Q 480,180 480,90" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round" />
+    
+    <!-- Head -->
+    <circle cx="480" cy="90" r="30" fill="#fff" stroke="#d0d0d0" stroke-width="3" />
+    
+    <!-- Beak Upper -->
+    <path d="M 500,90 L 590,100 L 500,110 Z" fill="#fbc02d" stroke="#f57f17" stroke-width="2" stroke-linejoin="round" />
+    
+    <!-- Beak Lower / Pouch -->
+    <path d="M 500,110 Q 560,150 590,100" fill="#f9a825" stroke="#f57f17" stroke-width="3" stroke-linejoin="round" />
+    <path d="M 520,110 Q 530,130 540,120" fill="none" stroke="#f57f17" stroke-width="2" />
+    <path d="M 530,115 Q 540,135 550,125" fill="none" stroke="#f57f17" stroke-width="2" />
+    
+    <!-- Eye -->
+    <circle cx="490" cy="80" r="6" fill="#000" />
+    <circle cx="492" cy="78" r="2" fill="#fff" />
+    
+    <!-- Cycling Cap -->
+    <path d="M 460,65 Q 480,55 500,70 L 490,80 L 460,75 Z" fill="#e53935" />
+    <path d="M 500,70 Q 520,65 525,75 Q 510,75 500,70" fill="#000" />
+    
+    <!-- Sweat Drop -->
+    <path d="M 460,95 Q 465,105 460,110 Q 455,105 460,95" fill="#4fc3f7">
+      <animate attributeName="opacity" values="0; 1; 1; 0" dur="2s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="model-name">Kimi</td><td class="svg-cell"><div class="cell-label">Kimi K2.6 <span class="time">182.4s</span> <span class="price">$0.74 / $4.66 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#87CEEB"/>
@@ -13144,6 +13909,152 @@
       <line x1="230" y1="280" x2="205" y2="280" stroke="#2C3E50" stroke-width="6" stroke-linecap="round"/>
       <rect x="197" y="276" width="16" height="8" rx="2" fill="#95A5A6" stroke="#2C3E50" stroke-width="2"/>
     </g>
+  </g>
+
+</svg></div><div class="cell-label">GLM-5.1 <span class="time">384.9s</span> <span class="price">$0.95 / $3.15 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#AED6F1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D6EAF8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect x="0" y="0" width="800" height="480" fill="url(#skyGrad)"/>
+
+  <!-- Sun -->
+  <circle cx="700" cy="80" r="60" fill="#F9E79F" opacity="0.3"/>
+  <circle cx="700" cy="80" r="50" fill="#F9E79F"/>
+
+  <!-- Clouds -->
+  <g opacity="0.8">
+    <ellipse cx="150" cy="100" rx="60" ry="30" fill="white"/>
+    <ellipse cx="180" cy="90" rx="40" ry="25" fill="white"/>
+    <ellipse cx="120" cy="95" rx="35" ry="20" fill="white"/>
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-800 0" dur="20s" repeatCount="indefinite"/>
+  </g>
+  <g opacity="0.8">
+    <ellipse cx="650" cy="150" rx="50" ry="25" fill="white"/>
+    <ellipse cx="680" cy="140" rx="30" ry="20" fill="white"/>
+    <ellipse cx="620" cy="145" rx="40" ry="20" fill="white"/>
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-800 0" dur="25s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Ground -->
+  <rect x="0" y="480" width="800" height="120" fill="#95A5A6"/>
+  <line x1="-50" y1="480" x2="800" y2="480" stroke="#F1C40F" stroke-width="4" stroke-dasharray="30, 20">
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-50 0" dur="0.15s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Rear Wheel -->
+  <g>
+    <circle cx="250" cy="400" r="80" stroke="#2C3E50" stroke-width="6" fill="none"/>
+    <circle cx="250" cy="400" r="10" fill="#2C3E50"/>
+    <g stroke="#7F8C8D" stroke-width="2">
+      <line x1="250" y1="320" x2="250" y2="480"/>
+      <line x1="170" y1="400" x2="330" y2="400"/>
+      <line x1="193" y1="343" x2="307" y2="457"/>
+      <line x1="307" y1="343" x2="193" y2="457"/>
+    </g>
+    <animateTransform attributeName="transform" type="rotate" from="0 250 400" to="360 250 400" dur="1.5s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Frame -->
+  <g stroke="#E67E22" stroke-width="8" stroke-linecap="round" fill="none">
+    <line x1="350" y1="400" x2="250" y2="400"/> <!-- Chainstay -->
+    <line x1="320" y1="290" x2="250" y2="400"/> <!-- Seatstay -->
+    <line x1="320" y1="290" x2="350" y2="400"/> <!-- Seat tube -->
+    <line x1="520" y1="290" x2="350" y2="400"/> <!-- Down tube -->
+    <line x1="320" y1="290" x2="520" y2="290"/> <!-- Top tube -->
+    <line x1="520" y1="290" x2="550" y2="400"/> <!-- Fork -->
+  </g>
+
+  <!-- Front Wheel -->
+  <g>
+    <circle cx="550" cy="400" r="80" stroke="#2C3E50" stroke-width="6" fill="none"/>
+    <circle cx="550" cy="400" r="10" fill="#2C3E50"/>
+    <g stroke="#7F8C8D" stroke-width="2">
+      <line x1="550" y1="320" x2="550" y2="480"/>
+      <line x1="470" y1="400" x2="630" y2="400"/>
+      <line x1="493" y1="343" x2="607" y2="457"/>
+      <line x1="607" y1="343" x2="493" y2="457"/>
+    </g>
+    <animateTransform attributeName="transform" type="rotate" from="0 550 400" to="360 550 400" dur="1.5s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Handlebars -->
+  <g stroke="#2C3E50" stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="520" y1="290" x2="520" y2="275"/> <!-- Stem -->
+    <path d="M 505,275 Q 520,265 535,275"/> <!-- Bar -->
+  </g>
+
+  <!-- Seat -->
+  <rect x="305" y="282" width="30" height="8" rx="4" fill="#2C3E50"/>
+
+  <!-- Crank & Pedals -->
+  <g>
+    <circle cx="350" cy="400" r="8" fill="#7F8C8D"/>
+    <line x1="350" y1="360" x2="350" y2="440" stroke="#7F8C8D" stroke-width="5"/>
+    <rect x="338" y="354" width="24" height="6" rx="2" fill="#2C3E50"/>
+    <rect x="338" y="440" width="24" height="6" rx="2" fill="#2C3E50"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 350 400" to="360 350 400" dur="1.5s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Pelican Legs -->
+  <!-- Leg 1 (Right) -->
+  <path fill="none" stroke="#F39C12" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" dur="1.5s" repeatCount="indefinite"
+      values="M 370,285 Q 340,320 350,360 l -8,5 l 16,0;
+              M 370,285 Q 410,340 390,400 l -5,-8 l 0,16;
+              M 370,285 Q 390,360 350,440 l -8,-5 l 16,0;
+              M 370,285 Q 330,340 310,400 l 5,-8 l 0,16;
+              M 370,285 Q 340,320 350,360 l -8,5 l 16,0"/>
+  </path>
+  <!-- Leg 2 (Left) -->
+  <path fill="none" stroke="#F39C12" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <animate attributeName="d" dur="1.5s" repeatCount="indefinite"
+      values="M 370,285 Q 390,360 350,440 l -8,-5 l 16,0;
+              M 370,285 Q 330,340 310,400 l 5,-8 l 0,16;
+              M 370,285 Q 340,320 350,360 l -8,5 l 16,0;
+              M 370,285 Q 410,340 390,400 l -5,-8 l 0,16;
+              M 370,285 Q 390,360 350,440 l -8,-5 l 16,0"/>
+  </path>
+
+  <!-- Pelican Body -->
+  <g>
+    <!-- Tail -->
+    <path d="M 310,245 Q 270,220 290,270 Z" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Body -->
+    <ellipse cx="380" cy="245" rx="75" ry="45" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Wing -->
+    <path d="M 360,235 Q 340,270 380,285 L 420,275 Q 400,240 360,235 Z" fill="#ECF0F1" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Neck -->
+    <path d="M 430,225 C 460,190 480,170 475,140 L 505,140 C 510,170 490,210 450,235 Z" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Head -->
+    <ellipse cx="490" cy="130" rx="28" ry="22" fill="white" stroke="#BDC3C7" stroke-width="2"/>
+    <!-- Eye -->
+    <circle cx="498" cy="125" r="5" fill="white"/>
+    <circle cx="499" cy="125" r="3" fill="black"/>
+    <circle cx="500" cy="124" r="1" fill="white"/>
+    <!-- Beak Upper -->
+    <path d="M 515,120 L 600,132 L 515,140 Z" fill="#F1C40F" stroke="#D4AC0D" stroke-width="2"/>
+    <!-- Beak Lower/Pouch -->
+    <path fill="#E67E22" stroke="#D4AC0D" stroke-width="2">
+      <animate attributeName="d" dur="1.5s" repeatCount="indefinite"
+        values="M 515,140 Q 555,170 515,155 Z;
+                M 515,140 Q 575,190 515,155 Z;
+                M 515,140 Q 555,170 515,155 Z"/>
+    </path>
+    <!-- Fish in Pouch -->
+    <path d="M 545,160 l 10,-5 l 0,10 Z" fill="#5DADE2">
+      <animateTransform attributeName="transform" type="rotate" values="-10 545 160; 10 545 160; -10 545 160" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Pelican Arm (Wing tip holding handlebar) -->
+  <g>
+    <path d="M 430,250 C 460,260 500,250 520,275" fill="none" stroke="#D5D8DC" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 515,268 L 525,275 L 515,282" fill="none" stroke="#BDC3C7" stroke-width="2" stroke-linecap="round"/>
   </g>
 
 </svg></div></td><td class="svg-cell"><div class="cell-label">GLM-5 Turbo <span class="time">217.3s</span> <span class="price">$0.96 / $3.20 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 460" width="550" height="460">
@@ -14100,6 +15011,50 @@
   </g>
   <animateTransform attributeName="transform" type="translate" from="0 0" to="200 0" dur="10s" repeatCount="indefinite" xlink:href="#bicycle"/>
   <animateTransform attributeName="transform" type="translate" from="0 0" to="200 0" dur="10s" repeatCount="indefinite" xlink:href="#pelican"/>
+</svg></div><div class="cell-label">Llama 4 Scout <span class="time">8.5s</span> <span class="price">$0.08 / $0.30 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <style>
+    .pelican {
+      fill: #ff9900;
+    }
+    .bicycle {
+      fill: #888;
+    }
+    .wheel {
+      fill: #444;
+      stroke: #333;
+      stroke-width: 2;
+    }
+  </style>
+  <g>
+    <rect x="100" y="50" width="80" height="20" fill="#ccc" rx="10" />
+    <circle cx="140" cy="120" r="30" class="wheel" />
+    <circle cx="260" cy="120" r="30" class="wheel" />
+    <line x1="140" y1="120" x2="260" y2="120" stroke="#333" stroke-width="2" />
+    <g class="pelican">
+      <path d="M 200 50 L 220 70 L 180 70 Z" />
+      <path d="M 200 100 L 220 80 L 180 80 Z" />
+      <circle cx="200" cy="50" r="20" />
+    </g>
+    <g class="bicycle">
+      <path d="M 140 120 L 140 150 L 120 140 Z" />
+      <path d="M 260 120 L 260 150 L 280 140 Z" />
+    </g>
+  </g>
+  <animateTransform attributeName="transform" type="rotate" from="0 200 120" to="360 200 120" dur="2s" repeatCount="indefinite" />
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 140 120" to="360 140 120" dur="1s" repeatCount="indefinite" />
+    <animateTransform attributeName="transform" type="rotate" from="0 260 120" to="360 260 120" dur="1s" repeatCount="indefinite" />
+  </g>
+  <g class="pelican" transform="translate(0,0)">
+    <path d="M 200 80 L 210 90 L 190 90 Z" />
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="10 -5" dur="0.5s" repeatCount="indefinite" />
+    <animateTransform attributeName="transform" type="translate" from="10 -5" to="0 0" dur="0.5s" repeatCount="indefinite" />
+  </g>
+  <g class="pelican" transform="translate(0,0)">
+    <path d="M 200 80 L 210 90 L 190 90 Z" transform="translate(0,20)" />
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="10 5" dur="0.5s" repeatCount="indefinite" />
+    <animateTransform attributeName="transform" type="translate" from="10 5" to="0 0" dur="0.5s" repeatCount="indefinite" />
+  </g>
 </svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="group-header" colspan="17">NVIDIA</td></tr><tr><td class="model-name">Nemotron</td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">Nemotron 3 Super <span class="time">6.5s</span> <span class="price">$0.10 / $0.50 /M</span></div><div class="svg-container"><svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
   <style>
     .pelican { fill:#f5deb3; }

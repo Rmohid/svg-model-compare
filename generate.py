@@ -286,7 +286,7 @@ PROVIDER_COLORS = {
     "Cohere":      "#39594D",  # forest green (brand)
     # Chinese & other vendors — no orange to avoid colliding with Anthropic/Amazon
     "Alibaba":     "#C026D3",  # magenta-purple (was orange)
-    "DeepSeek":    "#4D6BFE",  # royal blue (brand)
+    "DeepSeek":    "#1E3A8A",  # deep navy (distinct from Google's bright blue)
     "Z AI":        "#7B68EE",  # medium purple
     "MiniMax":     "#E91E63",  # hot pink
     "Kimi":        "#A78BFA",  # lavender
@@ -382,7 +382,7 @@ def call_model(name, model_id):
     payload = json.dumps({
         "model": model_id,
         "messages": [{"role": "user", "content": PROMPT}],
-        "max_tokens": 16000,
+        "max_tokens": 32000,
         "temperature": 0.7,
     }).encode()
 
@@ -400,14 +400,16 @@ def call_model(name, model_id):
         # Strip markdown fences if present
         content = re.sub(r"```(?:svg|xml|html)?\s*\n?", "", content)
         content = content.replace("```", "")
-        svg_match = re.search(r"(<svg[\s\S]*?</svg>)", content, re.IGNORECASE)
-        if svg_match:
+        # Match <svg ...> with at least one attribute and a real body (not the prompt's literal example)
+        svg_match = re.search(r"(<svg\s[^>]*>[\s\S]+?</svg>)", content, re.IGNORECASE)
+        if svg_match and len(svg_match.group(1)) >= 200:
             svg = svg_match.group(1)
             print(f"  [{name}] Done in {elapsed:.1f}s ({len(svg)} chars)", flush=True)
             return name, svg, elapsed, None
         else:
-            print(f"  [{name}] Done in {elapsed:.1f}s but no SVG found", flush=True)
-            return name, None, elapsed, "No <svg> tag found in response"
+            found_len = len(svg_match.group(1)) if svg_match else 0
+            print(f"  [{name}] Done in {elapsed:.1f}s but no usable SVG (matched {found_len} chars)", flush=True)
+            return name, None, elapsed, f"No usable <svg> in response (matched {found_len} chars)"
     except HTTPError as e:
         elapsed = time.time() - start
         body = e.read().decode() if e.fp else ""
@@ -460,29 +462,23 @@ def build_html(results, model_dates):
         for family_label, model_names in families:
             cells = [f'<td class="model-name">{family_label}</td>']
             for m in global_months:
-                matched = None
-                for name in model_names:
-                    if model_dates.get(name) == m and name in results:
-                        matched = name
-                        break
+                matched = [n for n in model_names if model_dates.get(n) == m and n in results]
                 if matched:
-                    svg, elapsed, error = results[matched]
-                    price = PRICING.get(matched, "")
-                    price_span = f' <span class="price">{price}</span>' if price else ""
-                    if error:
-                        cells.append(
-                            f'<td class="svg-cell">'
-                            f'<div class="cell-label">{matched}'
+                    blocks = []
+                    for name in matched:
+                        svg, elapsed, error = results[name]
+                        price = PRICING.get(name, "")
+                        price_span = f' <span class="price">{price}</span>' if price else ""
+                        if error:
+                            body = f'<div class="error">Error: {error}</div>'
+                        else:
+                            body = f'<div class="svg-container">{svg}</div>'
+                        blocks.append(
+                            f'<div class="cell-label">{name}'
                             f' <span class="time">{elapsed:.1f}s</span>{price_span}</div>'
-                            f'<div class="error">Error: {error}</div></td>'
+                            f'{body}'
                         )
-                    else:
-                        cells.append(
-                            f'<td class="svg-cell">'
-                            f'<div class="cell-label">{matched}'
-                            f' <span class="time">{elapsed:.1f}s</span>{price_span}</div>'
-                            f'<div class="svg-container">{svg}</div></td>'
-                        )
+                    cells.append(f'<td class="svg-cell">{"".join(blocks)}</td>')
                 else:
                     cells.append('<td class="empty-cell"></td>')
             timeline_rows.append(f'<tr>{"".join(cells)}</tr>')
