@@ -62,6 +62,7 @@ MODELS = [
     ("Gemma 4 31B", "google/gemma-4-31b-it", "Apr 2026"),
     ("Gemma 4 26B-A4B", "google/gemma-4-26b-a4b-it", "Apr 2026"),
     # --- xAI / Grok ---
+    ("Grok 4.3", "x-ai/grok-4.3", "Apr 2026"),
     ("Grok 4.20 Beta", "x-ai/grok-4.20-beta", "Mar 2026"),
     ("Grok 4", "x-ai/grok-4", "Jul 2025"),
     ("Grok 4.1 Fast", "x-ai/grok-4.1-fast", "Nov 2025"),
@@ -78,6 +79,7 @@ MODELS = [
     ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),
     ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
     ("Tencent Hy3 Preview", "tencent/hy3-preview:free", "Apr 2026"),
+    ("Ring 2.6 1T", "inclusionai/ring-2.6-1t:free", "May 2026"),
     ("Ling 2.6 1T", "inclusionai/ling-2.6-1t:free", "Apr 2026"),
     ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash:free", "Apr 2026"),
     ("DeepSeek V4 Pro", "deepseek/deepseek-v4-pro", "Apr 2026"),
@@ -96,15 +98,23 @@ MODELS = [
     ("Llama 4 Scout", "meta-llama/llama-4-scout", "Apr 2025"),
     # --- NVIDIA ---
     ("Nemotron 3 Super", "nvidia/nemotron-3-super-120b-a12b", "Mar 2026"),
+    ("Nemotron 3 Nano", "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free", "Apr 2026"),
     # --- Mistral ---
     ("Mistral Large 3", "mistralai/mistral-large-2512", "Dec 2025"),
+    ("Mistral Medium 3.5", "mistralai/mistral-medium-3-5", "Apr 2026"),
     ("Mistral Small 4", "mistralai/mistral-small-2603", "Mar 2026"),
     # --- Amazon ---
     ("Nova Premier", "amazon/nova-premier-v1", "Oct 2025"),
     # --- Cohere ---
     ("Command A", "cohere/command-a", "Mar 2025"),
+    # --- IBM ---
+    ("IBM Granite 4.1 8B", "ibm-granite/granite-4.1-8b", "Apr 2026"),
     # --- Qwen: full model then smaller quantizations ---
+    ("Qwen 3.6 Max", "qwen/qwen3.6-max-preview", "Apr 2026"),
     ("Qwen 3.6 Plus", "qwen/qwen3.6-plus:free", "Apr 2026"),
+    ("Qwen 3.6 Flash", "qwen/qwen3.6-flash", "Apr 2026"),
+    ("Qwen 3.6 35B", "qwen/qwen3.6-35b-a3b", "Apr 2026"),
+    ("Qwen 3.6 27B", "qwen/qwen3.6-27b", "Apr 2026"),
     ("Qwen3 Max Thinking", "qwen/qwen3-max-thinking", "Feb 2026"),
     ("Qwen 3.5 397B", "qwen/qwen3.5-397b-a17b", "Feb 2026"),
     ("Qwen 3.5 122B", "qwen/qwen3.5-122b-a10b", "Mar 2026"),
@@ -150,6 +160,7 @@ PRICING = {
     "Gemini 2.5 Flash": "$0.30 / $2.50 /M",
     "Gemma 4 31B": "$0.14 / $0.40 /M",
     "Gemma 4 26B-A4B": "$0.13 / $0.40 /M",
+    "Grok 4.3": "$1.25 / $2.50 /M",
     "Grok 4.20 Beta": "$2 / $6 /M",
     "Grok 4": "$3 / $15 /M",
     "Grok 4.1 Fast": "$0.20 / $0.50 /M",
@@ -165,6 +176,7 @@ PRICING = {
     "Xiaomi MiMo-V2-Pro": "$1 / $3 /M",
     "ByteDance Seed 2.0": "$0.25 / $2 /M",
     "Tencent Hy3 Preview": "Free /M",
+    "Ring 2.6 1T": "Free /M",
     "Ling 2.6 1T": "Free /M",
     "Ling 2.6 Flash": "Free /M",
     "DeepSeek V4 Pro": "$1.74 / $3.48 /M",
@@ -181,11 +193,18 @@ PRICING = {
     "Llama 4 Maverick": "$0.15 / $0.60 /M",
     "Llama 4 Scout": "$0.08 / $0.30 /M",
     "Nemotron 3 Super": "$0.10 / $0.50 /M",
+    "Nemotron 3 Nano": "Free /M",
     "Mistral Large 3": "$0.50 / $1.50 /M",
+    "Mistral Medium 3.5": "$1.50 / $7.50 /M",
     "Mistral Small 4": "$0.15 / $0.60 /M",
     "Nova Premier": "$2.50 / $12.50 /M",
     "Command A": "$2.50 / $10 /M",
+    "IBM Granite 4.1 8B": "$0.05 / $0.10 /M",
+    "Qwen 3.6 Max": "$1.04 / $6.24 /M",
     "Qwen 3.6 Plus": "Free /M",
+    "Qwen 3.6 Flash": "$0.25 / $1.50 /M",
+    "Qwen 3.6 35B": "$0.15 / $1 /M",
+    "Qwen 3.6 27B": "$0.32 / $3.20 /M",
     "Qwen3 Max Thinking": "$1.20 / $6 /M",
     "Qwen 3.5 397B": "$0.55 / $3.50 /M",
     "Qwen 3.5 122B": "$0.26 / $2.08 /M",
@@ -268,7 +287,8 @@ def model_provider(name):
     if name.startswith("Nova"): return "Amazon"
     if name.startswith("Nemotron"): return "NVIDIA"
     if name.startswith("Xiaomi"): return "Xiaomi"
-    if name.startswith("Ling"): return "inclusionAI"
+    if name.startswith(("Ling", "Ring")): return "inclusionAI"
+    if name.startswith("IBM"): return "IBM"
     if name.startswith("Tencent"): return "Tencent"
     if name.startswith("ByteDance"): return "ByteDance"
     return "Other"
@@ -284,6 +304,7 @@ PROVIDER_COLORS = {
     "NVIDIA":      "#76B900",  # nvidia green (brand)
     "Mistral":     "#FA520F",  # vermillion (brand)
     "Cohere":      "#39594D",  # forest green (brand)
+    "IBM":         "#0F62FE",  # IBM blue (brand)
     # Chinese & other vendors — no orange to avoid colliding with Anthropic/Amazon
     "Alibaba":     "#C026D3",  # magenta-purple (was orange)
     "DeepSeek":    "#1E3A8A",  # deep navy (distinct from Google's bright blue)
@@ -317,7 +338,7 @@ CATEGORIES = [
         ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
-        ("Grok (flagship)", ["Grok 4.20 Beta", "Grok 4", "Grok 3"]),
+        ("Grok (flagship)", ["Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3"]),
         ("Grok Fast", ["Grok 4.1 Fast", "Grok 4 Fast"]),
         ("Grok Mini", ["Grok 3 Mini"]),
     ]),
@@ -333,15 +354,18 @@ CATEGORIES = [
         ("Tencent", ["Tencent Hy3 Preview"]),
         ("inclusionAI Ling (1T)", ["Ling 2.6 1T"]),
         ("inclusionAI Ling (Flash)", ["Ling 2.6 Flash"]),
+        ("inclusionAI Ring", ["Ring 2.6 1T"]),
     ]),
     ("Meta", [
         ("Llama 4", ["Llama 4 Maverick", "Llama 4 Scout"]),
     ]),
     ("NVIDIA", [
         ("Nemotron", ["Nemotron 3 Super"]),
+        ("Nemotron Nano", ["Nemotron 3 Nano"]),
     ]),
     ("Mistral", [
         ("Mistral Large", ["Mistral Large 3"]),
+        ("Mistral Medium", ["Mistral Medium 3.5"]),
         ("Mistral Small", ["Mistral Small 4"]),
     ]),
     ("Amazon", [
@@ -350,12 +374,16 @@ CATEGORIES = [
     ("Cohere", [
         ("Command", ["Command A"]),
     ]),
+    ("IBM", [
+        ("Granite", ["IBM Granite 4.1 8B"]),
+    ]),
     ("Qwen", [
+        ("Qwen Max", ["Qwen 3.6 Max", "Qwen3 Max Thinking"]),
         ("Qwen Plus", ["Qwen 3.6 Plus"]),
-        ("Qwen Max Thinking", ["Qwen3 Max Thinking"]),
+        ("Qwen Flash", ["Qwen 3.6 Flash"]),
         ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
-        ("Qwen 35B", ["Qwen 3.5 35B"]),
-        ("Qwen 27-32B", ["Qwen 3.5 27B", "Qwen3 32B"]),
+        ("Qwen 35B", ["Qwen 3.6 35B", "Qwen 3.5 35B"]),
+        ("Qwen 27-32B", ["Qwen 3.6 27B", "Qwen 3.5 27B", "Qwen3 32B"]),
         ("Qwen 14B", ["Qwen3 14B"]),
         ("Qwen 8-9B", ["Qwen 3.5 9B", "Qwen3 8B"]),
         ("Qwen 7B", ["Qwen 2.5 7B"]),
