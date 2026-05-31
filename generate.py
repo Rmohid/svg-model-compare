@@ -28,6 +28,8 @@ Start with <svg and end with </svg>."""
 # (display_name, model_id, release_date_str)
 MODELS = [
     # --- Anthropic ---
+    ("Claude Opus 4.8", "anthropic/claude-opus-4.8", "May 2026"),
+    ("Claude Opus 4.8 Fast", "anthropic/claude-opus-4.8-fast", "May 2026"),
     ("Claude Opus 4.7", "anthropic/claude-opus-4.7", "Apr 2026"),
     ("Claude Opus 4.6", "anthropic/claude-opus-4.6", "Feb 2026"),
     ("Claude Sonnet 4.6", "anthropic/claude-sonnet-4.6", "Feb 2026"),
@@ -53,6 +55,7 @@ MODELS = [
     ("o4 Mini", "openai/o4-mini", "Apr 2025"),
     # --- Google ---
     ("Gemini 3.1 Pro", "google/gemini-3.1-pro-preview", "Feb 2026"),
+    ("Gemini 3.5 Flash", "google/gemini-3.5-flash", "May 2026"),
     ("Gemini 3.1 Flash Lite", "google/gemini-3.1-flash-lite-preview", "Mar 2026"),
     ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),
     ("Gemini 3 Flash", "google/gemini-3-flash-preview", "Dec 2025"),
@@ -63,6 +66,7 @@ MODELS = [
     ("Gemma 4 26B-A4B", "google/gemma-4-26b-a4b-it", "Apr 2026"),
     # --- xAI / Grok ---
     ("Grok 4.3", "x-ai/grok-4.3", "Apr 2026"),
+    ("Grok Build 0.1", "x-ai/grok-build-0.1", "May 2026"),
     ("Grok 4.20 Beta", "x-ai/grok-4.20-beta", "Mar 2026"),
     ("Grok 4", "x-ai/grok-4", "Jul 2025"),
     ("Grok 4.1 Fast", "x-ai/grok-4.1-fast", "Nov 2025"),
@@ -78,6 +82,7 @@ MODELS = [
     ("Xiaomi MiMo-V2.5", "xiaomi/mimo-v2.5", "Apr 2026"),
     ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),
     ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
+    ("StepFun Step 3.7 Flash", "stepfun/step-3.7-flash", "May 2026"),
     ("Tencent Hy3 Preview", "tencent/hy3-preview:free", "Apr 2026"),
     ("Ring 2.6 1T", "inclusionai/ring-2.6-1t:free", "May 2026"),
     ("Ling 2.6 1T", "inclusionai/ling-2.6-1t:free", "Apr 2026"),
@@ -110,6 +115,7 @@ MODELS = [
     # --- IBM ---
     ("IBM Granite 4.1 8B", "ibm-granite/granite-4.1-8b", "Apr 2026"),
     # --- Qwen: full model then smaller quantizations ---
+    ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
     ("Qwen 3.6 Max", "qwen/qwen3.6-max-preview", "Apr 2026"),
     ("Qwen 3.6 Plus", "qwen/qwen3.6-plus:free", "Apr 2026"),
     ("Qwen 3.6 Flash", "qwen/qwen3.6-flash", "Apr 2026"),
@@ -130,6 +136,8 @@ MODELS = [
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
 PRICING = {
+    "Claude Opus 4.8": "$5 / $25 /M",
+    "Claude Opus 4.8 Fast": "$10 / $50 /M",
     "Claude Opus 4.7": "$5 / $25 /M",
     "Claude Opus 4.6": "$5 / $25 /M",
     "Claude Sonnet 4.6": "$3 / $15 /M",
@@ -153,6 +161,7 @@ PRICING = {
     "o3": "$2 / $8 /M",
     "o4 Mini": "$1.10 / $4.40 /M",
     "Gemini 3.1 Pro": "$2 / $12 /M",
+    "Gemini 3.5 Flash": "$1.50 / $9 /M",
     "Gemini 3.1 Flash Lite": "$0.25 / $1.50 /M",
     "Gemini 3 Pro": "$2 / $12 /M",
     "Gemini 3 Flash": "$0.50 / $3 /M",
@@ -161,6 +170,7 @@ PRICING = {
     "Gemma 4 31B": "$0.14 / $0.40 /M",
     "Gemma 4 26B-A4B": "$0.13 / $0.40 /M",
     "Grok 4.3": "$1.25 / $2.50 /M",
+    "Grok Build 0.1": "$1 / $2 /M",
     "Grok 4.20 Beta": "$2 / $6 /M",
     "Grok 4": "$3 / $15 /M",
     "Grok 4.1 Fast": "$0.20 / $0.50 /M",
@@ -175,6 +185,7 @@ PRICING = {
     "Xiaomi MiMo-V2.5": "$0.40 / $2 /M",
     "Xiaomi MiMo-V2-Pro": "$1 / $3 /M",
     "ByteDance Seed 2.0": "$0.25 / $2 /M",
+    "StepFun Step 3.7 Flash": "$0.20 / $1.15 /M",
     "Tencent Hy3 Preview": "Free /M",
     "Ring 2.6 1T": "Free /M",
     "Ling 2.6 1T": "Free /M",
@@ -200,6 +211,7 @@ PRICING = {
     "Nova Premier": "$2.50 / $12.50 /M",
     "Command A": "$2.50 / $10 /M",
     "IBM Granite 4.1 8B": "$0.05 / $0.10 /M",
+    "Qwen 3.7 Max": "$1.25 / $3.75 /M",
     "Qwen 3.6 Max": "$1.04 / $6.24 /M",
     "Qwen 3.6 Plus": "Free /M",
     "Qwen 3.6 Flash": "$0.25 / $1.50 /M",
@@ -291,6 +303,7 @@ def model_provider(name):
     if name.startswith("IBM"): return "IBM"
     if name.startswith("Tencent"): return "Tencent"
     if name.startswith("ByteDance"): return "ByteDance"
+    if name.startswith("StepFun"): return "StepFun"
     return "Other"
 
 PROVIDER_COLORS = {
@@ -315,6 +328,7 @@ PROVIDER_COLORS = {
     "inclusionAI": "#00BCD4",  # cyan
     "Tencent":     "#00A1E0",  # sky blue
     "ByteDance":   "#FF3366",  # rose
+    "StepFun":     "#14B8A6",  # teal
     "Other":       "#888888",
 }
 
@@ -322,7 +336,7 @@ PROVIDER_COLORS = {
 # Models in the same family (lineage) share a row in the timeline table.
 CATEGORIES = [
     ("Anthropic", [
-        ("Claude Opus", ["Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
+        ("Claude Opus", ["Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
         ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
@@ -334,12 +348,13 @@ CATEGORIES = [
     ]),
     ("Google", [
         ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
-        ("Gemini Flash", ["Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
+        ("Gemini Flash", ["Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
         ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
         ("Grok (flagship)", ["Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3"]),
         ("Grok Fast", ["Grok 4.1 Fast", "Grok 4 Fast"]),
+        ("Grok Build", ["Grok Build 0.1"]),
         ("Grok Mini", ["Grok 3 Mini"]),
     ]),
     ("Chinese Models", [
@@ -351,6 +366,7 @@ CATEGORIES = [
         ("Xiaomi Pro", ["Xiaomi MiMo-V2.5-Pro", "Xiaomi MiMo-V2-Pro"]),
         ("Xiaomi", ["Xiaomi MiMo-V2.5"]),
         ("ByteDance", ["ByteDance Seed 2.0"]),
+        ("StepFun", ["StepFun Step 3.7 Flash"]),
         ("Tencent", ["Tencent Hy3 Preview"]),
         ("inclusionAI Ling (1T)", ["Ling 2.6 1T"]),
         ("inclusionAI Ling (Flash)", ["Ling 2.6 Flash"]),
@@ -378,7 +394,7 @@ CATEGORIES = [
         ("Granite", ["IBM Granite 4.1 8B"]),
     ]),
     ("Qwen", [
-        ("Qwen Max", ["Qwen 3.6 Max", "Qwen3 Max Thinking"]),
+        ("Qwen Max", ["Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
         ("Qwen Plus", ["Qwen 3.6 Plus"]),
         ("Qwen Flash", ["Qwen 3.6 Flash"]),
         ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
