@@ -233,8 +233,9 @@ PRICING = {
 # Intelligence / price / speed data sourced from the Artificial Analysis leaderboard.
 # (intel_index, blended_price_usd_per_Mtok, output_tokens_per_sec)
 # Models not in this dict are simply not plotted on the Chart view.
-AA_SNAPSHOT_DATE = "2026-04-24"
+AA_SNAPSHOT_DATE = "2026-05-31"
 INTEL_DATA = {
+    "Claude Opus 4.8":         (61, 10.00, 56),
     "Claude Opus 4.7":         (57, 10.00, 46),
     "Claude Sonnet 4.6":       (52, 6.00, 51),
     "Claude Haiku 4.5":        (37, 2.00, 98),
@@ -245,6 +246,7 @@ INTEL_DATA = {
     "GPT-5.4 Nano":            (44, 0.46, 157),
     "o3":                      (38, 3.50, 93),
     "Gemini 3.1 Pro":          (57, 4.50, 130),
+    "Gemini 3.5 Flash":        (55, 3.38, 176),
     "Gemini 3.1 Flash Lite":   (34, 0.56, 321),
     "Gemini 3 Pro":            (41, 4.50, None),
     "Gemini 3 Flash":          (46, 1.13, 176),
@@ -273,6 +275,7 @@ INTEL_DATA = {
     "Mistral Small 4":         (28, 0.26, 151),
     "Nova Premier":            (19, 5.00, 26),
     "Command A":               (13, 4.38, 40),
+    "Qwen 3.7 Max":            (57, 1.88, 189),
     "Qwen 3.6 Plus":           (50, 1.13, 53),
     "Qwen 3.5 397B":           (45, 1.35, 53),
     "Qwen 3.5 122B":           (42, 1.10, 142),
