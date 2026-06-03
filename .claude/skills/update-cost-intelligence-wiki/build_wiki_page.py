@@ -201,7 +201,7 @@ this shows a **curated subset** (the Pareto frontier plus each provider's flagsh
 (a literal 1.0 is a lexical error — clamp to 0.98); quadrant/axis labels reject
 parentheses, plus signs, and colons.
 
-```
+```mermaid
 {mermaid}
 ```
 
