@@ -28,6 +28,7 @@ Start with <svg and end with </svg>."""
 # (display_name, model_id, release_date_str)
 MODELS = [
     # --- Anthropic ---
+    ("Claude Fable 5", "anthropic/claude-fable-5", "Jun 2026"),
     ("Claude Opus 4.8", "anthropic/claude-opus-4.8", "May 2026"),
     ("Claude Opus 4.8 Fast", "anthropic/claude-opus-4.8-fast", "May 2026"),
     ("Claude Opus 4.7", "anthropic/claude-opus-4.7", "Apr 2026"),
@@ -74,7 +75,9 @@ MODELS = [
     ("Grok 3", "x-ai/grok-3", "Jun 2025"),
     ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),                    # 6mo ago fast
     # --- Chinese Models ---
+    ("MiniMax M3", "minimax/minimax-m3", "Jun 2026"),
     ("MiniMax M2.7", "minimax/minimax-m2.7", "Mar 2026"),
+    ("GLM-5.2", "z-ai/glm-5.2", "Jun 2026"),
     ("GLM-5V-Turbo", "z-ai/glm-5v-turbo", "Apr 2026"),
     ("GLM-5.1", "z-ai/glm-5.1", "Apr 2026"),
     ("GLM-5 Turbo", "z-ai/glm-5-turbo", "Mar 2026"),
@@ -93,6 +96,7 @@ MODELS = [
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
     ("DeepSeek R1", "deepseek/deepseek-r1", "Jan 2025"),                 # 6mo ago SOTA
+    ("Kimi K2.7 Code", "moonshotai/kimi-k2.7-code", "Jun 2026"),
     ("Kimi K2.6", "moonshotai/kimi-k2.6", "Apr 2026"),
     ("Kimi K2.5", "moonshotai/kimi-k2.5", "Jan 2026"),
     ("Kimi K2", "moonshotai/kimi-k2", "Jul 2025"),                       # 6mo ago SOTA
@@ -115,6 +119,7 @@ MODELS = [
     # --- IBM ---
     ("IBM Granite 4.1 8B", "ibm-granite/granite-4.1-8b", "Apr 2026"),
     # --- Qwen: full model then smaller quantizations ---
+    ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
     ("Qwen 3.6 Max", "qwen/qwen3.6-max-preview", "Apr 2026"),
     ("Qwen 3.6 Plus", "qwen/qwen3.6-plus:free", "Apr 2026"),
@@ -136,6 +141,7 @@ MODELS = [
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
 PRICING = {
+    "Claude Fable 5": "$10 / $50 /M",
     "Claude Opus 4.8": "$5 / $25 /M",
     "Claude Opus 4.8 Fast": "$10 / $50 /M",
     "Claude Opus 4.7": "$5 / $25 /M",
@@ -177,7 +183,9 @@ PRICING = {
     "Grok 4 Fast": "$0.20 / $0.50 /M",
     "Grok 3": "$3 / $15 /M",
     "Grok 3 Mini": "$0.30 / $0.50 /M",
+    "MiniMax M3": "$0.60 / $2.40 /M",
     "MiniMax M2.7": "$0.30 / $1.20 /M",
+    "GLM-5.2": "$1.40 / $4.40 /M",
     "GLM-5V-Turbo": "$1.20 / $4.00 /M",
     "GLM-5.1": "$0.95 / $3.15 /M",
     "GLM-5 Turbo": "$0.96 / $3.20 /M",
@@ -196,6 +204,7 @@ PRICING = {
     "DeepSeek V3.2": "$0.25 / $0.40 /M",
     "DeepSeek V3.1": "$0.19 / $0.87 /M",
     "DeepSeek R1": "$0.70 / $2.50 /M",
+    "Kimi K2.7 Code": "$0.61 / $3.07 /M",
     "Kimi K2.6": "$0.74 / $4.66 /M",
     "Kimi K2.5": "$0.45 / $2.20 /M",
     "Kimi K2": "$0.50 / $2.40 /M",
@@ -211,6 +220,7 @@ PRICING = {
     "Nova Premier": "$2.50 / $12.50 /M",
     "Command A": "$2.50 / $10 /M",
     "IBM Granite 4.1 8B": "$0.05 / $0.10 /M",
+    "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
     "Qwen 3.7 Max": "$1.25 / $3.75 /M",
     "Qwen 3.6 Max": "$1.04 / $6.24 /M",
     "Qwen 3.6 Plus": "Free /M",
@@ -339,6 +349,7 @@ PROVIDER_COLORS = {
 # Models in the same family (lineage) share a row in the timeline table.
 CATEGORIES = [
     ("Anthropic", [
+        ("Claude Fable", ["Claude Fable 5"]),
         ("Claude Opus", ["Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
         ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
@@ -363,9 +374,9 @@ CATEGORIES = [
     ("Chinese Models", [
         ("DeepSeek", ["DeepSeek V4 Pro", "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
         ("DeepSeek Flash", ["DeepSeek V4 Flash"]),
-        ("Kimi", ["Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
-        ("MiniMax", ["MiniMax M2.7", "MiniMax M2.5"]),
-        ("GLM", ["GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5"]),
+        ("Kimi", ["Kimi K2.7 Code", "Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
+        ("MiniMax", ["MiniMax M3", "MiniMax M2.7", "MiniMax M2.5"]),
+        ("GLM", ["GLM-5.2", "GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5"]),
         ("Xiaomi Pro", ["Xiaomi MiMo-V2.5-Pro", "Xiaomi MiMo-V2-Pro"]),
         ("Xiaomi", ["Xiaomi MiMo-V2.5"]),
         ("ByteDance", ["ByteDance Seed 2.0"]),
@@ -398,7 +409,7 @@ CATEGORIES = [
     ]),
     ("Qwen", [
         ("Qwen Max", ["Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
-        ("Qwen Plus", ["Qwen 3.6 Plus"]),
+        ("Qwen Plus", ["Qwen 3.7 Plus", "Qwen 3.6 Plus"]),
         ("Qwen Flash", ["Qwen 3.6 Flash"]),
         ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
         ("Qwen 35B", ["Qwen 3.6 35B", "Qwen 3.5 35B"]),
