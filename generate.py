@@ -28,7 +28,8 @@ Start with <svg and end with </svg>."""
 # (display_name, model_id, release_date_str)
 MODELS = [
     # --- Anthropic ---
-    ("Claude Fable 5", "anthropic/claude-fable-5", "Jun 2026"),
+    # Claude Fable 5 is gated behind Anthropic's Fable Mythos access program;
+    # OpenRouter lists it but inference 404s ("not available"). Re-add when it serves.
     ("Claude Opus 4.8", "anthropic/claude-opus-4.8", "May 2026"),
     ("Claude Opus 4.8 Fast", "anthropic/claude-opus-4.8-fast", "May 2026"),
     ("Claude Opus 4.7", "anthropic/claude-opus-4.7", "Apr 2026"),
@@ -141,7 +142,6 @@ MODELS = [
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
 PRICING = {
-    "Claude Fable 5": "$10 / $50 /M",
     "Claude Opus 4.8": "$5 / $25 /M",
     "Claude Opus 4.8 Fast": "$10 / $50 /M",
     "Claude Opus 4.7": "$5 / $25 /M",
@@ -353,7 +353,6 @@ PROVIDER_COLORS = {
 # Models in the same family (lineage) share a row in the timeline table.
 CATEGORIES = [
     ("Anthropic", [
-        ("Claude Fable", ["Claude Fable 5"]),
         ("Claude Opus", ["Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
         ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
