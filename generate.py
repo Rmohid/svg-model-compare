@@ -19,6 +19,24 @@ API_KEY = os.environ.get("OPENROUTER_911_API_KEY") or subprocess.check_output(
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
 
+# Anthropic models are generated through the Claude Max account via the local
+# `claude` CLI (-p print mode) instead of OpenRouter. Maps the display name used
+# in MODELS -> the CLI `--model` id. Any Claude model NOT listed here still falls
+# back to OpenRouter. Reachability probed 2026-07-01 against the Max account:
+# opus-4-8, sonnet-4-6, haiku-4-5 serve; opus-4-8-fast and claude-fable-5 do not.
+# Claude Fable 5 stays mapped so it works the moment Fable Mythos access is granted;
+# until then it returns the CLI's "unavailable" message and is skipped by the cache.
+CLAUDE_MAX_MODELS = {
+    "Claude Opus 4.8":   "claude-opus-4-8",
+    "Claude Opus 4.7":   "claude-opus-4-7",
+    "Claude Opus 4.6":   "claude-opus-4-6",
+    "Claude Sonnet 4.6": "claude-sonnet-4-6",
+    "Claude Opus 4.5":   "claude-opus-4-5",
+    "Claude Sonnet 4.5": "claude-sonnet-4-5",
+    "Claude Haiku 4.5":  "claude-haiku-4-5",
+    "Claude Fable 5":    "claude-fable-5",
+}
+
 PROMPT = """Create an animated SVG image of a pelican riding a bicycle.
 The pelican should be pedaling and the wheels should be spinning.
 Use SVG animations (animate, animateTransform, etc).
@@ -436,9 +454,21 @@ def save_cache(cache):
         json.dump(cache, f)
 
 
-def call_model(name, model_id):
-    """Call a single model and return (name, svg_output, elapsed, error)."""
-    print(f"  [{name}] Requesting...", flush=True)
+def extract_svg(content):
+    """Pull a usable <svg>...</svg> out of a model response. Returns svg or None."""
+    # Strip markdown fences if present
+    content = re.sub(r"```(?:svg|xml|html)?\s*\n?", "", content)
+    content = content.replace("```", "")
+    # Match <svg ...> with at least one attribute and a real body (not the prompt's literal example)
+    svg_match = re.search(r"(<svg\s[^>]*>[\s\S]+?</svg>)", content, re.IGNORECASE)
+    if svg_match and len(svg_match.group(1)) >= 200:
+        return svg_match.group(1)
+    return None
+
+
+def call_openrouter(name, model_id):
+    """Call a single model via OpenRouter and return (name, svg, elapsed, error)."""
+    print(f"  [{name}] Requesting via OpenRouter...", flush=True)
     start = time.time()
     payload = json.dumps({
         "model": model_id,
@@ -458,19 +488,12 @@ def call_model(name, model_id):
         elapsed = time.time() - start
         msg = data["choices"][0]["message"]
         content = msg.get("content") or msg.get("reasoning") or ""
-        # Strip markdown fences if present
-        content = re.sub(r"```(?:svg|xml|html)?\s*\n?", "", content)
-        content = content.replace("```", "")
-        # Match <svg ...> with at least one attribute and a real body (not the prompt's literal example)
-        svg_match = re.search(r"(<svg\s[^>]*>[\s\S]+?</svg>)", content, re.IGNORECASE)
-        if svg_match and len(svg_match.group(1)) >= 200:
-            svg = svg_match.group(1)
+        svg = extract_svg(content)
+        if svg:
             print(f"  [{name}] Done in {elapsed:.1f}s ({len(svg)} chars)", flush=True)
             return name, svg, elapsed, None
-        else:
-            found_len = len(svg_match.group(1)) if svg_match else 0
-            print(f"  [{name}] Done in {elapsed:.1f}s but no usable SVG (matched {found_len} chars)", flush=True)
-            return name, None, elapsed, f"No usable <svg> in response (matched {found_len} chars)"
+        print(f"  [{name}] Done in {elapsed:.1f}s but no usable SVG", flush=True)
+        return name, None, elapsed, "No usable <svg> in response"
     except HTTPError as e:
         elapsed = time.time() - start
         body = e.read().decode() if e.fp else ""
@@ -480,6 +503,44 @@ def call_model(name, model_id):
         elapsed = time.time() - start
         print(f"  [{name}] Error: {e} in {elapsed:.1f}s", flush=True)
         return name, None, elapsed, str(e)
+
+
+def call_claude_max(name, cli_model):
+    """Generate via the Claude Max account using the local `claude` CLI (-p print mode).
+    Used for Anthropic models so the SVGs come from the Max subscription rather than
+    OpenRouter. Returns (name, svg, elapsed, error)."""
+    print(f"  [{name}] Requesting via Claude Max ({cli_model})...", flush=True)
+    start = time.time()
+    try:
+        proc = subprocess.run(
+            ["claude", "-p", PROMPT, "--model", cli_model],
+            capture_output=True, text=True, timeout=600,
+        )
+        elapsed = time.time() - start
+        content = proc.stdout or ""
+        if proc.returncode != 0:
+            err = (proc.stderr or content).strip()[:200] or f"exit {proc.returncode}"
+            print(f"  [{name}] Error in {elapsed:.1f}s: {err}", flush=True)
+            return name, None, elapsed, err
+        # The CLI surfaces gating/errors as a plain-text message on stdout with exit 0.
+        svg = extract_svg(content)
+        if svg:
+            print(f"  [{name}] Done in {elapsed:.1f}s ({len(svg)} chars)", flush=True)
+            return name, svg, elapsed, None
+        print(f"  [{name}] Done in {elapsed:.1f}s but no usable SVG", flush=True)
+        return name, None, elapsed, content.strip()[:200] or "No usable <svg> in response"
+    except Exception as e:
+        elapsed = time.time() - start
+        print(f"  [{name}] Error: {e} in {elapsed:.1f}s", flush=True)
+        return name, None, elapsed, str(e)
+
+
+def call_model(name, model_id):
+    """Dispatch a model to its backend. Anthropic models go through the Claude Max
+    account (`claude` CLI); everything else uses OpenRouter."""
+    if name in CLAUDE_MAX_MODELS:
+        return call_claude_max(name, CLAUDE_MAX_MODELS[name])
+    return call_openrouter(name, model_id)
 
 
 def build_html(results, model_dates):
@@ -1008,7 +1069,8 @@ def build_html(results, model_dates):
 <body>
 <h1>Animated SVG: Pelican Riding a Bicycle</h1>
 <p class="subtitle">
-    Same prompt sent to {total} models via OpenRouter ({success} returned valid SVG)<br>
+    Same prompt sent to {total} models ({success} returned valid SVG)<br>
+    Non-Anthropic models via OpenRouter; Claude models via the Claude Max account<br>
     Generated {time.strftime('%Y-%m-%d %H:%M')}
 </p>
 <div class="view-controls">
