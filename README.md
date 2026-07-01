@@ -1,6 +1,6 @@
 # SVG Model Comparison
 
-Compares animated SVG generation across 34 AI models by sending the same prompt via OpenRouter and displaying the results side by side.
+Compares animated SVG generation across many AI models by sending the same prompt and displaying the results side by side. Non-Anthropic models are generated via OpenRouter; Claude models are generated through the Claude Max account using the local `claude` CLI.
 
 **Live page:** https://rmohid.github.io/svg-model-compare/
 
@@ -23,7 +23,7 @@ Each card shows the model name, release date, and response time.
 
 ## Re-running
 
-Requires an [OpenRouter](https://openrouter.ai/) API key in `~/.config/jobsearch/api_keys.json`.
+Requires an [OpenRouter](https://openrouter.ai/) API key (in the `secrets` vault as `OPENROUTER_911_API_KEY`) for non-Anthropic models, and a signed-in `claude` CLI (Claude Max account) for Claude models. Export `SOPS_AGE_KEY_FILE` so the OpenRouter key can be read from the vault.
 
 ```bash
 # Regenerate with cached results (only calls new/failed models)
