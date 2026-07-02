@@ -252,9 +252,9 @@
 <body>
 <h1>Animated SVG: Pelican Riding a Bicycle</h1>
 <p class="subtitle">
-    Same prompt sent to 96 models (96 returned valid SVG)<br>
+    Same prompt sent to 98 models (98 returned valid SVG)<br>
     Non-Anthropic models via OpenRouter; Claude models via the Claude Max account<br>
-    Generated 2026-07-01 08:48
+    Generated 2026-07-02 11:57
 </p>
 <div class="view-controls">
     <button class="view-btn active" data-view="chart">Chart</button>
@@ -268,12 +268,12 @@
       (snapshot 2026-05-31).
       X = blended price USD/Mtok (log). Y = intelligence index. Bubble area = output tokens/sec.
       Free-on-OpenRouter models are plotted at $0.01 so they remain visible on a log scale.
-      Showing 50 of 96 models that have AA intel + price.
+      Showing 52 of 98 models that have AA intel + price.
     </div>
     <div class="chart-wrap"><canvas id="value-chart"></canvas></div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var datasets = [{"label": "Best-value frontier", "type": "line", "data": [{"x": 0.01, "y": 34}, {"x": 0.01, "y": 50}, {"x": 1.5, "y": 54}, {"x": 1.88, "y": 57}, {"x": 10.0, "y": 61}], "borderColor": "rgba(255,255,255,0.35)", "borderDash": [6, 4], "borderWidth": 1.5, "pointRadius": 0, "fill": false, "tension": 0, "order": 99}, {"label": "Alibaba", "type": "bubble", "data": [{"x": 0.56, "y": 39, "r": 14.76910464424289, "label": "Qwen 3.7 Plus", "price_raw": 0.56, "speed_raw": 51, "free": false, "est": false}, {"x": 1.88, "y": 57, "r": 22.88111260008719, "label": "Qwen 3.7 Max", "price_raw": 1.88, "speed_raw": 189, "free": false, "est": false}, {"x": 0.01, "y": 50, "r": 14.93939441940391, "label": "Qwen 3.6 Plus", "price_raw": 1.13, "speed_raw": 53, "free": true, "est": false}, {"x": 1.35, "y": 45, "r": 14.93939441940391, "label": "Qwen 3.5 397B", "price_raw": 1.35, "speed_raw": 53, "free": false, "est": false}, {"x": 1.1, "y": 42, "r": 20.6323586274775, "label": "Qwen 3.5 122B", "price_raw": 1.1, "speed_raw": 142, "free": false, "est": false}, {"x": 0.69, "y": 31, "r": 21.23808967512137, "label": "Qwen 3.5 35B", "price_raw": 0.69, "speed_raw": 154, "free": false, "est": false}, {"x": 0.11, "y": 32, "r": 14.507281103601839, "label": "Qwen 3.5 9B", "price_raw": 0.11, "speed_raw": 48, "free": false, "est": false}], "backgroundColor": "#C026D3CC", "borderColor": "#C026D3", "borderWidth": 1.5}, {"label": "Amazon", "type": "bubble", "data": [{"x": 5.0, "y": 19, "r": 12.261189360803424, "label": "Nova Premier", "price_raw": 5.0, "speed_raw": 26, "free": false, "est": false}], "backgroundColor": "#FF9900CC", "borderColor": "#FF9900", "borderWidth": 1.5}, {"label": "Anthropic", "type": "bubble", "data": [{"x": 10.0, "y": 61, "r": 15.188913813484762, "label": "Claude Opus 4.8", "price_raw": 10.0, "speed_raw": 56, "free": false, "est": false}, {"x": 10.0, "y": 57, "r": 14.328160388207793, "label": "Claude Opus 4.7", "price_raw": 10.0, "speed_raw": 46, "free": false, "est": false}, {"x": 6.0, "y": 52, "r": 14.76910464424289, "label": "Claude Sonnet 4.6", "price_raw": 6.0, "speed_raw": 51, "free": false, "est": false}, {"x": 2.0, "y": 37, "r": 18.155790384643417, "label": "Claude Haiku 4.5", "price_raw": 2.0, "speed_raw": 98, "free": false, "est": false}], "backgroundColor": "#D97757CC", "borderColor": "#D97757", "borderWidth": 1.5}, {"label": "Cohere", "type": "bubble", "data": [{"x": 4.38, "y": 13, "r": 13.766049605800287, "label": "Command A", "price_raw": 4.38, "speed_raw": 40, "free": false, "est": false}], "backgroundColor": "#39594DCC", "borderColor": "#39594D", "borderWidth": 1.5}, {"label": "DeepSeek", "type": "bubble", "data": [{"x": 2.17, "y": 52, "r": 13.053864851681976, "label": "DeepSeek V4 Pro", "price_raw": 2.17, "speed_raw": 33, "free": false, "est": false}, {"x": 0.17, "y": 47, "r": 17.25407506672479, "label": "DeepSeek V4 Flash", "price_raw": 0.17, "speed_raw": 84, "free": false, "est": false}, {"x": 0.32, "y": 42, "r": 15.746314903880721, "label": "DeepSeek V3.2", "price_raw": 0.32, "speed_raw": 63, "free": false, "est": false}, {"x": 0.6000000000000001, "y": 29, "r": 18.812861158484754, "label": "DeepSeek V3.2 Speciale", "price_raw": null, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#1E3A8ACC", "borderColor": "#1E3A8A", "borderWidth": 1.5}, {"label": "Google", "type": "bubble", "data": [{"x": 4.5, "y": 57, "r": 20.000445030754914, "label": "Gemini 3.1 Pro", "price_raw": 4.5, "speed_raw": 130, "free": false, "est": false}, {"x": 3.38, "y": 55, "r": 22.290203083783314, "label": "Gemini 3.5 Flash", "price_raw": 3.38, "speed_raw": 176, "free": false, "est": false}, {"x": 0.56, "y": 34, "r": 28.0, "label": "Gemini 3.1 Flash Lite", "price_raw": 0.56, "speed_raw": 321, "free": false, "est": false}, {"x": 4.5, "y": 41, "r": 18.812861158484754, "label": "Gemini 3 Pro", "price_raw": 4.5, "speed_raw": null, "free": false, "est": false}, {"x": 1.13, "y": 46, "r": 22.290203083783314, "label": "Gemini 3 Flash", "price_raw": 1.13, "speed_raw": 176, "free": false, "est": false}, {"x": 0.26, "y": 30, "r": 25.415124014500716, "label": "Gemini 2.5 Flash", "price_raw": 0.26, "speed_raw": 250, "free": false, "est": true}, {"x": 0.20500000000000002, "y": 39, "r": 13.264474218398874, "label": "Gemma 4 31B", "price_raw": null, "speed_raw": 35, "free": false, "est": false}, {"x": 0.2, "y": 31, "r": 18.812861158484754, "label": "Gemma 4 26B-A4B", "price_raw": 0.2, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#4285F4CC", "borderColor": "#4285F4", "borderWidth": 1.5}, {"label": "Kimi", "type": "bubble", "data": [{"x": 1.23, "y": 42, "r": 18.812861158484754, "label": "Kimi K2.7 Code", "price_raw": 1.23, "speed_raw": null, "free": false, "est": false}, {"x": 1.71, "y": 54, "r": 18.99508653850763, "label": "Kimi K2.6", "price_raw": 1.71, "speed_raw": 112, "free": false, "est": false}, {"x": 1.2, "y": 37, "r": 13.569408837932013, "label": "Kimi K2.5", "price_raw": 1.2, "speed_raw": 38, "free": false, "est": false}], "backgroundColor": "#A78BFACC", "borderColor": "#A78BFA", "borderWidth": 1.5}, {"label": "Meta", "type": "bubble", "data": [{"x": 0.47, "y": 18, "r": 18.99508653850763, "label": "Llama 4 Maverick", "price_raw": 0.47, "speed_raw": 112, "free": false, "est": false}, {"x": 0.29, "y": 14, "r": 20.683790626575586, "label": "Llama 4 Scout", "price_raw": 0.29, "speed_raw": 143, "free": false, "est": false}], "backgroundColor": "#8B5CF6CC", "borderColor": "#8B5CF6", "borderWidth": 1.5}, {"label": "MiniMax", "type": "bubble", "data": [{"x": 1.05, "y": 44, "r": 17.584176553274965, "label": "MiniMax M3", "price_raw": 1.05, "speed_raw": 89, "free": false, "est": false}, {"x": 0.53, "y": 50, "r": 14.76910464424289, "label": "MiniMax M2.7", "price_raw": 0.53, "speed_raw": 51, "free": false, "est": false}], "backgroundColor": "#E91E63CC", "borderColor": "#E91E63", "borderWidth": 1.5}, {"label": "Mistral", "type": "bubble", "data": [{"x": 0.75, "y": 23, "r": 14.682707417602442, "label": "Mistral Large 3", "price_raw": 0.75, "speed_raw": 50, "free": false, "est": false}, {"x": 0.26, "y": 28, "r": 21.08893675714294, "label": "Mistral Small 4", "price_raw": 0.26, "speed_raw": 151, "free": false, "est": false}], "backgroundColor": "#FA520FCC", "borderColor": "#FA520F", "borderWidth": 1.5}, {"label": "NVIDIA", "type": "bubble", "data": [{"x": 0.41, "y": 36, "r": 21.23808967512137, "label": "Nemotron 3 Super", "price_raw": 0.41, "speed_raw": 154, "free": false, "est": false}], "backgroundColor": "#76B900CC", "borderColor": "#76B900", "borderWidth": 1.5}, {"label": "OpenAI", "type": "bubble", "data": [{"x": 11.25, "y": 60, "r": 18.812861158484754, "label": "GPT-5.5", "price_raw": 11.25, "speed_raw": null, "free": false, "est": false}, {"x": 67.5, "y": 60, "r": 18.812861158484754, "label": "GPT-5.5 Pro", "price_raw": 67.5, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 57, "r": 16.91399398925562, "label": "GPT-5.4", "price_raw": 5.63, "speed_raw": 79, "free": false, "est": false}, {"x": 1.69, "y": 49, "r": 21.628873351684394, "label": "GPT-5.4 Mini", "price_raw": 1.69, "speed_raw": 162, "free": false, "est": false}, {"x": 0.46, "y": 44, "r": 21.385796743523613, "label": "GPT-5.4 Nano", "price_raw": 0.46, "speed_raw": 157, "free": false, "est": false}, {"x": 3.5, "y": 38, "r": 17.841634138302894, "label": "o3", "price_raw": 3.5, "speed_raw": 93, "free": false, "est": false}], "backgroundColor": "#10A37FCC", "borderColor": "#10A37F", "borderWidth": 1.5}, {"label": "Xiaomi", "type": "bubble", "data": [{"x": 1.5, "y": 49, "r": 18.812861158484754, "label": "Xiaomi MiMo-V2-Pro", "price_raw": null, "speed_raw": null, "free": false, "est": false}, {"x": 1.5, "y": 54, "r": 15.511429425676571, "label": "Xiaomi MiMo-V2.5-Pro", "price_raw": 1.5, "speed_raw": 60, "free": false, "est": false}], "backgroundColor": "#DC2626CC", "borderColor": "#DC2626", "borderWidth": 1.5}, {"label": "Z AI", "type": "bubble", "data": [{"x": 2.15, "y": 51, "r": 18.812861158484754, "label": "GLM-5.2", "price_raw": 2.15, "speed_raw": null, "free": false, "est": false}, {"x": 1.55, "y": 50, "r": 16.12568985381126, "label": "GLM-5", "price_raw": 1.55, "speed_raw": 68, "free": false, "est": false}], "backgroundColor": "#7B68EECC", "borderColor": "#7B68EE", "borderWidth": 1.5}, {"label": "inclusionAI", "type": "bubble", "data": [{"x": 0.01, "y": 34, "r": 16.12568985381126, "label": "Ling 2.6 1T", "price_raw": 0.85, "speed_raw": 68, "free": true, "est": false}, {"x": 0.01, "y": 26, "r": 23.32194689510276, "label": "Ling 2.6 Flash", "price_raw": 0.15, "speed_raw": 199, "free": true, "est": false}], "backgroundColor": "#00BCD4CC", "borderColor": "#00BCD4", "borderWidth": 1.5}, {"label": "xAI", "type": "bubble", "data": [{"x": 3.0, "y": 49, "r": 21.677036403765364, "label": "Grok 4.20 Beta", "price_raw": 3.0, "speed_raw": 163, "free": false, "est": false}, {"x": 0.28, "y": 39, "r": 20.6323586274775, "label": "Grok 4.1 Fast", "price_raw": 0.28, "speed_raw": 142, "free": false, "est": false}, {"x": 0.35, "y": 32, "r": 23.666696055932764, "label": "Grok 3 Mini", "price_raw": 0.35, "speed_raw": 207, "free": false, "est": false}], "backgroundColor": "#FFD700CC", "borderColor": "#FFD700", "borderWidth": 1.5}];
+      var datasets = [{"label": "Best-value frontier", "type": "line", "data": [{"x": 0.01, "y": 34}, {"x": 0.01, "y": 50}, {"x": 1.5, "y": 54}, {"x": 1.88, "y": 57}, {"x": 6.0, "y": 58}, {"x": 10.0, "y": 61}, {"x": 20.0, "y": 65}], "borderColor": "rgba(255,255,255,0.35)", "borderDash": [6, 4], "borderWidth": 1.5, "pointRadius": 0, "fill": false, "tension": 0, "order": 99}, {"label": "Alibaba", "type": "bubble", "data": [{"x": 0.56, "y": 39, "r": 14.76910464424289, "label": "Qwen 3.7 Plus", "price_raw": 0.56, "speed_raw": 51, "free": false, "est": false}, {"x": 1.88, "y": 57, "r": 22.88111260008719, "label": "Qwen 3.7 Max", "price_raw": 1.88, "speed_raw": 189, "free": false, "est": false}, {"x": 0.01, "y": 50, "r": 14.93939441940391, "label": "Qwen 3.6 Plus", "price_raw": 1.13, "speed_raw": 53, "free": true, "est": false}, {"x": 1.35, "y": 45, "r": 14.93939441940391, "label": "Qwen 3.5 397B", "price_raw": 1.35, "speed_raw": 53, "free": false, "est": false}, {"x": 1.1, "y": 42, "r": 20.6323586274775, "label": "Qwen 3.5 122B", "price_raw": 1.1, "speed_raw": 142, "free": false, "est": false}, {"x": 0.69, "y": 31, "r": 21.23808967512137, "label": "Qwen 3.5 35B", "price_raw": 0.69, "speed_raw": 154, "free": false, "est": false}, {"x": 0.11, "y": 32, "r": 14.507281103601839, "label": "Qwen 3.5 9B", "price_raw": 0.11, "speed_raw": 48, "free": false, "est": false}], "backgroundColor": "#C026D3CC", "borderColor": "#C026D3", "borderWidth": 1.5}, {"label": "Amazon", "type": "bubble", "data": [{"x": 5.0, "y": 19, "r": 12.261189360803424, "label": "Nova Premier", "price_raw": 5.0, "speed_raw": 26, "free": false, "est": false}], "backgroundColor": "#FF9900CC", "borderColor": "#FF9900", "borderWidth": 1.5}, {"label": "Anthropic", "type": "bubble", "data": [{"x": 20.0, "y": 65, "r": 18.771908245173854, "label": "Claude Fable 5", "price_raw": 20.0, "speed_raw": null, "free": false, "est": true}, {"x": 6.0, "y": 58, "r": 16.91399398925562, "label": "Claude Sonnet 5", "price_raw": 6.0, "speed_raw": 79, "free": false, "est": true}, {"x": 10.0, "y": 61, "r": 15.188913813484762, "label": "Claude Opus 4.8", "price_raw": 10.0, "speed_raw": 56, "free": false, "est": false}, {"x": 10.0, "y": 57, "r": 14.328160388207793, "label": "Claude Opus 4.7", "price_raw": 10.0, "speed_raw": 46, "free": false, "est": false}, {"x": 6.0, "y": 52, "r": 14.76910464424289, "label": "Claude Sonnet 4.6", "price_raw": 6.0, "speed_raw": 51, "free": false, "est": false}, {"x": 2.0, "y": 37, "r": 18.155790384643417, "label": "Claude Haiku 4.5", "price_raw": 2.0, "speed_raw": 98, "free": false, "est": false}], "backgroundColor": "#D97757CC", "borderColor": "#D97757", "borderWidth": 1.5}, {"label": "Cohere", "type": "bubble", "data": [{"x": 4.38, "y": 13, "r": 13.766049605800287, "label": "Command A", "price_raw": 4.38, "speed_raw": 40, "free": false, "est": false}], "backgroundColor": "#39594DCC", "borderColor": "#39594D", "borderWidth": 1.5}, {"label": "DeepSeek", "type": "bubble", "data": [{"x": 2.17, "y": 52, "r": 13.053864851681976, "label": "DeepSeek V4 Pro", "price_raw": 2.17, "speed_raw": 33, "free": false, "est": false}, {"x": 0.17, "y": 47, "r": 17.25407506672479, "label": "DeepSeek V4 Flash", "price_raw": 0.17, "speed_raw": 84, "free": false, "est": false}, {"x": 0.32, "y": 42, "r": 15.746314903880721, "label": "DeepSeek V3.2", "price_raw": 0.32, "speed_raw": 63, "free": false, "est": false}, {"x": 0.6000000000000001, "y": 29, "r": 18.771908245173854, "label": "DeepSeek V3.2 Speciale", "price_raw": null, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#1E3A8ACC", "borderColor": "#1E3A8A", "borderWidth": 1.5}, {"label": "Google", "type": "bubble", "data": [{"x": 4.5, "y": 57, "r": 20.000445030754914, "label": "Gemini 3.1 Pro", "price_raw": 4.5, "speed_raw": 130, "free": false, "est": false}, {"x": 3.38, "y": 55, "r": 22.290203083783314, "label": "Gemini 3.5 Flash", "price_raw": 3.38, "speed_raw": 176, "free": false, "est": false}, {"x": 0.56, "y": 34, "r": 28.0, "label": "Gemini 3.1 Flash Lite", "price_raw": 0.56, "speed_raw": 321, "free": false, "est": false}, {"x": 4.5, "y": 41, "r": 18.771908245173854, "label": "Gemini 3 Pro", "price_raw": 4.5, "speed_raw": null, "free": false, "est": false}, {"x": 1.13, "y": 46, "r": 22.290203083783314, "label": "Gemini 3 Flash", "price_raw": 1.13, "speed_raw": 176, "free": false, "est": false}, {"x": 0.26, "y": 30, "r": 25.415124014500716, "label": "Gemini 2.5 Flash", "price_raw": 0.26, "speed_raw": 250, "free": false, "est": true}, {"x": 0.20500000000000002, "y": 39, "r": 13.264474218398874, "label": "Gemma 4 31B", "price_raw": null, "speed_raw": 35, "free": false, "est": false}, {"x": 0.2, "y": 31, "r": 18.771908245173854, "label": "Gemma 4 26B-A4B", "price_raw": 0.2, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#4285F4CC", "borderColor": "#4285F4", "borderWidth": 1.5}, {"label": "Kimi", "type": "bubble", "data": [{"x": 1.23, "y": 42, "r": 18.771908245173854, "label": "Kimi K2.7 Code", "price_raw": 1.23, "speed_raw": null, "free": false, "est": false}, {"x": 1.71, "y": 54, "r": 18.99508653850763, "label": "Kimi K2.6", "price_raw": 1.71, "speed_raw": 112, "free": false, "est": false}, {"x": 1.2, "y": 37, "r": 13.569408837932013, "label": "Kimi K2.5", "price_raw": 1.2, "speed_raw": 38, "free": false, "est": false}], "backgroundColor": "#A78BFACC", "borderColor": "#A78BFA", "borderWidth": 1.5}, {"label": "Meta", "type": "bubble", "data": [{"x": 0.47, "y": 18, "r": 18.99508653850763, "label": "Llama 4 Maverick", "price_raw": 0.47, "speed_raw": 112, "free": false, "est": false}, {"x": 0.29, "y": 14, "r": 20.683790626575586, "label": "Llama 4 Scout", "price_raw": 0.29, "speed_raw": 143, "free": false, "est": false}], "backgroundColor": "#8B5CF6CC", "borderColor": "#8B5CF6", "borderWidth": 1.5}, {"label": "MiniMax", "type": "bubble", "data": [{"x": 1.05, "y": 44, "r": 17.584176553274965, "label": "MiniMax M3", "price_raw": 1.05, "speed_raw": 89, "free": false, "est": false}, {"x": 0.53, "y": 50, "r": 14.76910464424289, "label": "MiniMax M2.7", "price_raw": 0.53, "speed_raw": 51, "free": false, "est": false}], "backgroundColor": "#E91E63CC", "borderColor": "#E91E63", "borderWidth": 1.5}, {"label": "Mistral", "type": "bubble", "data": [{"x": 0.75, "y": 23, "r": 14.682707417602442, "label": "Mistral Large 3", "price_raw": 0.75, "speed_raw": 50, "free": false, "est": false}, {"x": 0.26, "y": 28, "r": 21.08893675714294, "label": "Mistral Small 4", "price_raw": 0.26, "speed_raw": 151, "free": false, "est": false}], "backgroundColor": "#FA520FCC", "borderColor": "#FA520F", "borderWidth": 1.5}, {"label": "NVIDIA", "type": "bubble", "data": [{"x": 0.41, "y": 36, "r": 21.23808967512137, "label": "Nemotron 3 Super", "price_raw": 0.41, "speed_raw": 154, "free": false, "est": false}], "backgroundColor": "#76B900CC", "borderColor": "#76B900", "borderWidth": 1.5}, {"label": "OpenAI", "type": "bubble", "data": [{"x": 11.25, "y": 60, "r": 18.771908245173854, "label": "GPT-5.5", "price_raw": 11.25, "speed_raw": null, "free": false, "est": false}, {"x": 67.5, "y": 60, "r": 18.771908245173854, "label": "GPT-5.5 Pro", "price_raw": 67.5, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 57, "r": 16.91399398925562, "label": "GPT-5.4", "price_raw": 5.63, "speed_raw": 79, "free": false, "est": false}, {"x": 1.69, "y": 49, "r": 21.628873351684394, "label": "GPT-5.4 Mini", "price_raw": 1.69, "speed_raw": 162, "free": false, "est": false}, {"x": 0.46, "y": 44, "r": 21.385796743523613, "label": "GPT-5.4 Nano", "price_raw": 0.46, "speed_raw": 157, "free": false, "est": false}, {"x": 3.5, "y": 38, "r": 17.841634138302894, "label": "o3", "price_raw": 3.5, "speed_raw": 93, "free": false, "est": false}], "backgroundColor": "#10A37FCC", "borderColor": "#10A37F", "borderWidth": 1.5}, {"label": "Xiaomi", "type": "bubble", "data": [{"x": 1.5, "y": 49, "r": 18.771908245173854, "label": "Xiaomi MiMo-V2-Pro", "price_raw": null, "speed_raw": null, "free": false, "est": false}, {"x": 1.5, "y": 54, "r": 15.511429425676571, "label": "Xiaomi MiMo-V2.5-Pro", "price_raw": 1.5, "speed_raw": 60, "free": false, "est": false}], "backgroundColor": "#DC2626CC", "borderColor": "#DC2626", "borderWidth": 1.5}, {"label": "Z AI", "type": "bubble", "data": [{"x": 2.15, "y": 51, "r": 18.771908245173854, "label": "GLM-5.2", "price_raw": 2.15, "speed_raw": null, "free": false, "est": false}, {"x": 1.55, "y": 50, "r": 16.12568985381126, "label": "GLM-5", "price_raw": 1.55, "speed_raw": 68, "free": false, "est": false}], "backgroundColor": "#7B68EECC", "borderColor": "#7B68EE", "borderWidth": 1.5}, {"label": "inclusionAI", "type": "bubble", "data": [{"x": 0.01, "y": 34, "r": 16.12568985381126, "label": "Ling 2.6 1T", "price_raw": 0.85, "speed_raw": 68, "free": true, "est": false}, {"x": 0.01, "y": 26, "r": 23.32194689510276, "label": "Ling 2.6 Flash", "price_raw": 0.15, "speed_raw": 199, "free": true, "est": false}], "backgroundColor": "#00BCD4CC", "borderColor": "#00BCD4", "borderWidth": 1.5}, {"label": "xAI", "type": "bubble", "data": [{"x": 3.0, "y": 49, "r": 21.677036403765364, "label": "Grok 4.20 Beta", "price_raw": 3.0, "speed_raw": 163, "free": false, "est": false}, {"x": 0.28, "y": 39, "r": 20.6323586274775, "label": "Grok 4.1 Fast", "price_raw": 0.28, "speed_raw": 142, "free": false, "est": false}, {"x": 0.35, "y": 32, "r": 23.666696055932764, "label": "Grok 3 Mini", "price_raw": 0.35, "speed_raw": 207, "free": false, "est": false}], "backgroundColor": "#FFD700CC", "borderColor": "#FFD700", "borderWidth": 1.5}];
       var ctx = document.getElementById('value-chart').getContext('2d');
       new Chart(ctx, {
         type: 'bubble',
@@ -332,6 +332,113 @@
         <section>
             <h2>Anthropic</h2>
             
+        <div class="family-row">
+            <div class="family-label">Claude Fable</div>
+            <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>Claude Fable 5</h3>
+                        <span class="release">Released: Jun 2026</span>
+                    </div>
+                    <div class="card-meta"><span class="time">48.1s</span><span class="price">$10 / $50 /M</span></div>
+                </div>
+                <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#e8f4f8"/>
+  <line x1="0" y1="266" x2="400" y2="266" stroke="#9fb8a0" stroke-width="4"/>
+  <circle cx="60" cy="50" r="18" fill="#fff3b0" stroke="#f2cc5a" stroke-width="3"/>
+
+  <!-- bicycle -->
+  <g stroke="#2b4a6f" stroke-width="4" fill="none" stroke-linecap="round">
+    <!-- rear wheel -->
+    <circle cx="120" cy="220" r="45" stroke-width="5"/>
+    <g stroke="#5a7ea3" stroke-width="2">
+      <g>
+        <line x1="120" y1="175" x2="120" y2="265"/>
+        <line x1="75" y1="220" x2="165" y2="220"/>
+        <line x1="88" y1="188" x2="152" y2="252"/>
+        <line x1="88" y1="252" x2="152" y2="188"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 120 220" to="360 120 220" dur="0.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <!-- front wheel -->
+    <circle cx="280" cy="220" r="45" stroke-width="5"/>
+    <g stroke="#5a7ea3" stroke-width="2">
+      <g>
+        <line x1="280" y1="175" x2="280" y2="265"/>
+        <line x1="235" y1="220" x2="325" y2="220"/>
+        <line x1="248" y1="188" x2="312" y2="252"/>
+        <line x1="248" y1="252" x2="312" y2="188"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 280 220" to="360 280 220" dur="0.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <!-- frame -->
+    <path d="M120 220 L175 150 L200 222 Z"/>
+    <line x1="175" y1="150" x2="252" y2="145"/>
+    <line x1="200" y1="222" x2="252" y2="145"/>
+    <line x1="252" y1="145" x2="280" y2="220"/>
+    <line x1="252" y1="145" x2="248" y2="122"/>
+    <line x1="236" y1="120" x2="262" y2="118"/>
+    <line x1="175" y1="150" x2="172" y2="132"/>
+    <line x1="160" y1="130" x2="184" y2="130"/>
+  </g>
+
+  <!-- pedals and cranks -->
+  <g>
+    <g stroke="#2b4a6f" stroke-width="4" stroke-linecap="round">
+      <line x1="200" y1="204" x2="200" y2="240"/>
+      <rect x="192" y="199" width="16" height="6" fill="#333" stroke="none"/>
+      <rect x="192" y="235" width="16" height="6" fill="#333" stroke="none"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 200 222" to="360 200 222" dur="1s" repeatCount="indefinite"/>
+    </g>
+    <circle cx="200" cy="222" r="6" fill="#2b4a6f"/>
+  </g>
+
+  <!-- far leg (behind frame) -->
+  <polyline fill="none" stroke="#c98a2b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" points="185,158 188,190 182,222">
+    <animate attributeName="points" dur="1s" repeatCount="indefinite"
+      values="185,158 188,190 182,222;
+              185,158 196,182 200,204;
+              185,158 205,190 218,222;
+              185,158 198,198 200,240;
+              185,158 188,190 182,222"/>
+  </polyline>
+
+  <!-- pelican -->
+  <g>
+    <!-- body -->
+    <ellipse cx="185" cy="130" rx="40" ry="27" fill="#f7f7f2" stroke="#c9c9bf" stroke-width="2"/>
+    <!-- tail -->
+    <path d="M148 122 L128 108 L150 132 Z" fill="#e8e8de" stroke="#c9c9bf" stroke-width="2"/>
+    <!-- wing -->
+    <path d="M170 122 Q195 118 205 138 Q185 148 168 138 Z" fill="#e8e8de" stroke="#c9c9bf" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="0 170 125; -6 170 125; 0 170 125" dur="1s" repeatCount="indefinite"/>
+    </path>
+    <!-- neck -->
+    <path d="M212 118 Q235 110 238 88" fill="none" stroke="#f7f7f2" stroke-width="13" stroke-linecap="round"/>
+    <!-- head -->
+    <circle cx="240" cy="84" r="13" fill="#f7f7f2" stroke="#c9c9bf" stroke-width="2"/>
+    <!-- beak -->
+    <path d="M250 80 L298 90 L252 92 Z" fill="#f2a53a" stroke="#d68a1e" stroke-width="2" stroke-linejoin="round"/>
+    <!-- pouch -->
+    <path d="M252 92 Q268 108 292 91" fill="#f6c26b" stroke="#d68a1e" stroke-width="2"/>
+    <!-- eye -->
+    <circle cx="243" cy="80" r="2.5" fill="#222"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="1s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- near leg (in front) -->
+  <polyline fill="none" stroke="#f2a53a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="185,158 205,190 218,222">
+    <animate attributeName="points" dur="1s" repeatCount="indefinite"
+      values="185,158 205,190 218,222;
+              185,158 198,198 200,240;
+              185,158 188,190 182,222;
+              185,158 196,182 200,204;
+              185,158 205,190 218,222"/>
+  </polyline>
+</svg></div>
+            </div></div>
+        </div>
         <div class="family-row">
             <div class="family-label">Claude Opus</div>
             <div class="grid">
@@ -1208,6 +1315,95 @@
         <div class="family-row">
             <div class="family-label">Claude Sonnet</div>
             <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>Claude Sonnet 5</h3>
+                        <span class="release">Released: Jun 2026</span>
+                    </div>
+                    <div class="card-meta"><span class="time">27.6s</span><span class="price">$3 / $15 /M</span></div>
+                </div>
+                <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
+  <ellipse cx="250" cy="270" rx="240" ry="15" fill="#e0e0e0"/>
+  <g id="bike">
+    <line x1="150" y1="230" x2="220" y2="180" stroke="#333" stroke-width="4"/>
+    <line x1="220" y1="180" x2="300" y2="230" stroke="#333" stroke-width="4"/>
+    <line x1="220" y1="180" x2="230" y2="140" stroke="#333" stroke-width="4"/>
+    <line x1="150" y1="230" x2="300" y2="230" stroke="#333" stroke-width="4"/>
+    <line x1="230" y1="140" x2="260" y2="140" stroke="#333" stroke-width="4"/>
+    <line x1="150" y1="230" x2="180" y2="150" stroke="#333" stroke-width="4"/>
+    <line x1="180" y1="150" x2="230" y2="140" stroke="#333" stroke-width="4"/>
+
+    <g id="wheel-back" transform="translate(150,230)">
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <g stroke="#222" stroke-width="2">
+        <line x1="-35" y1="0" x2="35" y2="0"/>
+        <line x1="0" y1="-35" x2="0" y2="35"/>
+        <line x1="-25" y1="-25" x2="25" y2="25"/>
+        <line x1="-25" y1="25" x2="25" y2="-25"/>
+      </g>
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="1s" repeatCount="indefinite" additive="sum"/>
+    </g>
+
+    <g id="wheel-front" transform="translate(300,230)">
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <g stroke="#222" stroke-width="2">
+        <line x1="-35" y1="0" x2="35" y2="0"/>
+        <line x1="0" y1="-35" x2="0" y2="35"/>
+        <line x1="-25" y1="-25" x2="25" y2="25"/>
+        <line x1="-25" y1="25" x2="25" y2="-25"/>
+      </g>
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="1s" repeatCount="indefinite" additive="sum"/>
+    </g>
+
+    <!-- pedal crank -->
+    <g id="crank" transform="translate(220,230)">
+      <circle r="6" fill="#333"/>
+      <g id="pedals">
+        <line x1="0" y1="0" x2="18" y2="0" stroke="#333" stroke-width="3"/>
+        <rect x="14" y="-4" width="12" height="8" fill="#555"/>
+        <line x1="0" y1="0" x2="-18" y2="0" stroke="#333" stroke-width="3"/>
+        <rect x="-26" y="-4" width="12" height="8" fill="#555"/>
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <line x1="260" y1="140" x2="300" y2="230" stroke="#333" stroke-width="3"/>
+  </g>
+
+  <g id="pelican">
+    <g id="legs">
+      <line x1="235" y1="180" x2="220" y2="230" stroke="#ff8c00" stroke-width="4">
+        <animate attributeName="x2" values="220;226;220" dur="1s" repeatCount="indefinite"/>
+      </line>
+      <line x1="245" y1="180" x2="260" y2="140" stroke="#ff8c00" stroke-width="4">
+        <animate attributeName="y2" values="140;135;140" dur="1s" repeatCount="indefinite"/>
+      </line>
+    </g>
+
+    <ellipse cx="235" cy="150" rx="45" ry="32" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+    <ellipse cx="180" cy="140" rx="18" ry="15" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+
+    <g id="head" transform="translate(150,120)">
+      <animateTransform attributeName="transform" type="translate" values="150,120;150,116;150,120" dur="0.6s" repeatCount="indefinite"/>
+      <circle cx="0" cy="0" r="16" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+      <path d="M -14 4 Q -55 12 -60 4 Q -55 -2 -14 -4 Z" fill="#ff9933" stroke="#e07b00" stroke-width="1"/>
+      <path d="M -20 6 Q -50 16 -55 8 Q -45 6 -20 2 Z" fill="#ffb84d"/>
+      <circle cx="-4" cy="-6" r="2.5" fill="#000"/>
+    </g>
+
+    <path d="M 220 140 Q 260 100 280 130 Q 260 145 220 150 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="1">
+      <animateTransform attributeName="transform" type="rotate" values="0 250 140;-15 250 140;0 250 140" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+
+    <path d="M 260 155 Q 285 165 300 185 Q 285 175 258 165 Z" fill="#ff8c00"/>
+  </g>
+
+  <animateTransform xlink:href="#bike" attributeName="transform" type="translate" values="0,0; -5,-2; 0,0; 5,-2; 0,0" dur="0.5s" repeatCount="indefinite"/>
+</svg></div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <div>
@@ -11117,7 +11313,100 @@
         <div class="table-wrap">
         <table>
         <thead><tr><th class="corner"></th><th>Jun 2026</th><th>May 2026</th><th>Apr 2026</th><th>Mar 2026</th><th>Feb 2026</th><th>Jan 2026</th><th>Dec 2025</th><th>Nov 2025</th><th>Oct 2025</th><th>Sep 2025</th><th>Aug 2025</th><th>Jul 2025</th><th>Jun 2025</th><th>May 2025</th><th>Apr 2025</th><th>Mar 2025</th><th>Jan 2025</th><th>Oct 2024</th></tr></thead>
-        <tbody><tr><td class="group-header" colspan="19">Anthropic</td></tr><tr><td class="model-name">Claude Opus</td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">Claude Opus 4.8 <span class="time">21.0s</span> <span class="price">$5 / $25 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+        <tbody><tr><td class="group-header" colspan="19">Anthropic</td></tr><tr><td class="model-name">Claude Fable</td><td class="svg-cell"><div class="cell-label">Claude Fable 5 <span class="time">48.1s</span> <span class="price">$10 / $50 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#e8f4f8"/>
+  <line x1="0" y1="266" x2="400" y2="266" stroke="#9fb8a0" stroke-width="4"/>
+  <circle cx="60" cy="50" r="18" fill="#fff3b0" stroke="#f2cc5a" stroke-width="3"/>
+
+  <!-- bicycle -->
+  <g stroke="#2b4a6f" stroke-width="4" fill="none" stroke-linecap="round">
+    <!-- rear wheel -->
+    <circle cx="120" cy="220" r="45" stroke-width="5"/>
+    <g stroke="#5a7ea3" stroke-width="2">
+      <g>
+        <line x1="120" y1="175" x2="120" y2="265"/>
+        <line x1="75" y1="220" x2="165" y2="220"/>
+        <line x1="88" y1="188" x2="152" y2="252"/>
+        <line x1="88" y1="252" x2="152" y2="188"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 120 220" to="360 120 220" dur="0.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <!-- front wheel -->
+    <circle cx="280" cy="220" r="45" stroke-width="5"/>
+    <g stroke="#5a7ea3" stroke-width="2">
+      <g>
+        <line x1="280" y1="175" x2="280" y2="265"/>
+        <line x1="235" y1="220" x2="325" y2="220"/>
+        <line x1="248" y1="188" x2="312" y2="252"/>
+        <line x1="248" y1="252" x2="312" y2="188"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 280 220" to="360 280 220" dur="0.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <!-- frame -->
+    <path d="M120 220 L175 150 L200 222 Z"/>
+    <line x1="175" y1="150" x2="252" y2="145"/>
+    <line x1="200" y1="222" x2="252" y2="145"/>
+    <line x1="252" y1="145" x2="280" y2="220"/>
+    <line x1="252" y1="145" x2="248" y2="122"/>
+    <line x1="236" y1="120" x2="262" y2="118"/>
+    <line x1="175" y1="150" x2="172" y2="132"/>
+    <line x1="160" y1="130" x2="184" y2="130"/>
+  </g>
+
+  <!-- pedals and cranks -->
+  <g>
+    <g stroke="#2b4a6f" stroke-width="4" stroke-linecap="round">
+      <line x1="200" y1="204" x2="200" y2="240"/>
+      <rect x="192" y="199" width="16" height="6" fill="#333" stroke="none"/>
+      <rect x="192" y="235" width="16" height="6" fill="#333" stroke="none"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 200 222" to="360 200 222" dur="1s" repeatCount="indefinite"/>
+    </g>
+    <circle cx="200" cy="222" r="6" fill="#2b4a6f"/>
+  </g>
+
+  <!-- far leg (behind frame) -->
+  <polyline fill="none" stroke="#c98a2b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" points="185,158 188,190 182,222">
+    <animate attributeName="points" dur="1s" repeatCount="indefinite"
+      values="185,158 188,190 182,222;
+              185,158 196,182 200,204;
+              185,158 205,190 218,222;
+              185,158 198,198 200,240;
+              185,158 188,190 182,222"/>
+  </polyline>
+
+  <!-- pelican -->
+  <g>
+    <!-- body -->
+    <ellipse cx="185" cy="130" rx="40" ry="27" fill="#f7f7f2" stroke="#c9c9bf" stroke-width="2"/>
+    <!-- tail -->
+    <path d="M148 122 L128 108 L150 132 Z" fill="#e8e8de" stroke="#c9c9bf" stroke-width="2"/>
+    <!-- wing -->
+    <path d="M170 122 Q195 118 205 138 Q185 148 168 138 Z" fill="#e8e8de" stroke="#c9c9bf" stroke-width="2">
+      <animateTransform attributeName="transform" type="rotate" values="0 170 125; -6 170 125; 0 170 125" dur="1s" repeatCount="indefinite"/>
+    </path>
+    <!-- neck -->
+    <path d="M212 118 Q235 110 238 88" fill="none" stroke="#f7f7f2" stroke-width="13" stroke-linecap="round"/>
+    <!-- head -->
+    <circle cx="240" cy="84" r="13" fill="#f7f7f2" stroke="#c9c9bf" stroke-width="2"/>
+    <!-- beak -->
+    <path d="M250 80 L298 90 L252 92 Z" fill="#f2a53a" stroke="#d68a1e" stroke-width="2" stroke-linejoin="round"/>
+    <!-- pouch -->
+    <path d="M252 92 Q268 108 292 91" fill="#f6c26b" stroke="#d68a1e" stroke-width="2"/>
+    <!-- eye -->
+    <circle cx="243" cy="80" r="2.5" fill="#222"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="1s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- near leg (in front) -->
+  <polyline fill="none" stroke="#f2a53a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" points="185,158 205,190 218,222">
+    <animate attributeName="points" dur="1s" repeatCount="indefinite"
+      values="185,158 205,190 218,222;
+              185,158 198,198 200,240;
+              185,158 188,190 182,222;
+              185,158 196,182 200,204;
+              185,158 205,190 218,222"/>
+  </polyline>
+</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="model-name">Claude Opus</td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">Claude Opus 4.8 <span class="time">21.0s</span> <span class="price">$5 / $25 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <rect width="400" height="300" fill="#aee4ff"/>
   <rect y="240" width="400" height="60" fill="#7cc36a"/>
 
@@ -11916,7 +12205,86 @@
       <animate attributeName="d" values="M190 145 L195 165 L220 180;M190 145 L185 160 L180 175;M190 145 L195 165 L220 180" dur="1s" repeatCount="indefinite"/>
     </g>
   </g>
-</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="model-name">Claude Sonnet</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">Claude Sonnet 4.6 <span class="time">25.5s</span> <span class="price">$3 / $15 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr><tr><td class="model-name">Claude Sonnet</td><td class="svg-cell"><div class="cell-label">Claude Sonnet 5 <span class="time">27.6s</span> <span class="price">$3 / $15 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
+  <ellipse cx="250" cy="270" rx="240" ry="15" fill="#e0e0e0"/>
+  <g id="bike">
+    <line x1="150" y1="230" x2="220" y2="180" stroke="#333" stroke-width="4"/>
+    <line x1="220" y1="180" x2="300" y2="230" stroke="#333" stroke-width="4"/>
+    <line x1="220" y1="180" x2="230" y2="140" stroke="#333" stroke-width="4"/>
+    <line x1="150" y1="230" x2="300" y2="230" stroke="#333" stroke-width="4"/>
+    <line x1="230" y1="140" x2="260" y2="140" stroke="#333" stroke-width="4"/>
+    <line x1="150" y1="230" x2="180" y2="150" stroke="#333" stroke-width="4"/>
+    <line x1="180" y1="150" x2="230" y2="140" stroke="#333" stroke-width="4"/>
+
+    <g id="wheel-back" transform="translate(150,230)">
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <g stroke="#222" stroke-width="2">
+        <line x1="-35" y1="0" x2="35" y2="0"/>
+        <line x1="0" y1="-35" x2="0" y2="35"/>
+        <line x1="-25" y1="-25" x2="25" y2="25"/>
+        <line x1="-25" y1="25" x2="25" y2="-25"/>
+      </g>
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="1s" repeatCount="indefinite" additive="sum"/>
+    </g>
+
+    <g id="wheel-front" transform="translate(300,230)">
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <g stroke="#222" stroke-width="2">
+        <line x1="-35" y1="0" x2="35" y2="0"/>
+        <line x1="0" y1="-35" x2="0" y2="35"/>
+        <line x1="-25" y1="-25" x2="25" y2="25"/>
+        <line x1="-25" y1="25" x2="25" y2="-25"/>
+      </g>
+      <circle r="35" fill="none" stroke="#222" stroke-width="4"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="1s" repeatCount="indefinite" additive="sum"/>
+    </g>
+
+    <!-- pedal crank -->
+    <g id="crank" transform="translate(220,230)">
+      <circle r="6" fill="#333"/>
+      <g id="pedals">
+        <line x1="0" y1="0" x2="18" y2="0" stroke="#333" stroke-width="3"/>
+        <rect x="14" y="-4" width="12" height="8" fill="#555"/>
+        <line x1="0" y1="0" x2="-18" y2="0" stroke="#333" stroke-width="3"/>
+        <rect x="-26" y="-4" width="12" height="8" fill="#555"/>
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <line x1="260" y1="140" x2="300" y2="230" stroke="#333" stroke-width="3"/>
+  </g>
+
+  <g id="pelican">
+    <g id="legs">
+      <line x1="235" y1="180" x2="220" y2="230" stroke="#ff8c00" stroke-width="4">
+        <animate attributeName="x2" values="220;226;220" dur="1s" repeatCount="indefinite"/>
+      </line>
+      <line x1="245" y1="180" x2="260" y2="140" stroke="#ff8c00" stroke-width="4">
+        <animate attributeName="y2" values="140;135;140" dur="1s" repeatCount="indefinite"/>
+      </line>
+    </g>
+
+    <ellipse cx="235" cy="150" rx="45" ry="32" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+    <ellipse cx="180" cy="140" rx="18" ry="15" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+
+    <g id="head" transform="translate(150,120)">
+      <animateTransform attributeName="transform" type="translate" values="150,120;150,116;150,120" dur="0.6s" repeatCount="indefinite"/>
+      <circle cx="0" cy="0" r="16" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+      <path d="M -14 4 Q -55 12 -60 4 Q -55 -2 -14 -4 Z" fill="#ff9933" stroke="#e07b00" stroke-width="1"/>
+      <path d="M -20 6 Q -50 16 -55 8 Q -45 6 -20 2 Z" fill="#ffb84d"/>
+      <circle cx="-4" cy="-6" r="2.5" fill="#000"/>
+    </g>
+
+    <path d="M 220 140 Q 260 100 280 130 Q 260 145 220 150 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="1">
+      <animateTransform attributeName="transform" type="rotate" values="0 250 140;-15 250 140;0 250 140" dur="0.8s" repeatCount="indefinite"/>
+    </path>
+
+    <path d="M 260 155 Q 285 165 300 185 Q 285 175 258 165 Z" fill="#ff8c00"/>
+  </g>
+
+  <animateTransform xlink:href="#bike" attributeName="transform" type="translate" values="0,0; -5,-2; 0,0; 5,-2; 0,0" dur="0.5s" repeatCount="indefinite"/>
+</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">Claude Sonnet 4.6 <span class="time">25.5s</span> <span class="price">$3 / $15 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
   <!-- Sky background -->
   <rect width="400" height="300" fill="#87CEEB"/>
   
