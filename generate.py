@@ -37,6 +37,24 @@ CLAUDE_MAX_MODELS = {
     "Claude Haiku 4.5":  "claude-haiku-4-5",
 }
 
+# Reasoning-capable OpenRouter models where we force the highest available
+# thinking effort via the unified `reasoning.effort` param, instead of the
+# provider's default. GLM-5.2 supports "high"/"xhigh" only, where "xhigh"
+# maps to the model's native max reasoning mode.
+REASONING_EFFORT_OVERRIDES = {
+    "GLM-5.2": "xhigh",
+}
+
+
+def reasoning_effort_for(name):
+    """Reasoning/thinking effort used to generate this model's SVG, recorded in the
+    cache for provenance. Claude Max models use the CLI's adaptive-thinking default
+    (no explicit override configured); OpenRouter models use their override if set,
+    else the provider's own default effort."""
+    if name in CLAUDE_MAX_MODELS:
+        return "adaptive"
+    return REASONING_EFFORT_OVERRIDES.get(name, "default")
+
 PROMPT = """Create an animated SVG image of a pelican riding a bicycle.
 The pelican should be pedaling and the wheels should be spinning.
 Use SVG animations (animate, animateTransform, etc).
@@ -475,12 +493,15 @@ def call_openrouter(name, model_id):
     """Call a single model via OpenRouter and return (name, svg, elapsed, error)."""
     print(f"  [{name}] Requesting via OpenRouter...", flush=True)
     start = time.time()
-    payload = json.dumps({
+    payload_dict = {
         "model": model_id,
         "messages": [{"role": "user", "content": PROMPT}],
         "max_tokens": 32000,
         "temperature": 0.7,
-    }).encode()
+    }
+    if name in REASONING_EFFORT_OVERRIDES:
+        payload_dict["reasoning"] = {"effort": REASONING_EFFORT_OVERRIDES[name]}
+    payload = json.dumps(payload_dict).encode()
 
     req = Request(API_URL, data=payload, method="POST")
     req.add_header("Authorization", f"Bearer {API_KEY}")
@@ -1146,7 +1167,7 @@ def main():
                 name, svg, elapsed, error = future.result()
                 results[name] = (svg, elapsed, error)
                 if svg and not error:
-                    cache[name] = {"svg": svg, "elapsed": elapsed}
+                    cache[name] = {"svg": svg, "elapsed": elapsed, "reasoning_effort": reasoning_effort_for(name)}
                     save_cache(cache)
     else:
         print("All models cached, building HTML...", flush=True)
