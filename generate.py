@@ -22,11 +22,12 @@ CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
 # Anthropic models are generated through the Claude Max account via the local
 # `claude` CLI (-p print mode) instead of OpenRouter. Maps the display name used
 # in MODELS -> the CLI `--model` id. Any Claude model NOT listed here still falls
-# back to OpenRouter. Reachability probed 2026-07-01 against the Max account:
-# opus-4-8, sonnet-4-6, haiku-4-5 serve; opus-4-8-fast and claude-fable-5 do not.
-# Claude Fable 5 stays mapped so it works the moment Fable Mythos access is granted;
-# until then it returns the CLI's "unavailable" message and is skipped by the cache.
+# back to OpenRouter. Reachability probed 2026-07-02 against the Max account:
+# claude-fable-5, claude-sonnet-5, opus-4-8, sonnet-4-6, haiku-4-5 all serve;
+# opus-4-8-fast does not.
 CLAUDE_MAX_MODELS = {
+    "Claude Fable 5":    "claude-fable-5",
+    "Claude Sonnet 5":   "claude-sonnet-5",
     "Claude Opus 4.8":   "claude-opus-4-8",
     "Claude Opus 4.7":   "claude-opus-4-7",
     "Claude Opus 4.6":   "claude-opus-4-6",
@@ -34,7 +35,6 @@ CLAUDE_MAX_MODELS = {
     "Claude Opus 4.5":   "claude-opus-4-5",
     "Claude Sonnet 4.5": "claude-sonnet-4-5",
     "Claude Haiku 4.5":  "claude-haiku-4-5",
-    "Claude Fable 5":    "claude-fable-5",
 }
 
 PROMPT = """Create an animated SVG image of a pelican riding a bicycle.
@@ -46,8 +46,8 @@ Start with <svg and end with </svg>."""
 # (display_name, model_id, release_date_str)
 MODELS = [
     # --- Anthropic ---
-    # Claude Fable 5 is gated behind Anthropic's Fable Mythos access program;
-    # OpenRouter lists it but inference 404s ("not available"). Re-add when it serves.
+    ("Claude Fable 5", "anthropic/claude-fable-5", "Jun 2026"),
+    ("Claude Sonnet 5", "anthropic/claude-sonnet-5", "Jun 2026"),
     ("Claude Opus 4.8", "anthropic/claude-opus-4.8", "May 2026"),
     ("Claude Opus 4.8 Fast", "anthropic/claude-opus-4.8-fast", "May 2026"),
     ("Claude Opus 4.7", "anthropic/claude-opus-4.7", "Apr 2026"),
@@ -160,6 +160,8 @@ MODELS = [
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
 PRICING = {
+    "Claude Fable 5": "$10 / $50 /M",
+    "Claude Sonnet 5": "$3 / $15 /M",
     "Claude Opus 4.8": "$5 / $25 /M",
     "Claude Opus 4.8 Fast": "$10 / $50 /M",
     "Claude Opus 4.7": "$5 / $25 /M",
@@ -263,6 +265,8 @@ PRICING = {
 # Models not in this dict are simply not plotted on the Chart view.
 AA_SNAPSHOT_DATE = "2026-05-31"
 INTEL_DATA = {
+    "Claude Fable 5":          (65, 20.00, None, "est"),  # AA rescaled index mapped onto the 2026-05-31 scale (+4 vs Opus 4.8)
+    "Claude Sonnet 5":         (58, 6.00, 79, "est"),     # AA rescaled index mapped onto the 2026-05-31 scale (+6 vs Sonnet 4.6)
     "Claude Opus 4.8":         (61, 10.00, 56),
     "Claude Opus 4.7":         (57, 10.00, 46),
     "Claude Sonnet 4.6":       (52, 6.00, 51),
@@ -371,8 +375,9 @@ PROVIDER_COLORS = {
 # Models in the same family (lineage) share a row in the timeline table.
 CATEGORIES = [
     ("Anthropic", [
+        ("Claude Fable", ["Claude Fable 5"]),
         ("Claude Opus", ["Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
-        ("Claude Sonnet", ["Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
+        ("Claude Sonnet", ["Claude Sonnet 5", "Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
     ("OpenAI", [
