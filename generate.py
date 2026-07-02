@@ -45,6 +45,28 @@ REASONING_EFFORT_OVERRIDES = {
     "GLM-5.2": "xhigh",
 }
 
+# OpenRouter's unified reasoning.effort can claim up to ~95% of max_tokens for
+# thinking (e.g. "xhigh"), starving the visible completion if max_tokens stays
+# at the plain default. Confirmed 2026-07-02: GLM-5.2 at xhigh with the default
+# 32000 budget produced a 3055-char SVG (3 animations) vs. 9196 chars (11
+# animations) at the provider's default effort -- same prompt, worse output,
+# 3x slower. Give any model with a forced effort override a much larger ceiling
+# so reasoning and completion both have room.
+DEFAULT_MAX_TOKENS = 32000
+REASONING_MAX_TOKENS = 96000
+
+# Below this length, a reasoning-boosted model's SVG is suspiciously sparse
+# compared to what non-boosted models typically produce (3-9k chars). Not a
+# hard failure -- some models are legitimately terse -- but worth flagging in
+# the cache for review rather than silently accepting.
+MIN_REASONING_SVG_CHARS = 4000
+
+# Extra attempts (beyond the first) for reasoning-boosted models whose result
+# comes back suspiciously short. Confirmed 2026-07-02: a clean, non-truncated
+# GLM-5.2 xhigh response can still land far terser than a typical run -- this
+# is generation variance under expensive thinking, not a bug in a single call.
+REASONING_RETRIES = 2
+
 
 def reasoning_effort_for(name):
     """Reasoning/thinking effort used to generate this model's SVG, recorded in the
@@ -489,17 +511,16 @@ def extract_svg(content):
     return None
 
 
-def call_openrouter(name, model_id):
-    """Call a single model via OpenRouter and return (name, svg, elapsed, error)."""
-    print(f"  [{name}] Requesting via OpenRouter...", flush=True)
+def _openrouter_attempt(name, model_id, has_reasoning_override):
+    """One raw OpenRouter call. Returns (svg, elapsed, error, usage)."""
     start = time.time()
     payload_dict = {
         "model": model_id,
         "messages": [{"role": "user", "content": PROMPT}],
-        "max_tokens": 32000,
+        "max_tokens": REASONING_MAX_TOKENS if has_reasoning_override else DEFAULT_MAX_TOKENS,
         "temperature": 0.7,
     }
-    if name in REASONING_EFFORT_OVERRIDES:
+    if has_reasoning_override:
         payload_dict["reasoning"] = {"effort": REASONING_EFFORT_OVERRIDES[name]}
     payload = json.dumps(payload_dict).encode()
 
@@ -512,23 +533,63 @@ def call_openrouter(name, model_id):
         with urlopen(req, timeout=600) as resp:
             data = json.loads(resp.read())
         elapsed = time.time() - start
-        msg = data["choices"][0]["message"]
+        usage = data.get("usage")
+        choice = data["choices"][0]
+        if choice.get("finish_reason") == "length":
+            return None, elapsed, "Truncated: hit max_tokens before finishing (reasoning likely ate the budget)", usage
+        msg = choice["message"]
         content = msg.get("content") or msg.get("reasoning") or ""
         svg = extract_svg(content)
         if svg:
-            print(f"  [{name}] Done in {elapsed:.1f}s ({len(svg)} chars)", flush=True)
-            return name, svg, elapsed, None
-        print(f"  [{name}] Done in {elapsed:.1f}s but no usable SVG", flush=True)
-        return name, None, elapsed, "No usable <svg> in response"
+            return svg, elapsed, None, usage
+        return None, elapsed, "No usable <svg> in response", usage
     except HTTPError as e:
         elapsed = time.time() - start
         body = e.read().decode() if e.fp else ""
-        print(f"  [{name}] Error: {e.code} in {elapsed:.1f}s", flush=True)
-        return name, None, elapsed, f"HTTP {e.code}: {body[:200]}"
+        return None, elapsed, f"HTTP {e.code}: {body[:200]}", None
     except Exception as e:
         elapsed = time.time() - start
-        print(f"  [{name}] Error: {e} in {elapsed:.1f}s", flush=True)
-        return name, None, elapsed, str(e)
+        return None, elapsed, str(e), None
+
+
+def call_openrouter(name, model_id):
+    """Call a model via OpenRouter and return (name, svg, elapsed, error, usage).
+
+    Reasoning-boosted models (REASONING_EFFORT_OVERRIDES) are non-deterministic
+    under expensive thinking -- the same request can occasionally come back much
+    terser than usual with a perfectly clean finish_reason (confirmed 2026-07-02
+    on GLM-5.2: one run produced an 18k-reasoning-token response with only ~3k
+    tokens of visible completion). Retry up to REASONING_RETRIES extra times
+    when the result looks suspiciously short, and keep the best of all attempts
+    rather than the first roll.
+    """
+    has_reasoning_override = name in REASONING_EFFORT_OVERRIDES
+    attempts = 1 + REASONING_RETRIES if has_reasoning_override else 1
+    best = None  # (svg, elapsed, error, usage)
+    total_elapsed = 0.0
+
+    for attempt in range(attempts):
+        label = f"attempt {attempt + 1}/{attempts}" if attempts > 1 else "Requesting"
+        print(f"  [{name}] {label} via OpenRouter...", flush=True)
+        svg, elapsed, error, usage = _openrouter_attempt(name, model_id, has_reasoning_override)
+        total_elapsed += elapsed
+        if svg and (best is None or len(svg) > len(best[0])):
+            best = (svg, elapsed, error, usage)
+        if svg and not (has_reasoning_override and len(svg) < MIN_REASONING_SVG_CHARS):
+            break  # good result, no need to retry
+        if not svg:
+            print(f"  [{name}] {label} failed in {elapsed:.1f}s: {error}", flush=True)
+        elif attempt < attempts - 1:
+            print(f"  [{name}] {label} suspiciously short ({len(svg)} chars), retrying...", flush=True)
+
+    if best:
+        svg, _, _, usage = best
+        suspect = has_reasoning_override and len(svg) < MIN_REASONING_SVG_CHARS
+        flag = " [SUSPECT: short for a max-reasoning model even after retries]" if suspect else ""
+        print(f"  [{name}] Done in {total_elapsed:.1f}s ({len(svg)} chars){flag}", flush=True)
+        return name, svg, total_elapsed, None, usage
+    print(f"  [{name}] Error: all {attempts} attempt(s) failed in {total_elapsed:.1f}s", flush=True)
+    return name, None, total_elapsed, error, usage
 
 
 def call_claude_max(name, cli_model):
@@ -562,10 +623,11 @@ def call_claude_max(name, cli_model):
 
 
 def call_model(name, model_id):
-    """Dispatch a model to its backend. Anthropic models go through the Claude Max
-    account (`claude` CLI); everything else uses OpenRouter."""
+    """Dispatch a model to its backend and normalize to (name, svg, elapsed, error, usage).
+    Anthropic models go through the Claude Max account (`claude` CLI, no usage data);
+    everything else uses OpenRouter."""
     if name in CLAUDE_MAX_MODELS:
-        return call_claude_max(name, CLAUDE_MAX_MODELS[name])
+        return call_claude_max(name, CLAUDE_MAX_MODELS[name]) + (None,)
     return call_openrouter(name, model_id)
 
 
@@ -1164,10 +1226,16 @@ def main():
         with ThreadPoolExecutor(max_workers=6) as pool:
             futures = {pool.submit(call_model, name, mid): name for name, mid in to_call.items()}
             for future in as_completed(futures):
-                name, svg, elapsed, error = future.result()
+                name, svg, elapsed, error, usage = future.result()
                 results[name] = (svg, elapsed, error)
                 if svg and not error:
-                    cache[name] = {"svg": svg, "elapsed": elapsed, "reasoning_effort": reasoning_effort_for(name)}
+                    entry = {"svg": svg, "elapsed": elapsed, "reasoning_effort": reasoning_effort_for(name)}
+                    if usage:
+                        entry["usage"] = usage
+                    if name in REASONING_EFFORT_OVERRIDES and len(svg) < MIN_REASONING_SVG_CHARS:
+                        entry["suspect_short"] = True
+                        print(f"  [{name}] WARNING: cached anyway, but flagged suspect_short for review", flush=True)
+                    cache[name] = entry
                     save_cache(cache)
     else:
         print("All models cached, building HTML...", flush=True)
