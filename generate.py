@@ -100,6 +100,9 @@ MODELS = [
     ("Claude Sonnet 4", "anthropic/claude-sonnet-4", "May 2025"),
     ("Claude Opus 4", "anthropic/claude-opus-4", "May 2025"),
     # --- OpenAI ---
+    ("GPT-5.6 Sol", "openai/gpt-5.6-sol", "Jul 2026"),
+    ("GPT-5.6 Terra", "openai/gpt-5.6-terra", "Jul 2026"),
+    ("GPT-5.6 Luna", "openai/gpt-5.6-luna", "Jul 2026"),
     ("GPT-5.5 Pro", "openai/gpt-5.5-pro", "Apr 2026"),
     ("GPT-5.5", "openai/gpt-5.5", "Apr 2026"),
     ("GPT-5.4", "openai/gpt-5.4", "Mar 2026"),
@@ -125,6 +128,7 @@ MODELS = [
     ("Gemma 4 31B", "google/gemma-4-31b-it", "Apr 2026"),
     ("Gemma 4 26B-A4B", "google/gemma-4-26b-a4b-it", "Apr 2026"),
     # --- xAI / Grok ---
+    ("Grok 4.5", "x-ai/grok-4.5", "Jul 2026"),
     ("Grok 4.3", "x-ai/grok-4.3", "Apr 2026"),
     ("Grok Build 0.1", "x-ai/grok-build-0.1", "May 2026"),
     ("Grok 4.20 Beta", "x-ai/grok-4.20-beta", "Mar 2026"),
@@ -145,6 +149,7 @@ MODELS = [
     ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),
     ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
     ("StepFun Step 3.7 Flash", "stepfun/step-3.7-flash", "May 2026"),
+    ("Tencent Hy3", "tencent/hy3", "Jul 2026"),
     ("Tencent Hy3 Preview", "tencent/hy3-preview:free", "Apr 2026"),
     ("Ring 2.6 1T", "inclusionai/ring-2.6-1t:free", "May 2026"),
     ("Ling 2.6 1T", "inclusionai/ling-2.6-1t:free", "Apr 2026"),
@@ -177,6 +182,10 @@ MODELS = [
     ("Command A", "cohere/command-a", "Mar 2025"),
     # --- IBM ---
     ("IBM Granite 4.1 8B", "ibm-granite/granite-4.1-8b", "Apr 2026"),
+    # --- Emerging Labs ---
+    ("Sakana Fugu Ultra", "sakana/fugu-ultra", "Jun 2026"),
+    ("Nex AGI Nex-N2-Mini", "nex-agi/nex-n2-mini", "Jun 2026"),
+    ("Poolside Laguna XS 2.1", "poolside/laguna-xs-2.1", "Jul 2026"),
     # --- Qwen: full model then smaller quantizations ---
     ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
@@ -213,6 +222,9 @@ PRICING = {
     "Claude Sonnet 4.5": "$3 / $15 /M",
     "Claude Opus 4.1": "$15 / $75 /M",
     "Claude Opus 4": "$15 / $75 /M",
+    "GPT-5.6 Sol": "$5 / $30 /M",
+    "GPT-5.6 Terra": "$2.50 / $15 /M",
+    "GPT-5.6 Luna": "$1 / $6 /M",
     "GPT-5.5 Pro": "$30 / $180 /M",
     "GPT-5.5": "$5 / $30 /M",
     "GPT-5.4": "$2.50 / $15 /M",
@@ -235,6 +247,7 @@ PRICING = {
     "Gemini 2.5 Flash": "$0.30 / $2.50 /M",
     "Gemma 4 31B": "$0.14 / $0.40 /M",
     "Gemma 4 26B-A4B": "$0.13 / $0.40 /M",
+    "Grok 4.5": "$2 / $6 /M",
     "Grok 4.3": "$1.25 / $2.50 /M",
     "Grok Build 0.1": "$1 / $2 /M",
     "Grok 4.20 Beta": "$2 / $6 /M",
@@ -254,6 +267,7 @@ PRICING = {
     "Xiaomi MiMo-V2-Pro": "$1 / $3 /M",
     "ByteDance Seed 2.0": "$0.25 / $2 /M",
     "StepFun Step 3.7 Flash": "$0.20 / $1.15 /M",
+    "Tencent Hy3": "$0.14 / $0.58 /M",
     "Tencent Hy3 Preview": "Free /M",
     "Ring 2.6 1T": "Free /M",
     "Ling 2.6 1T": "Free /M",
@@ -280,6 +294,9 @@ PRICING = {
     "Nova Premier": "$2.50 / $12.50 /M",
     "Command A": "$2.50 / $10 /M",
     "IBM Granite 4.1 8B": "$0.05 / $0.10 /M",
+    "Sakana Fugu Ultra": "$5 / $30 /M",
+    "Nex AGI Nex-N2-Mini": "$0.025 / $0.10 /M",
+    "Poolside Laguna XS 2.1": "$0.06 / $0.12 /M",
     "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
     "Qwen 3.7 Max": "$1.25 / $3.75 /M",
     "Qwen 3.6 Max": "$1.04 / $6.24 /M",
@@ -311,6 +328,9 @@ INTEL_DATA = {
     "Claude Opus 4.7":         (57, 10.00, 46),
     "Claude Sonnet 4.6":       (52, 6.00, 51),
     "Claude Haiku 4.5":        (37, 2.00, 98),
+    "GPT-5.6 Sol":             (64, 11.25, None, "est"),  # AA max-mode index mapped onto the 2026-05-31 scale (1 below Fable 5)
+    "GPT-5.6 Terra":           (60, 5.63, None, "est"),   # ~GPT-5.5-class, mapped onto the 2026-05-31 scale
+    "GPT-5.6 Luna":            (56, 2.25, None, "est"),   # cheapest GPT-5.6 tier, AA max-mode mapped to the 2026-05-31 scale
     "GPT-5.5":                 (60, 11.25, None),
     "GPT-5.5 Pro":             (60, 67.50, None, "est"),  # Same model tier as GPT-5.5 xhigh; OR-blended pricing
     "GPT-5.4":                 (57, 5.63, 79),
@@ -325,6 +345,7 @@ INTEL_DATA = {
     "Gemini 2.5 Flash":        (30, 0.26, 250, "est"),  # Historical AA numbers; kept as Google Flash exception
     "Gemma 4 31B":             (39, 0.00, 35),
     "Gemma 4 26B-A4B":         (31, 0.20, None),
+    "Grok 4.5":                (59, 3.00, 90, "est"),  # AA rescaled index mapped onto the 2026-05-31 scale (Opus-class, ~2 below Opus 4.8)
     "Grok 4.20 Beta":          (49, 3.00, 163),
     "Grok 4.1 Fast":           (39, 0.28, 142),
     "Grok 3 Mini":             (32, 0.35, 207),
@@ -339,6 +360,7 @@ INTEL_DATA = {
     "Kimi K2.5":               (37, 1.20, 38),
     "GLM-5.2":                 (51, 2.15, None),
     "GLM-5":                   (50, 1.55, 68),
+    "Tencent Hy3":             (35, 0.25, None, "est"),  # AA 33.6 (current scale) nudged onto the 2026-05-31 scale
     "Xiaomi MiMo-V2-Pro":      (49, None, None),
     "Xiaomi MiMo-V2.5-Pro":    (54, 1.50, 60),
     "Ling 2.6 1T":             (34, 0.85, 68),
@@ -421,6 +443,7 @@ CATEGORIES = [
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
     ("OpenAI", [
+        ("GPT-5.6", ["GPT-5.6 Sol", "GPT-5.6 Terra", "GPT-5.6 Luna"]),
         ("GPT Pro", ["GPT-5.5 Pro"]),
         ("GPT (flagship)", ["GPT-5.5", "GPT-5.4", "GPT-5.2", "GPT-5.1", "GPT-5", "GPT-4.1"]),
         ("GPT Mini", ["GPT-5.4 Mini", "GPT-5.4 Nano", "GPT-5 Mini", "GPT-4.1 Mini"]),
@@ -432,7 +455,7 @@ CATEGORIES = [
         ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
-        ("Grok (flagship)", ["Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3"]),
+        ("Grok (flagship)", ["Grok 4.5", "Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3"]),
         ("Grok Fast", ["Grok 4.1 Fast", "Grok 4 Fast"]),
         ("Grok Build", ["Grok Build 0.1"]),
         ("Grok Mini", ["Grok 3 Mini"]),
@@ -447,7 +470,7 @@ CATEGORIES = [
         ("Xiaomi", ["Xiaomi MiMo-V2.5"]),
         ("ByteDance", ["ByteDance Seed 2.0"]),
         ("StepFun", ["StepFun Step 3.7 Flash"]),
-        ("Tencent", ["Tencent Hy3 Preview"]),
+        ("Tencent", ["Tencent Hy3", "Tencent Hy3 Preview"]),
         ("inclusionAI Ling (1T)", ["Ling 2.6 1T"]),
         ("inclusionAI Ling (Flash)", ["Ling 2.6 Flash"]),
         ("inclusionAI Ring", ["Ring 2.6 1T"]),
@@ -472,6 +495,15 @@ CATEGORIES = [
     ]),
     ("IBM", [
         ("Granite", ["IBM Granite 4.1 8B"]),
+    ]),
+    ("Sakana AI", [
+        ("Fugu", ["Sakana Fugu Ultra"]),
+    ]),
+    ("Nex AGI", [
+        ("Nex-N2", ["Nex AGI Nex-N2-Mini"]),
+    ]),
+    ("Poolside", [
+        ("Laguna", ["Poolside Laguna XS 2.1"]),
     ]),
     ("Qwen", [
         ("Qwen Max", ["Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
