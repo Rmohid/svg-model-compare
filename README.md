@@ -1,6 +1,11 @@
 # SVG Model Comparison
 
-Compares animated SVG generation across many AI models by sending the same prompt and displaying the results side by side. Non-Anthropic models are generated via OpenRouter; Claude models are generated through the Claude Max account using the local `claude` CLI.
+Compares animated SVG generation across many AI models by sending the same prompt and displaying the results side by side. Each model is served by one of four backends, chosen by the model's name:
+
+- **Claude Max CLI** — Anthropic models, via the local `claude` CLI.
+- **OpenAI (native)** — the latest GPT models (`OPENAI_DIRECT_MODELS` in `generate.py`), via OpenAI's own API.
+- **xAI / Grok (native)** — the latest Grok models (`GROK_DIRECT_MODELS`), via xAI's own API.
+- **OpenRouter** — every other model, and any native model whose key is missing at run time (it falls back automatically with a printed notice).
 
 **Live page:** https://rmohid.github.io/svg-model-compare/
 
@@ -23,7 +28,22 @@ Each card shows the model name, release date, and response time.
 
 ## Re-running
 
-Requires an [OpenRouter](https://openrouter.ai/) API key (in the `secrets` vault as `OPENROUTER_911_API_KEY`) for non-Anthropic models, and a signed-in `claude` CLI (Claude Max account) for Claude models. Export `SOPS_AGE_KEY_FILE` so the OpenRouter key can be read from the vault.
+Keys are read from the environment first, then the `secrets` vault (export `SOPS_AGE_KEY_FILE` so the vault can be read):
+
+| Backend | Key | Needed for |
+|---------|-----|-----------|
+| OpenRouter | `OPENROUTER_911_API_KEY` | all OpenRouter-served models (required) |
+| Claude Max | — (signed-in `claude` CLI) | Anthropic models |
+| OpenAI | `OPENAI_API_KEY` | the latest GPT models (optional; falls back to OpenRouter) |
+| xAI / Grok | `XAI_API_KEY` | the latest Grok models (optional; falls back to OpenRouter) |
+
+```bash
+# Route a model to a native backend by exporting its key (or `secrets set` it):
+export OPENAI_API_KEY=sk-...     # latest GPT models via OpenAI directly
+export XAI_API_KEY=xai-...       # latest Grok models via xAI directly
+```
+
+To move a model onto (or off) a native backend, edit `OPENAI_DIRECT_MODELS` / `GROK_DIRECT_MODELS` in `generate.py`. Already-cached models are not re-called, so change the map *and* remove the model from `cache.json` to regenerate it through the new backend.
 
 ```bash
 # Regenerate with cached results (only calls new/failed models)
@@ -45,4 +65,4 @@ git add -A && git commit -m "Update comparison" && git push
 
 ## Last updated
 
-February 2026
+July 2026

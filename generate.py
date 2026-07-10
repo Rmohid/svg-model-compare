@@ -13,11 +13,81 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
 import subprocess
+from functools import lru_cache
 API_KEY = os.environ.get("OPENROUTER_911_API_KEY") or subprocess.check_output(
     ["secrets", "get", "OPENROUTER_911_API_KEY"], text=True
 ).strip()
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
+
+# --- Backend selection ------------------------------------------------------
+# Four backends can serve a model's SVG, chosen by the model's display name:
+#   Claude Max CLI  -> models in CLAUDE_MAX_MODELS   (needs the `claude` CLI, Max plan)
+#   OpenAI (native) -> models in OPENAI_DIRECT_MODELS (needs OPENAI_API_KEY)
+#   xAI / Grok      -> models in GROK_DIRECT_MODELS   (needs XAI_API_KEY)
+#   OpenRouter      -> every other model             (needs OPENROUTER_911_API_KEY)
+# OpenAI and xAI both speak OpenAI's /chat/completions schema, so a native call
+# is just OpenRouter's call pointed at a different base URL + key. If a native
+# key is missing at run time the model falls back to OpenRouter (with a notice),
+# so adding a model to a DIRECT map never breaks a machine without that key.
+#
+# Keys are read from the environment first, then the `secrets` vault. Provide via:
+#   export OPENAI_API_KEY=sk-...      # or: secrets set OPENAI_API_KEY sk-...
+#   export XAI_API_KEY=xai-...        # or: secrets set XAI_API_KEY xai-...
+#
+# Quick test -- generate one SVG from a new model through its native backend:
+#   python3 -c "import generate as g; \
+#     n,svg,el,err,_ = g.call_openai('GPT-5.5','gpt-5.5',g.get_openai_key()); \
+#     print(err or svg[:80])"
+#   python3 -c "import generate as g; \
+#     n,svg,el,err,_ = g.call_grok('Grok 4.3','grok-4.3',g.get_grok_key()); \
+#     print(err or svg[:80])"
+# Each prints the first 80 chars of the returned <svg ...> (or the error string).
+OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
+XAI_API_URL = "https://api.x.ai/v1/chat/completions"
+
+# Latest OpenAI models routed to OpenAI's own API instead of OpenRouter.
+# display name (must match MODELS) -> native OpenAI model id
+OPENAI_DIRECT_MODELS = {
+    "GPT-5.5 Pro":  "gpt-5.5-pro",
+    "GPT-5.5":      "gpt-5.5",
+    "GPT-5.4":      "gpt-5.4",
+    "GPT-5.4 Mini": "gpt-5.4-mini",
+    "GPT-5.4 Nano": "gpt-5.4-nano",
+}
+
+# Latest Grok models routed to xAI's own API instead of OpenRouter.
+# display name (must match MODELS) -> native xAI model id
+GROK_DIRECT_MODELS = {
+    "Grok 4.3":        "grok-4.3",
+    "Grok Build 0.1":  "grok-build-0.1",
+    "Grok 4.20 Beta":  "grok-4.20-beta",
+    "Grok 4.1 Fast":   "grok-4.1-fast",
+}
+
+
+@lru_cache(maxsize=None)
+def _resolve_key(env_name, secret_name):
+    """API key from the environment first, then the `secrets` vault. None if neither
+    has it -- callers treat None as 'this backend is unavailable' and fall back."""
+    val = os.environ.get(env_name)
+    if val:
+        return val
+    try:
+        out = subprocess.check_output(
+            ["secrets", "get", secret_name], text=True, stderr=subprocess.DEVNULL
+        ).strip()
+        return out or None
+    except Exception:
+        return None
+
+
+def get_openai_key():
+    return _resolve_key("OPENAI_API_KEY", "OPENAI_API_KEY")
+
+
+def get_grok_key():
+    return _resolve_key("XAI_API_KEY", "XAI_API_KEY")
 
 # Anthropic models are generated through the Claude Max account via the local
 # `claude` CLI (-p print mode) instead of OpenRouter. Maps the display name used
@@ -622,12 +692,90 @@ def call_claude_max(name, cli_model):
         return name, None, elapsed, str(e)
 
 
+def _openai_compatible(url, api_key, model_id, token_param="max_tokens", temperature=0.7):
+    """One OpenAI-style /chat/completions call. Shared by the native OpenAI and
+    xAI/Grok backends -- xAI's API is OpenAI-compatible, so only the base URL and
+    key differ. Returns (svg, elapsed, error, usage).
+
+    token_param varies by vendor: OpenAI's newer reasoning models (GPT-5.x) require
+    'max_completion_tokens'; xAI still accepts the classic 'max_tokens'. Pass
+    temperature=None to omit it entirely -- OpenAI's GPT-5/o-series reject any
+    non-default temperature."""
+    start = time.time()
+    payload_dict = {
+        "model": model_id,
+        "messages": [{"role": "user", "content": PROMPT}],
+        token_param: DEFAULT_MAX_TOKENS,
+    }
+    if temperature is not None:
+        payload_dict["temperature"] = temperature
+    payload = json.dumps(payload_dict).encode()
+
+    req = Request(url, data=payload, method="POST")
+    req.add_header("Authorization", f"Bearer {api_key}")
+    req.add_header("Content-Type", "application/json")
+
+    try:
+        with urlopen(req, timeout=600) as resp:
+            data = json.loads(resp.read())
+        elapsed = time.time() - start
+        usage = data.get("usage")
+        choice = data["choices"][0]
+        if choice.get("finish_reason") == "length":
+            return None, elapsed, "Truncated: hit token limit before finishing", usage
+        msg = choice["message"]
+        content = msg.get("content") or msg.get("reasoning") or ""
+        svg = extract_svg(content)
+        if svg:
+            return svg, elapsed, None, usage
+        return None, elapsed, "No usable <svg> in response", usage
+    except HTTPError as e:
+        elapsed = time.time() - start
+        body = e.read().decode() if e.fp else ""
+        return None, elapsed, f"HTTP {e.code}: {body[:200]}", None
+    except Exception as e:
+        elapsed = time.time() - start
+        return None, elapsed, str(e), None
+
+
+def call_openai(name, model_id, api_key):
+    """Generate via OpenAI's native API. Returns (name, svg, elapsed, error, usage)."""
+    print(f"  [{name}] Requesting via OpenAI ({model_id})...", flush=True)
+    svg, elapsed, error, usage = _openai_compatible(
+        OPENAI_API_URL, api_key, model_id, token_param="max_completion_tokens", temperature=None
+    )
+    tail = f"({len(svg)} chars)" if svg else f"failed: {error}"
+    print(f"  [{name}] Done in {elapsed:.1f}s {tail}", flush=True)
+    return name, svg, elapsed, error, usage
+
+
+def call_grok(name, model_id, api_key):
+    """Generate via xAI's native (OpenAI-compatible) API. Returns (name, svg, elapsed, error, usage)."""
+    print(f"  [{name}] Requesting via xAI/Grok ({model_id})...", flush=True)
+    svg, elapsed, error, usage = _openai_compatible(XAI_API_URL, api_key, model_id)
+    tail = f"({len(svg)} chars)" if svg else f"failed: {error}"
+    print(f"  [{name}] Done in {elapsed:.1f}s {tail}", flush=True)
+    return name, svg, elapsed, error, usage
+
+
 def call_model(name, model_id):
     """Dispatch a model to its backend and normalize to (name, svg, elapsed, error, usage).
     Anthropic models go through the Claude Max account (`claude` CLI, no usage data);
-    everything else uses OpenRouter."""
+    models in the OpenAI/Grok DIRECT maps use those vendors' native APIs when their
+    key is available; everything else (and any direct model missing its key) uses
+    OpenRouter."""
     if name in CLAUDE_MAX_MODELS:
         return call_claude_max(name, CLAUDE_MAX_MODELS[name]) + (None,)
+    if name in OPENAI_DIRECT_MODELS:
+        key = get_openai_key()
+        if key:
+            return call_openai(name, OPENAI_DIRECT_MODELS[name], key)
+        print(f"  [{name}] No OPENAI_API_KEY; falling back to OpenRouter", flush=True)
+    if name in GROK_DIRECT_MODELS:
+        key = get_grok_key()
+        if key:
+            return call_grok(name, GROK_DIRECT_MODELS[name], key)
+        print(f"  [{name}] No XAI_API_KEY; falling back to OpenRouter", flush=True)
     return call_openrouter(name, model_id)
 
 
@@ -1158,7 +1306,7 @@ def build_html(results, model_dates):
 <h1>Animated SVG: Pelican Riding a Bicycle</h1>
 <p class="subtitle">
     Same prompt sent to {total} models ({success} returned valid SVG)<br>
-    Non-Anthropic models via OpenRouter; Claude models via the Claude Max account<br>
+    Claude via Claude Max; latest OpenAI &amp; Grok via their native APIs; others via OpenRouter<br>
     Generated {time.strftime('%Y-%m-%d %H:%M')}
 </p>
 <div class="view-controls">
