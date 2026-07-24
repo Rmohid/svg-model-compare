@@ -43,6 +43,8 @@ CLAUDE_MAX_MODELS = {
 # maps to the model's native max reasoning mode.
 REASONING_EFFORT_OVERRIDES = {
     "GLM-5.2": "xhigh",
+    "Gemini 3.6 Flash": "high",
+    "Inkling": "xhigh",
 }
 
 # OpenRouter's unified reasoning.effort can claim up to ~95% of max_tokens for
@@ -118,6 +120,7 @@ MODELS = [
     ("o4 Mini", "openai/o4-mini", "Apr 2025"),
     # --- Google ---
     ("Gemini 3.1 Pro", "google/gemini-3.1-pro-preview", "Feb 2026"),
+    ("Gemini 3.6 Flash", "google/gemini-3.6-flash", "Jul 2026"),
     ("Gemini 3.5 Flash", "google/gemini-3.5-flash", "May 2026"),
     ("Gemini 3.1 Flash Lite", "google/gemini-3.1-flash-lite-preview", "Mar 2026"),
     ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),
@@ -160,6 +163,7 @@ MODELS = [
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
     ("DeepSeek R1", "deepseek/deepseek-r1", "Jan 2025"),                 # 6mo ago SOTA
+    ("Kimi K3", "moonshotai/kimi-k3", "Jul 2026"),
     ("Kimi K2.7 Code", "moonshotai/kimi-k2.7-code", "Jun 2026"),
     ("Kimi K2.6", "moonshotai/kimi-k2.6", "Apr 2026"),
     ("Kimi K2.5", "moonshotai/kimi-k2.5", "Jan 2026"),
@@ -186,6 +190,7 @@ MODELS = [
     ("Sakana Fugu Ultra", "sakana/fugu-ultra", "Jun 2026"),
     ("Nex AGI Nex-N2-Mini", "nex-agi/nex-n2-mini", "Jun 2026"),
     ("Poolside Laguna XS 2.1", "poolside/laguna-xs-2.1", "Jul 2026"),
+    ("Inkling", "thinkingmachines/inkling", "Jul 2026"),
     # --- Qwen: full model then smaller quantizations ---
     ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
@@ -239,6 +244,7 @@ PRICING = {
     "o3": "$2 / $8 /M",
     "o4 Mini": "$1.10 / $4.40 /M",
     "Gemini 3.1 Pro": "$2 / $12 /M",
+    "Gemini 3.6 Flash": "$1.50 / $7.50 /M",
     "Gemini 3.5 Flash": "$1.50 / $9 /M",
     "Gemini 3.1 Flash Lite": "$0.25 / $1.50 /M",
     "Gemini 3 Pro": "$2 / $12 /M",
@@ -278,6 +284,7 @@ PRICING = {
     "DeepSeek V3.2": "$0.25 / $0.40 /M",
     "DeepSeek V3.1": "$0.19 / $0.87 /M",
     "DeepSeek R1": "$0.70 / $2.50 /M",
+    "Kimi K3": "$3 / $15 /M",
     "Kimi K2.7 Code": "$0.61 / $3.07 /M",
     "Kimi K2.6": "$0.74 / $4.66 /M",
     "Kimi K2.5": "$0.45 / $2.20 /M",
@@ -297,6 +304,7 @@ PRICING = {
     "Sakana Fugu Ultra": "$5 / $30 /M",
     "Nex AGI Nex-N2-Mini": "$0.025 / $0.10 /M",
     "Poolside Laguna XS 2.1": "$0.06 / $0.12 /M",
+    "Inkling": "$1 / $4.05 /M",
     "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
     "Qwen 3.7 Max": "$1.25 / $3.75 /M",
     "Qwen 3.6 Max": "$1.04 / $6.24 /M",
@@ -338,6 +346,7 @@ INTEL_DATA = {
     "GPT-5.4 Nano":            (44, 0.46, 157),
     "o3":                      (38, 3.50, 93),
     "Gemini 3.1 Pro":          (57, 4.50, 130),
+    "Gemini 3.6 Flash":        (55, 1.16, 244),  # AA raw 50, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
     "Gemini 3.5 Flash":        (55, 3.38, 176),
     "Gemini 3.1 Flash Lite":   (34, 0.56, 321),
     "Gemini 3 Pro":            (41, 4.50, None),
@@ -355,7 +364,8 @@ INTEL_DATA = {
     "DeepSeek V4 Flash":       (47, 0.17, 84),
     "DeepSeek V3.2":           (42, 0.32, 63),
     "DeepSeek V3.2 Speciale":  (29, None, None),
-    "Kimi K2.7 Code":          (42, 1.23, None),
+    "Kimi K3":                 (62, 2.31, 33),  # AA raw 57, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
+"Kimi K2.7 Code":          (42, 1.23, None),
     "Kimi K2.6":               (54, 1.71, 112),
     "Kimi K2.5":               (37, 1.20, 38),
     "GLM-5.2":                 (51, 2.15, None),
@@ -379,6 +389,7 @@ INTEL_DATA = {
     "Qwen 3.5 122B":           (42, 1.10, 142),
     "Qwen 3.5 35B":            (31, 0.69, 154),
     "Qwen 3.5 9B":             (32, 0.11, 48),
+    "Inkling":                 (46, 1.10, 65),  # AA raw 41, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
 }
 
 # Models marked Free on OpenRouter snap to this x-value so log scale still works.
@@ -405,6 +416,7 @@ def model_provider(name):
     if name.startswith("Tencent"): return "Tencent"
     if name.startswith("ByteDance"): return "ByteDance"
     if name.startswith("StepFun"): return "StepFun"
+    if name.startswith("Inkling"): return "Thinking Machines"
     return "Other"
 
 PROVIDER_COLORS = {
@@ -430,6 +442,7 @@ PROVIDER_COLORS = {
     "Tencent":     "#00A1E0",  # sky blue
     "ByteDance":   "#FF3366",  # rose
     "StepFun":     "#14B8A6",  # teal
+    "Thinking Machines": "#F59E0B",  # amber
     "Other":       "#888888",
 }
 
@@ -451,7 +464,7 @@ CATEGORIES = [
     ]),
     ("Google", [
         ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
-        ("Gemini Flash", ["Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
+        ("Gemini Flash", ["Gemini 3.6 Flash", "Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
         ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
@@ -463,7 +476,7 @@ CATEGORIES = [
     ("Chinese Models", [
         ("DeepSeek", ["DeepSeek V4 Pro", "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
         ("DeepSeek Flash", ["DeepSeek V4 Flash"]),
-        ("Kimi", ["Kimi K2.7 Code", "Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
+        ("Kimi", ["Kimi K3", "Kimi K2.7 Code", "Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
         ("MiniMax", ["MiniMax M3", "MiniMax M2.7", "MiniMax M2.5"]),
         ("GLM", ["GLM-5.2", "GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5"]),
         ("Xiaomi Pro", ["Xiaomi MiMo-V2.5-Pro", "Xiaomi MiMo-V2-Pro"]),
@@ -504,6 +517,9 @@ CATEGORIES = [
     ]),
     ("Poolside", [
         ("Laguna", ["Poolside Laguna XS 2.1"]),
+    ]),
+    ("Thinking Machines", [
+        ("Inkling", ["Inkling"]),
     ]),
     ("Qwen", [
         ("Qwen Max", ["Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
