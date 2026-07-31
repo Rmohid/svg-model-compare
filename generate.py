@@ -68,6 +68,20 @@ REASONING_EFFORT_OVERRIDES = {
     "Gemini 3.6 Flash": "high",
     "Inkling": "xhigh",
     "DeepSeek V4 Flash 0731": "xhigh",
+    # GPT-5.6 family: "max" is the real ceiling, and nothing below it thinks much.
+    # Probed 2026-07-31 (reasoning tokens on a reasoning-inducing prompt):
+    #   Sol   default 25  | high 121 | xhigh 138 | max 4142
+    #   Terra default 59  | high 119 | xhigh 201 | max 5178
+    #   Luna  default 54  | high 219 | xhigh 2070 | max 3624
+    # Note xhigh is nearly a no-op on Sol/Terra -- don't assume the GLM-5.2
+    # convention (xhigh == max) carries over to other providers.
+    "GPT-5.6 Sol": "max",
+    "GPT-5.6 Terra": "max",
+    "GPT-5.6 Luna": "max",
+    # Probed 2026-07-31: 0 reasoning tokens at the provider default, 907 at "max"
+    # -- it does no thinking at all unless asked. (Its sibling Gemini 3.6 Flash
+    # tops out at "high"; 3.5 Flash and 3.5 Flash Lite differ from each other.)
+    "Gemini 3.5 Flash Lite": "max",
 }
 
 # OpenRouter's unified reasoning.effort can claim up to ~95% of max_tokens for
