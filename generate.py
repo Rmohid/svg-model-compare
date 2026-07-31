@@ -123,6 +123,12 @@ Output ONLY the SVG code, nothing else. No markdown fences, no explanation.
 Start with <svg and end with </svg>."""
 
 # (display_name, model_id, release_date_str)
+#
+# A trailing "# DELISTED <date>" marks a model OpenRouter no longer serves. Such
+# rows are kept deliberately: this site is a historical record, and the cache is
+# keyed by display name (not model_id), so they keep rendering for free. Never
+# delete one, and never spend a probe call re-checking it — the marker is the
+# record that it was already checked and found gone.
 MODELS = [
     # --- Anthropic ---
     ("Claude Opus 5", "anthropic/claude-opus-5", "Jul 2026"),
@@ -162,7 +168,7 @@ MODELS = [
     ("Gemini 3.5 Flash Lite", "google/gemini-3.5-flash-lite", "Jul 2026"),
     ("Gemini 3.5 Flash", "google/gemini-3.5-flash", "May 2026"),
     ("Gemini 3.1 Flash Lite", "google/gemini-3.1-flash-lite-preview", "Mar 2026"),
-    ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),
+    ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),        # DELISTED 2026-07-31
     ("Gemini 3 Flash", "google/gemini-3-flash-preview", "Dec 2025"),
     ("Gemini 2.5 Pro", "google/gemini-2.5-pro", "Jun 2025"),
     ("Gemini 2.5 Flash", "google/gemini-2.5-flash", "Jun 2025"),
@@ -174,11 +180,11 @@ MODELS = [
     ("Grok 4.3", "x-ai/grok-4.3", "Apr 2026"),
     ("Grok Build 0.1", "x-ai/grok-build-0.1", "May 2026"),
     ("Grok 4.20 Beta", "x-ai/grok-4.20-beta", "Mar 2026"),
-    ("Grok 4", "x-ai/grok-4", "Jul 2025"),
-    ("Grok 4.1 Fast", "x-ai/grok-4.1-fast", "Nov 2025"),
-    ("Grok 4 Fast", "x-ai/grok-4-fast", "Sep 2025"),
-    ("Grok 3", "x-ai/grok-3", "Jun 2025"),
-    ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),                    # 6mo ago fast
+    ("Grok 4", "x-ai/grok-4", "Jul 2025"),                              # DELISTED 2026-07-31
+    ("Grok 4.1 Fast", "x-ai/grok-4.1-fast", "Nov 2025"),                # DELISTED 2026-07-31
+    ("Grok 4 Fast", "x-ai/grok-4-fast", "Sep 2025"),                    # DELISTED 2026-07-31
+    ("Grok 3", "x-ai/grok-3", "Jun 2025"),                              # DELISTED 2026-07-31
+    ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),                    # DELISTED 2026-07-31; 6mo ago fast
     # --- Chinese Models ---
     ("MiniMax M3", "minimax/minimax-m3", "Jun 2026"),
     ("MiniMax M2.7", "minimax/minimax-m2.7", "Mar 2026"),
@@ -188,18 +194,18 @@ MODELS = [
     ("GLM-5 Turbo", "z-ai/glm-5-turbo", "Mar 2026"),
     ("Xiaomi MiMo-V2.5-Pro", "xiaomi/mimo-v2.5-pro", "Apr 2026"),
     ("Xiaomi MiMo-V2.5", "xiaomi/mimo-v2.5", "Apr 2026"),
-    ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),
+    ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),           # DELISTED 2026-07-31
     ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
     ("StepFun Step 3.7 Flash", "stepfun/step-3.7-flash", "May 2026"),
     ("Tencent Hy3", "tencent/hy3", "Jul 2026"),
-    ("Tencent Hy3 Preview", "tencent/hy3-preview:free", "Apr 2026"),
-    ("Ring 2.6 1T", "inclusionai/ring-2.6-1t:free", "May 2026"),
-    ("Ling 2.6 1T", "inclusionai/ling-2.6-1t:free", "Apr 2026"),
-    ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash:free", "Apr 2026"),
+    ("Tencent Hy3 Preview", "tencent/hy3-preview", "Apr 2026"),          # free tier retired 2026-07
+    ("Ring 2.6 1T", "inclusionai/ring-2.6-1t", "May 2026"),              # free tier retired 2026-07
+    ("Ling 2.6 1T", "inclusionai/ling-2.6-1t", "Apr 2026"),              # free tier retired 2026-07
+    ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash", "Apr 2026"),        # free tier retired 2026-07
     ("DeepSeek V4 Pro", "deepseek/deepseek-v4-pro", "Apr 2026"),
     ("DeepSeek V4 Flash 0731", "deepseek/deepseek-v4-flash-0731", "Jul 2026"),
     ("DeepSeek V4 Flash", "deepseek/deepseek-v4-flash", "Apr 2026"),
-    ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),
+    ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),  # DELISTED 2026-07-31
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
     ("DeepSeek R1", "deepseek/deepseek-r1", "Jan 2025"),                 # 6mo ago SOTA
@@ -236,7 +242,7 @@ MODELS = [
     ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
     ("Qwen 3.6 Max", "qwen/qwen3.6-max-preview", "Apr 2026"),
-    ("Qwen 3.6 Plus", "qwen/qwen3.6-plus:free", "Apr 2026"),
+    ("Qwen 3.6 Plus", "qwen/qwen3.6-plus", "Apr 2026"),                 # free tier retired 2026-07
     ("Qwen 3.6 Flash", "qwen/qwen3.6-flash", "Apr 2026"),
     ("Qwen 3.6 35B", "qwen/qwen3.6-35b-a3b", "Apr 2026"),
     ("Qwen 3.6 27B", "qwen/qwen3.6-27b", "Apr 2026"),
@@ -317,10 +323,10 @@ PRICING = {
     "ByteDance Seed 2.0": "$0.25 / $2 /M",
     "StepFun Step 3.7 Flash": "$0.20 / $1.15 /M",
     "Tencent Hy3": "$0.14 / $0.58 /M",
-    "Tencent Hy3 Preview": "Free /M",
-    "Ring 2.6 1T": "Free /M",
-    "Ling 2.6 1T": "Free /M",
-    "Ling 2.6 Flash": "Free /M",
+    "Tencent Hy3 Preview": "$0.063 / $0.21 /M",
+    "Ring 2.6 1T": "$0.075 / $0.625 /M",
+    "Ling 2.6 1T": "$0.075 / $0.625 /M",
+    "Ling 2.6 Flash": "$0.01 / $0.03 /M",
     "DeepSeek V4 Pro": "$1.74 / $3.48 /M",
     "DeepSeek V4 Flash 0731": "$0.14 / $0.28 /M",
     "DeepSeek V4 Flash": "$0.14 / $0.28 /M",
@@ -353,7 +359,7 @@ PRICING = {
     "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
     "Qwen 3.7 Max": "$1.25 / $3.75 /M",
     "Qwen 3.6 Max": "$1.04 / $6.24 /M",
-    "Qwen 3.6 Plus": "Free /M",
+    "Qwen 3.6 Plus": "$0.325 / $1.95 /M",
     "Qwen 3.6 Flash": "$0.25 / $1.50 /M",
     "Qwen 3.6 35B": "$0.15 / $1 /M",
     "Qwen 3.6 27B": "$0.32 / $3.20 /M",
