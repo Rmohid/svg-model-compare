@@ -26,6 +26,7 @@ CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
 # claude-fable-5, claude-sonnet-5, opus-4-8, sonnet-4-6, haiku-4-5 all serve;
 # opus-4-8-fast does not.
 CLAUDE_MAX_MODELS = {
+    "Claude Opus 5":     "claude-opus-5",
     "Claude Fable 5":    "claude-fable-5",
     "Claude Sonnet 5":   "claude-sonnet-5",
     "Claude Opus 4.8":   "claude-opus-4-8",
@@ -88,6 +89,7 @@ Start with <svg and end with </svg>."""
 # (display_name, model_id, release_date_str)
 MODELS = [
     # --- Anthropic ---
+    ("Claude Opus 5", "anthropic/claude-opus-5", "Jul 2026"),
     ("Claude Fable 5", "anthropic/claude-fable-5", "Jun 2026"),
     ("Claude Sonnet 5", "anthropic/claude-sonnet-5", "Jun 2026"),
     ("Claude Opus 4.8", "anthropic/claude-opus-4.8", "May 2026"),
@@ -121,6 +123,7 @@ MODELS = [
     # --- Google ---
     ("Gemini 3.1 Pro", "google/gemini-3.1-pro-preview", "Feb 2026"),
     ("Gemini 3.6 Flash", "google/gemini-3.6-flash", "Jul 2026"),
+    ("Gemini 3.5 Flash Lite", "google/gemini-3.5-flash-lite", "Jul 2026"),
     ("Gemini 3.5 Flash", "google/gemini-3.5-flash", "May 2026"),
     ("Gemini 3.1 Flash Lite", "google/gemini-3.1-flash-lite-preview", "Mar 2026"),
     ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),
@@ -192,6 +195,7 @@ MODELS = [
     ("Poolside Laguna XS 2.1", "poolside/laguna-xs-2.1", "Jul 2026"),
     ("Inkling", "thinkingmachines/inkling", "Jul 2026"),
     # --- Qwen: full model then smaller quantizations ---
+    ("Qwen 3.7 Flash", "qwen/qwen3.7-flash", "Jul 2026"),
     ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
     ("Qwen 3.6 Max", "qwen/qwen3.6-max-preview", "Apr 2026"),
@@ -214,6 +218,7 @@ MODELS = [
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
 PRICING = {
+    "Claude Opus 5": "$5 / $25 /M",
     "Claude Fable 5": "$10 / $50 /M",
     "Claude Sonnet 5": "$3 / $15 /M",
     "Claude Opus 4.8": "$5 / $25 /M",
@@ -245,6 +250,7 @@ PRICING = {
     "o4 Mini": "$1.10 / $4.40 /M",
     "Gemini 3.1 Pro": "$2 / $12 /M",
     "Gemini 3.6 Flash": "$1.50 / $7.50 /M",
+    "Gemini 3.5 Flash Lite": "$0.30 / $2.50 /M",
     "Gemini 3.5 Flash": "$1.50 / $9 /M",
     "Gemini 3.1 Flash Lite": "$0.25 / $1.50 /M",
     "Gemini 3 Pro": "$2 / $12 /M",
@@ -305,6 +311,7 @@ PRICING = {
     "Nex AGI Nex-N2-Mini": "$0.025 / $0.10 /M",
     "Poolside Laguna XS 2.1": "$0.06 / $0.12 /M",
     "Inkling": "$1 / $4.05 /M",
+    "Qwen 3.7 Flash": "$0.03 / $0.13 /M",
     "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
     "Qwen 3.7 Max": "$1.25 / $3.75 /M",
     "Qwen 3.6 Max": "$1.04 / $6.24 /M",
@@ -330,6 +337,7 @@ PRICING = {
 # Models not in this dict are simply not plotted on the Chart view.
 AA_SNAPSHOT_DATE = "2026-05-31"
 INTEL_DATA = {
+    "Claude Opus 5":           (66, 10.00, 54),  # AA raw 61 (max effort), mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61); narrowly tops Fable 5 per AA 2026-07-25
     "Claude Fable 5":          (65, 20.00, None, "est"),  # AA rescaled index mapped onto the 2026-05-31 scale (+4 vs Opus 4.8)
     "Claude Sonnet 5":         (58, 6.00, 79, "est"),     # AA rescaled index mapped onto the 2026-05-31 scale (+6 vs Sonnet 4.6)
     "Claude Opus 4.8":         (61, 10.00, 56),
@@ -347,6 +355,7 @@ INTEL_DATA = {
     "o3":                      (38, 3.50, 93),
     "Gemini 3.1 Pro":          (57, 4.50, 130),
     "Gemini 3.6 Flash":        (55, 1.16, 244),  # AA raw 50, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
+    "Gemini 3.5 Flash Lite":   (41, 0.85, 350),  # AA raw 36 (high effort), mapped +5 vs Opus 4.8 anchor
     "Gemini 3.5 Flash":        (55, 3.38, 176),
     "Gemini 3.1 Flash Lite":   (34, 0.56, 321),
     "Gemini 3 Pro":            (41, 4.50, None),
@@ -451,7 +460,7 @@ PROVIDER_COLORS = {
 CATEGORIES = [
     ("Anthropic", [
         ("Claude Fable", ["Claude Fable 5"]),
-        ("Claude Opus", ["Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
+        ("Claude Opus", ["Claude Opus 5", "Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
         ("Claude Sonnet", ["Claude Sonnet 5", "Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
@@ -464,7 +473,7 @@ CATEGORIES = [
     ]),
     ("Google", [
         ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
-        ("Gemini Flash", ["Gemini 3.6 Flash", "Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
+        ("Gemini Flash", ["Gemini 3.6 Flash", "Gemini 3.5 Flash Lite", "Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
         ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
@@ -524,7 +533,7 @@ CATEGORIES = [
     ("Qwen", [
         ("Qwen Max", ["Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
         ("Qwen Plus", ["Qwen 3.7 Plus", "Qwen 3.6 Plus"]),
-        ("Qwen Flash", ["Qwen 3.6 Flash"]),
+        ("Qwen Flash", ["Qwen 3.7 Flash", "Qwen 3.6 Flash"]),
         ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
         ("Qwen 35B", ["Qwen 3.6 35B", "Qwen 3.5 35B"]),
         ("Qwen 27-32B", ["Qwen 3.6 27B", "Qwen 3.5 27B", "Qwen3 32B"]),
