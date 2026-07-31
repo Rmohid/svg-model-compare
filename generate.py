@@ -192,13 +192,15 @@ MODELS = [
     ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
     ("StepFun Step 3.7 Flash", "stepfun/step-3.7-flash", "May 2026"),
     ("Tencent Hy3", "tencent/hy3", "Jul 2026"),
-    ("Tencent Hy3 Preview", "tencent/hy3-preview:free", "Apr 2026"),
-    ("Ring 2.6 1T", "inclusionai/ring-2.6-1t:free", "May 2026"),
-    ("Ling 2.6 1T", "inclusionai/ling-2.6-1t:free", "Apr 2026"),
-    ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash:free", "Apr 2026"),
+    ("Tencent Hy3 Preview", "tencent/hy3-preview", "Apr 2026"),          # free tier retired 2026-07
+    ("Ring 2.6 1T", "inclusionai/ring-2.6-1t", "May 2026"),              # free tier retired 2026-07
+    ("Ling 2.6 1T", "inclusionai/ling-2.6-1t", "Apr 2026"),              # free tier retired 2026-07
+    ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash", "Apr 2026"),        # free tier retired 2026-07
     ("DeepSeek V4 Pro", "deepseek/deepseek-v4-pro", "Apr 2026"),
     ("DeepSeek V4 Flash 0731", "deepseek/deepseek-v4-flash-0731", "Jul 2026"),
     ("DeepSeek V4 Flash", "deepseek/deepseek-v4-flash", "Apr 2026"),
+    # DELISTED 2026-07-31: OpenRouter has no endpoints for this ID and no successor
+    # exists. Cache-only historical entry — do not probe it, any API call 404s.
     ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
@@ -236,7 +238,7 @@ MODELS = [
     ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
     ("Qwen 3.6 Max", "qwen/qwen3.6-max-preview", "Apr 2026"),
-    ("Qwen 3.6 Plus", "qwen/qwen3.6-plus:free", "Apr 2026"),
+    ("Qwen 3.6 Plus", "qwen/qwen3.6-plus", "Apr 2026"),                 # free tier retired 2026-07
     ("Qwen 3.6 Flash", "qwen/qwen3.6-flash", "Apr 2026"),
     ("Qwen 3.6 35B", "qwen/qwen3.6-35b-a3b", "Apr 2026"),
     ("Qwen 3.6 27B", "qwen/qwen3.6-27b", "Apr 2026"),
@@ -317,10 +319,10 @@ PRICING = {
     "ByteDance Seed 2.0": "$0.25 / $2 /M",
     "StepFun Step 3.7 Flash": "$0.20 / $1.15 /M",
     "Tencent Hy3": "$0.14 / $0.58 /M",
-    "Tencent Hy3 Preview": "Free /M",
-    "Ring 2.6 1T": "Free /M",
-    "Ling 2.6 1T": "Free /M",
-    "Ling 2.6 Flash": "Free /M",
+    "Tencent Hy3 Preview": "$0.063 / $0.21 /M",
+    "Ring 2.6 1T": "$0.075 / $0.625 /M",
+    "Ling 2.6 1T": "$0.075 / $0.625 /M",
+    "Ling 2.6 Flash": "$0.01 / $0.03 /M",
     "DeepSeek V4 Pro": "$1.74 / $3.48 /M",
     "DeepSeek V4 Flash 0731": "$0.14 / $0.28 /M",
     "DeepSeek V4 Flash": "$0.14 / $0.28 /M",
@@ -353,7 +355,7 @@ PRICING = {
     "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
     "Qwen 3.7 Max": "$1.25 / $3.75 /M",
     "Qwen 3.6 Max": "$1.04 / $6.24 /M",
-    "Qwen 3.6 Plus": "Free /M",
+    "Qwen 3.6 Plus": "$0.325 / $1.95 /M",
     "Qwen 3.6 Flash": "$0.25 / $1.50 /M",
     "Qwen 3.6 35B": "$0.15 / $1 /M",
     "Qwen 3.6 27B": "$0.32 / $3.20 /M",
