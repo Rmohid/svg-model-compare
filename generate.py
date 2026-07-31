@@ -19,6 +19,27 @@ API_KEY = os.environ.get("OPENROUTER_911_API_KEY") or subprocess.check_output(
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
 
+# Per-model OpenRouter API key overrides (secret name -> fetched via `secrets get`).
+# Use when OPENROUTER_911_API_KEY's account-level privacy/guardrail settings block a
+# model's only provider. Confirmed 2026-07-31: deepseek/deepseek-v4-flash-0731 404s
+# on the 911 key ("No endpoints available matching your guardrail restrictions and
+# data policy") but serves fine (provider: DeepSeek) on OPENROUTER_LLM_WIKI_KEY.
+OPENROUTER_KEY_OVERRIDES = {
+    "DeepSeek V4 Flash 0731": "OPENROUTER_LLM_WIKI_KEY",
+}
+_override_key_cache = {}
+
+
+def api_key_for(name):
+    secret_name = OPENROUTER_KEY_OVERRIDES.get(name)
+    if not secret_name:
+        return API_KEY
+    if secret_name not in _override_key_cache:
+        _override_key_cache[secret_name] = subprocess.check_output(
+            ["secrets", "get", secret_name], text=True
+        ).strip()
+    return _override_key_cache[secret_name]
+
 # Anthropic models are generated through the Claude Max account via the local
 # `claude` CLI (-p print mode) instead of OpenRouter. Maps the display name used
 # in MODELS -> the CLI `--model` id. Any Claude model NOT listed here still falls
@@ -46,6 +67,7 @@ REASONING_EFFORT_OVERRIDES = {
     "GLM-5.2": "xhigh",
     "Gemini 3.6 Flash": "high",
     "Inkling": "xhigh",
+    "DeepSeek V4 Flash 0731": "xhigh",
 }
 
 # OpenRouter's unified reasoning.effort can claim up to ~95% of max_tokens for
@@ -161,6 +183,7 @@ MODELS = [
     ("Ling 2.6 1T", "inclusionai/ling-2.6-1t:free", "Apr 2026"),
     ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash:free", "Apr 2026"),
     ("DeepSeek V4 Pro", "deepseek/deepseek-v4-pro", "Apr 2026"),
+    ("DeepSeek V4 Flash 0731", "deepseek/deepseek-v4-flash-0731", "Jul 2026"),
     ("DeepSeek V4 Flash", "deepseek/deepseek-v4-flash", "Apr 2026"),
     ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
@@ -285,6 +308,7 @@ PRICING = {
     "Ling 2.6 1T": "Free /M",
     "Ling 2.6 Flash": "Free /M",
     "DeepSeek V4 Pro": "$1.74 / $3.48 /M",
+    "DeepSeek V4 Flash 0731": "$0.14 / $0.28 /M",
     "DeepSeek V4 Flash": "$0.14 / $0.28 /M",
     "DeepSeek V3.2 Speciale": "$0.40 / $1.20 /M",
     "DeepSeek V3.2": "$0.25 / $0.40 /M",
@@ -370,6 +394,7 @@ INTEL_DATA = {
     "MiniMax M3":              (44, 1.05, 89),
     "MiniMax M2.7":            (50, 0.53, 51),
     "DeepSeek V4 Pro":         (52, 2.17, 33),
+    "DeepSeek V4 Flash 0731":  (55, 0.17, 114),  # AA raw 50, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
     "DeepSeek V4 Flash":       (47, 0.17, 84),
     "DeepSeek V3.2":           (42, 0.32, 63),
     "DeepSeek V3.2 Speciale":  (29, None, None),
@@ -484,7 +509,7 @@ CATEGORIES = [
     ]),
     ("Chinese Models", [
         ("DeepSeek", ["DeepSeek V4 Pro", "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
-        ("DeepSeek Flash", ["DeepSeek V4 Flash"]),
+        ("DeepSeek Flash", ["DeepSeek V4 Flash 0731", "DeepSeek V4 Flash"]),
         ("Kimi", ["Kimi K3", "Kimi K2.7 Code", "Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
         ("MiniMax", ["MiniMax M3", "MiniMax M2.7", "MiniMax M2.5"]),
         ("GLM", ["GLM-5.2", "GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5"]),
@@ -582,7 +607,7 @@ def _openrouter_attempt(name, model_id, has_reasoning_override):
     payload = json.dumps(payload_dict).encode()
 
     req = Request(API_URL, data=payload, method="POST")
-    req.add_header("Authorization", f"Bearer {API_KEY}")
+    req.add_header("Authorization", f"Bearer {api_key_for(name)}")
     req.add_header("Content-Type", "application/json")
     req.add_header("HTTP-Referer", "https://localhost")
 

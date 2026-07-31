@@ -252,9 +252,9 @@
 <body>
 <h1>Animated SVG: Pelican Riding a Bicycle</h1>
 <p class="subtitle">
-    Same prompt sent to 112 models (112 returned valid SVG)<br>
+    Same prompt sent to 113 models (113 returned valid SVG)<br>
     Non-Anthropic models via OpenRouter; Claude models via the Claude Max account<br>
-    Generated 2026-07-31 10:25
+    Generated 2026-07-31 11:10
 </p>
 <div class="view-controls">
     <button class="view-btn active" data-view="chart">Chart</button>
@@ -268,12 +268,12 @@
       (snapshot 2026-05-31).
       X = blended price USD/Mtok (log). Y = intelligence index. Bubble area = output tokens/sec.
       Free-on-OpenRouter models are plotted at $0.01 so they remain visible on a log scale.
-      Showing 62 of 112 models that have AA intel + price.
+      Showing 63 of 113 models that have AA intel + price.
     </div>
     <div class="chart-wrap"><canvas id="value-chart"></canvas></div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var datasets = [{"label": "Best-value frontier", "type": "line", "data": [{"x": 0.01, "y": 34}, {"x": 0.01, "y": 50}, {"x": 1.16, "y": 55}, {"x": 1.88, "y": 57}, {"x": 2.31, "y": 62}, {"x": 10.0, "y": 66}], "borderColor": "rgba(255,255,255,0.35)", "borderDash": [6, 4], "borderWidth": 1.5, "pointRadius": 0, "fill": false, "tension": 0, "order": 99}, {"label": "Alibaba", "type": "bubble", "data": [{"x": 0.56, "y": 39, "r": 14.397958935700643, "label": "Qwen 3.7 Plus", "price_raw": 0.56, "speed_raw": 51, "free": false, "est": false}, {"x": 1.88, "y": 57, "r": 22.166632302368974, "label": "Qwen 3.7 Max", "price_raw": 1.88, "speed_raw": 189, "free": false, "est": false}, {"x": 0.01, "y": 50, "r": 14.561041325179348, "label": "Qwen 3.6 Plus", "price_raw": 1.13, "speed_raw": 53, "free": true, "est": false}, {"x": 1.35, "y": 45, "r": 14.561041325179348, "label": "Qwen 3.5 397B", "price_raw": 1.35, "speed_raw": 53, "free": false, "est": false}, {"x": 1.1, "y": 42, "r": 20.013055137467855, "label": "Qwen 3.5 122B", "price_raw": 1.1, "speed_raw": 142, "free": false, "est": false}, {"x": 0.69, "y": 31, "r": 20.59314907756376, "label": "Qwen 3.5 35B", "price_raw": 0.69, "speed_raw": 154, "free": false, "est": false}, {"x": 0.11, "y": 32, "r": 14.147216877998453, "label": "Qwen 3.5 9B", "price_raw": 0.11, "speed_raw": 48, "free": false, "est": false}], "backgroundColor": "#C026D3CC", "borderColor": "#C026D3", "borderWidth": 1.5}, {"label": "Amazon", "type": "bubble", "data": [{"x": 5.0, "y": 19, "r": 11.996189266049372, "label": "Nova Premier", "price_raw": 5.0, "speed_raw": 26, "free": false, "est": false}], "backgroundColor": "#FF9900CC", "borderColor": "#FF9900", "borderWidth": 1.5}, {"label": "Anthropic", "type": "bubble", "data": [{"x": 10.0, "y": 66, "r": 14.641428453345299, "label": "Claude Opus 5", "price_raw": 10.0, "speed_raw": 54, "free": false, "est": false}, {"x": 20.0, "y": 65, "r": 18.445079348883237, "label": "Claude Fable 5", "price_raw": 20.0, "speed_raw": null, "free": false, "est": true}, {"x": 6.0, "y": 58, "r": 16.452067464655702, "label": "Claude Sonnet 5", "price_raw": 6.0, "speed_raw": 79, "free": false, "est": true}, {"x": 10.0, "y": 61, "r": 14.8, "label": "Claude Opus 4.8", "price_raw": 10.0, "speed_raw": 56, "free": false, "est": false}, {"x": 10.0, "y": 57, "r": 13.975677311139698, "label": "Claude Opus 4.7", "price_raw": 10.0, "speed_raw": 46, "free": false, "est": false}, {"x": 6.0, "y": 52, "r": 14.397958935700643, "label": "Claude Sonnet 4.6", "price_raw": 6.0, "speed_raw": 51, "free": false, "est": false}, {"x": 2.0, "y": 37, "r": 17.641305768684198, "label": "Claude Haiku 4.5", "price_raw": 2.0, "speed_raw": 98, "free": false, "est": false}], "backgroundColor": "#D97757CC", "borderColor": "#D97757", "borderWidth": 1.5}, {"label": "Cohere", "type": "bubble", "data": [{"x": 4.38, "y": 13, "r": 13.437357441610946, "label": "Command A", "price_raw": 4.38, "speed_raw": 40, "free": false, "est": false}], "backgroundColor": "#39594DCC", "borderColor": "#39594D", "borderWidth": 1.5}, {"label": "DeepSeek", "type": "bubble", "data": [{"x": 2.17, "y": 52, "r": 12.7553153674929, "label": "DeepSeek V4 Pro", "price_raw": 2.17, "speed_raw": 33, "free": false, "est": false}, {"x": 0.17, "y": 47, "r": 16.777754868245985, "label": "DeepSeek V4 Flash", "price_raw": 0.17, "speed_raw": 84, "free": false, "est": false}, {"x": 0.32, "y": 42, "r": 15.333809511662427, "label": "DeepSeek V3.2", "price_raw": 0.32, "speed_raw": 63, "free": false, "est": false}, {"x": 0.6000000000000001, "y": 29, "r": 18.445079348883237, "label": "DeepSeek V3.2 Speciale", "price_raw": null, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#1E3A8ACC", "borderColor": "#1E3A8A", "borderWidth": 1.5}, {"label": "Google", "type": "bubble", "data": [{"x": 4.5, "y": 57, "r": 19.40788680484097, "label": "Gemini 3.1 Pro", "price_raw": 4.5, "speed_raw": 130, "free": false, "est": false}, {"x": 1.16, "y": 55, "r": 24.36891784665452, "label": "Gemini 3.6 Flash", "price_raw": 1.16, "speed_raw": 244, "free": false, "est": false}, {"x": 0.85, "y": 41, "r": 28.0, "label": "Gemini 3.5 Flash Lite", "price_raw": 0.85, "speed_raw": 350, "free": false, "est": false}, {"x": 3.38, "y": 55, "r": 21.60073258353136, "label": "Gemini 3.5 Flash", "price_raw": 3.38, "speed_raw": 176, "free": false, "est": false}, {"x": 0.56, "y": 34, "r": 27.06886667234721, "label": "Gemini 3.1 Flash Lite", "price_raw": 0.56, "speed_raw": 321, "free": false, "est": false}, {"x": 4.5, "y": 41, "r": 18.445079348883237, "label": "Gemini 3 Pro", "price_raw": 4.5, "speed_raw": null, "free": false, "est": false}, {"x": 1.13, "y": 46, "r": 21.60073258353136, "label": "Gemini 3 Flash", "price_raw": 1.13, "speed_raw": 176, "free": false, "est": false}, {"x": 0.26, "y": 30, "r": 24.593393604027366, "label": "Gemini 2.5 Flash", "price_raw": 0.26, "speed_raw": 250, "free": false, "est": true}, {"x": 0.20500000000000002, "y": 39, "r": 12.957010852370434, "label": "Gemma 4 31B", "price_raw": null, "speed_raw": 35, "free": false, "est": false}, {"x": 0.2, "y": 31, "r": 18.445079348883237, "label": "Gemma 4 26B-A4B", "price_raw": 0.2, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#4285F4CC", "borderColor": "#4285F4", "borderWidth": 1.5}, {"label": "Kimi", "type": "bubble", "data": [{"x": 2.31, "y": 62, "r": 12.7553153674929, "label": "Kimi K3", "price_raw": 2.31, "speed_raw": 33, "free": false, "est": false}, {"x": 1.23, "y": 42, "r": 18.445079348883237, "label": "Kimi K2.7 Code", "price_raw": 1.23, "speed_raw": null, "free": false, "est": false}, {"x": 1.71, "y": 54, "r": 18.445079348883237, "label": "Kimi K2.6", "price_raw": 1.71, "speed_raw": 112, "free": false, "est": false}, {"x": 1.2, "y": 37, "r": 13.249039345221643, "label": "Kimi K2.5", "price_raw": 1.2, "speed_raw": 38, "free": false, "est": false}], "backgroundColor": "#A78BFACC", "borderColor": "#A78BFA", "borderWidth": 1.5}, {"label": "Meta", "type": "bubble", "data": [{"x": 0.47, "y": 18, "r": 18.445079348883237, "label": "Llama 4 Maverick", "price_raw": 0.47, "speed_raw": 112, "free": false, "est": false}, {"x": 0.29, "y": 14, "r": 20.06231031618103, "label": "Llama 4 Scout", "price_raw": 0.29, "speed_raw": 143, "free": false, "est": false}], "backgroundColor": "#8B5CF6CC", "borderColor": "#8B5CF6", "borderWidth": 1.5}, {"label": "MiniMax", "type": "bubble", "data": [{"x": 1.05, "y": 44, "r": 17.09388505954004, "label": "MiniMax M3", "price_raw": 1.05, "speed_raw": 89, "free": false, "est": false}, {"x": 0.53, "y": 50, "r": 14.397958935700643, "label": "MiniMax M2.7", "price_raw": 0.53, "speed_raw": 51, "free": false, "est": false}], "backgroundColor": "#E91E63CC", "borderColor": "#E91E63", "borderWidth": 1.5}, {"label": "Mistral", "type": "bubble", "data": [{"x": 0.75, "y": 23, "r": 14.315218406202998, "label": "Mistral Large 3", "price_raw": 0.75, "speed_raw": 50, "free": false, "est": false}, {"x": 0.26, "y": 28, "r": 20.450308943805616, "label": "Mistral Small 4", "price_raw": 0.26, "speed_raw": 151, "free": false, "est": false}], "backgroundColor": "#FA520FCC", "borderColor": "#FA520F", "borderWidth": 1.5}, {"label": "NVIDIA", "type": "bubble", "data": [{"x": 0.41, "y": 36, "r": 20.59314907756376, "label": "Nemotron 3 Super", "price_raw": 0.41, "speed_raw": 154, "free": false, "est": false}], "backgroundColor": "#76B900CC", "borderColor": "#76B900", "borderWidth": 1.5}, {"label": "OpenAI", "type": "bubble", "data": [{"x": 11.25, "y": 64, "r": 18.445079348883237, "label": "GPT-5.6 Sol", "price_raw": 11.25, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 60, "r": 18.445079348883237, "label": "GPT-5.6 Terra", "price_raw": 5.63, "speed_raw": null, "free": false, "est": true}, {"x": 2.25, "y": 56, "r": 18.445079348883237, "label": "GPT-5.6 Luna", "price_raw": 2.25, "speed_raw": null, "free": false, "est": true}, {"x": 11.25, "y": 60, "r": 18.445079348883237, "label": "GPT-5.5", "price_raw": 11.25, "speed_raw": null, "free": false, "est": false}, {"x": 67.5, "y": 60, "r": 18.445079348883237, "label": "GPT-5.5 Pro", "price_raw": 67.5, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 57, "r": 16.452067464655702, "label": "GPT-5.4", "price_raw": 5.63, "speed_raw": 79, "free": false, "est": false}, {"x": 1.69, "y": 49, "r": 20.967393131165398, "label": "GPT-5.4 Mini", "price_raw": 1.69, "speed_raw": 162, "free": false, "est": false}, {"x": 0.46, "y": 44, "r": 20.734604556233307, "label": "GPT-5.4 Nano", "price_raw": 0.46, "speed_raw": 157, "free": false, "est": false}, {"x": 3.5, "y": 38, "r": 17.340445947391764, "label": "o3", "price_raw": 3.5, "speed_raw": 93, "free": false, "est": false}], "backgroundColor": "#10A37FCC", "borderColor": "#10A37F", "borderWidth": 1.5}, {"label": "Tencent", "type": "bubble", "data": [{"x": 0.25, "y": 35, "r": 18.445079348883237, "label": "Tencent Hy3", "price_raw": 0.25, "speed_raw": null, "free": false, "est": true}], "backgroundColor": "#00A1E0CC", "borderColor": "#00A1E0", "borderWidth": 1.5}, {"label": "Thinking Machines", "type": "bubble", "data": [{"x": 1.1, "y": 46, "r": 15.48080768108468, "label": "Inkling", "price_raw": 1.1, "speed_raw": 65, "free": false, "est": false}], "backgroundColor": "#F59E0BCC", "borderColor": "#F59E0B", "borderWidth": 1.5}, {"label": "Xiaomi", "type": "bubble", "data": [{"x": 1.5, "y": 49, "r": 18.445079348883237, "label": "Xiaomi MiMo-V2-Pro", "price_raw": null, "speed_raw": null, "free": false, "est": false}, {"x": 1.5, "y": 54, "r": 15.108865383319076, "label": "Xiaomi MiMo-V2.5-Pro", "price_raw": 1.5, "speed_raw": 60, "free": false, "est": false}], "backgroundColor": "#DC2626CC", "borderColor": "#DC2626", "borderWidth": 1.5}, {"label": "Z AI", "type": "bubble", "data": [{"x": 2.15, "y": 51, "r": 18.445079348883237, "label": "GLM-5.2", "price_raw": 2.15, "speed_raw": null, "free": false, "est": false}, {"x": 1.55, "y": 50, "r": 15.69712770434038, "label": "GLM-5", "price_raw": 1.55, "speed_raw": 68, "free": false, "est": false}], "backgroundColor": "#7B68EECC", "borderColor": "#7B68EE", "borderWidth": 1.5}, {"label": "inclusionAI", "type": "bubble", "data": [{"x": 0.01, "y": 34, "r": 15.69712770434038, "label": "Ling 2.6 1T", "price_raw": 0.85, "speed_raw": 68, "free": true, "est": false}, {"x": 0.01, "y": 26, "r": 22.588808619927214, "label": "Ling 2.6 Flash", "price_raw": 0.15, "speed_raw": 199, "free": true, "est": false}], "backgroundColor": "#00BCD4CC", "borderColor": "#00BCD4", "borderWidth": 1.5}, {"label": "xAI", "type": "bubble", "data": [{"x": 3.0, "y": 59, "r": 17.15603616241642, "label": "Grok 4.5", "price_raw": 3.0, "speed_raw": 90, "free": false, "est": true}, {"x": 3.0, "y": 49, "r": 21.013517718566632, "label": "Grok 4.20 Beta", "price_raw": 3.0, "speed_raw": 163, "free": false, "est": false}, {"x": 0.28, "y": 39, "r": 20.013055137467855, "label": "Grok 4.1 Fast", "price_raw": 0.28, "speed_raw": 142, "free": false, "est": false}, {"x": 0.35, "y": 32, "r": 22.91896653378771, "label": "Grok 3 Mini", "price_raw": 0.35, "speed_raw": 207, "free": false, "est": false}], "backgroundColor": "#FFD700CC", "borderColor": "#FFD700", "borderWidth": 1.5}];
+      var datasets = [{"label": "Best-value frontier", "type": "line", "data": [{"x": 0.01, "y": 34}, {"x": 0.01, "y": 50}, {"x": 0.17, "y": 55}, {"x": 1.88, "y": 57}, {"x": 2.31, "y": 62}, {"x": 10.0, "y": 66}], "borderColor": "rgba(255,255,255,0.35)", "borderDash": [6, 4], "borderWidth": 1.5, "pointRadius": 0, "fill": false, "tension": 0, "order": 99}, {"label": "Alibaba", "type": "bubble", "data": [{"x": 0.56, "y": 39, "r": 14.397958935700643, "label": "Qwen 3.7 Plus", "price_raw": 0.56, "speed_raw": 51, "free": false, "est": false}, {"x": 1.88, "y": 57, "r": 22.166632302368974, "label": "Qwen 3.7 Max", "price_raw": 1.88, "speed_raw": 189, "free": false, "est": false}, {"x": 0.01, "y": 50, "r": 14.561041325179348, "label": "Qwen 3.6 Plus", "price_raw": 1.13, "speed_raw": 53, "free": true, "est": false}, {"x": 1.35, "y": 45, "r": 14.561041325179348, "label": "Qwen 3.5 397B", "price_raw": 1.35, "speed_raw": 53, "free": false, "est": false}, {"x": 1.1, "y": 42, "r": 20.013055137467855, "label": "Qwen 3.5 122B", "price_raw": 1.1, "speed_raw": 142, "free": false, "est": false}, {"x": 0.69, "y": 31, "r": 20.59314907756376, "label": "Qwen 3.5 35B", "price_raw": 0.69, "speed_raw": 154, "free": false, "est": false}, {"x": 0.11, "y": 32, "r": 14.147216877998453, "label": "Qwen 3.5 9B", "price_raw": 0.11, "speed_raw": 48, "free": false, "est": false}], "backgroundColor": "#C026D3CC", "borderColor": "#C026D3", "borderWidth": 1.5}, {"label": "Amazon", "type": "bubble", "data": [{"x": 5.0, "y": 19, "r": 11.996189266049372, "label": "Nova Premier", "price_raw": 5.0, "speed_raw": 26, "free": false, "est": false}], "backgroundColor": "#FF9900CC", "borderColor": "#FF9900", "borderWidth": 1.5}, {"label": "Anthropic", "type": "bubble", "data": [{"x": 10.0, "y": 66, "r": 14.641428453345299, "label": "Claude Opus 5", "price_raw": 10.0, "speed_raw": 54, "free": false, "est": false}, {"x": 20.0, "y": 65, "r": 18.447301486093856, "label": "Claude Fable 5", "price_raw": 20.0, "speed_raw": null, "free": false, "est": true}, {"x": 6.0, "y": 58, "r": 16.452067464655702, "label": "Claude Sonnet 5", "price_raw": 6.0, "speed_raw": 79, "free": false, "est": true}, {"x": 10.0, "y": 61, "r": 14.8, "label": "Claude Opus 4.8", "price_raw": 10.0, "speed_raw": 56, "free": false, "est": false}, {"x": 10.0, "y": 57, "r": 13.975677311139698, "label": "Claude Opus 4.7", "price_raw": 10.0, "speed_raw": 46, "free": false, "est": false}, {"x": 6.0, "y": 52, "r": 14.397958935700643, "label": "Claude Sonnet 4.6", "price_raw": 6.0, "speed_raw": 51, "free": false, "est": false}, {"x": 2.0, "y": 37, "r": 17.641305768684198, "label": "Claude Haiku 4.5", "price_raw": 2.0, "speed_raw": 98, "free": false, "est": false}], "backgroundColor": "#D97757CC", "borderColor": "#D97757", "borderWidth": 1.5}, {"label": "Cohere", "type": "bubble", "data": [{"x": 4.38, "y": 13, "r": 13.437357441610946, "label": "Command A", "price_raw": 4.38, "speed_raw": 40, "free": false, "est": false}], "backgroundColor": "#39594DCC", "borderColor": "#39594D", "borderWidth": 1.5}, {"label": "DeepSeek", "type": "bubble", "data": [{"x": 2.17, "y": 52, "r": 12.7553153674929, "label": "DeepSeek V4 Pro", "price_raw": 2.17, "speed_raw": 33, "free": false, "est": false}, {"x": 0.17, "y": 55, "r": 18.555704451989712, "label": "DeepSeek V4 Flash 0731", "price_raw": 0.17, "speed_raw": 114, "free": false, "est": false}, {"x": 0.17, "y": 47, "r": 16.777754868245985, "label": "DeepSeek V4 Flash", "price_raw": 0.17, "speed_raw": 84, "free": false, "est": false}, {"x": 0.32, "y": 42, "r": 15.333809511662427, "label": "DeepSeek V3.2", "price_raw": 0.32, "speed_raw": 63, "free": false, "est": false}, {"x": 0.6000000000000001, "y": 29, "r": 18.447301486093856, "label": "DeepSeek V3.2 Speciale", "price_raw": null, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#1E3A8ACC", "borderColor": "#1E3A8A", "borderWidth": 1.5}, {"label": "Google", "type": "bubble", "data": [{"x": 4.5, "y": 57, "r": 19.40788680484097, "label": "Gemini 3.1 Pro", "price_raw": 4.5, "speed_raw": 130, "free": false, "est": false}, {"x": 1.16, "y": 55, "r": 24.36891784665452, "label": "Gemini 3.6 Flash", "price_raw": 1.16, "speed_raw": 244, "free": false, "est": false}, {"x": 0.85, "y": 41, "r": 28.0, "label": "Gemini 3.5 Flash Lite", "price_raw": 0.85, "speed_raw": 350, "free": false, "est": false}, {"x": 3.38, "y": 55, "r": 21.60073258353136, "label": "Gemini 3.5 Flash", "price_raw": 3.38, "speed_raw": 176, "free": false, "est": false}, {"x": 0.56, "y": 34, "r": 27.06886667234721, "label": "Gemini 3.1 Flash Lite", "price_raw": 0.56, "speed_raw": 321, "free": false, "est": false}, {"x": 4.5, "y": 41, "r": 18.447301486093856, "label": "Gemini 3 Pro", "price_raw": 4.5, "speed_raw": null, "free": false, "est": false}, {"x": 1.13, "y": 46, "r": 21.60073258353136, "label": "Gemini 3 Flash", "price_raw": 1.13, "speed_raw": 176, "free": false, "est": false}, {"x": 0.26, "y": 30, "r": 24.593393604027366, "label": "Gemini 2.5 Flash", "price_raw": 0.26, "speed_raw": 250, "free": false, "est": true}, {"x": 0.20500000000000002, "y": 39, "r": 12.957010852370434, "label": "Gemma 4 31B", "price_raw": null, "speed_raw": 35, "free": false, "est": false}, {"x": 0.2, "y": 31, "r": 18.447301486093856, "label": "Gemma 4 26B-A4B", "price_raw": 0.2, "speed_raw": null, "free": false, "est": false}], "backgroundColor": "#4285F4CC", "borderColor": "#4285F4", "borderWidth": 1.5}, {"label": "Kimi", "type": "bubble", "data": [{"x": 2.31, "y": 62, "r": 12.7553153674929, "label": "Kimi K3", "price_raw": 2.31, "speed_raw": 33, "free": false, "est": false}, {"x": 1.23, "y": 42, "r": 18.447301486093856, "label": "Kimi K2.7 Code", "price_raw": 1.23, "speed_raw": null, "free": false, "est": false}, {"x": 1.71, "y": 54, "r": 18.445079348883237, "label": "Kimi K2.6", "price_raw": 1.71, "speed_raw": 112, "free": false, "est": false}, {"x": 1.2, "y": 37, "r": 13.249039345221643, "label": "Kimi K2.5", "price_raw": 1.2, "speed_raw": 38, "free": false, "est": false}], "backgroundColor": "#A78BFACC", "borderColor": "#A78BFA", "borderWidth": 1.5}, {"label": "Meta", "type": "bubble", "data": [{"x": 0.47, "y": 18, "r": 18.445079348883237, "label": "Llama 4 Maverick", "price_raw": 0.47, "speed_raw": 112, "free": false, "est": false}, {"x": 0.29, "y": 14, "r": 20.06231031618103, "label": "Llama 4 Scout", "price_raw": 0.29, "speed_raw": 143, "free": false, "est": false}], "backgroundColor": "#8B5CF6CC", "borderColor": "#8B5CF6", "borderWidth": 1.5}, {"label": "MiniMax", "type": "bubble", "data": [{"x": 1.05, "y": 44, "r": 17.09388505954004, "label": "MiniMax M3", "price_raw": 1.05, "speed_raw": 89, "free": false, "est": false}, {"x": 0.53, "y": 50, "r": 14.397958935700643, "label": "MiniMax M2.7", "price_raw": 0.53, "speed_raw": 51, "free": false, "est": false}], "backgroundColor": "#E91E63CC", "borderColor": "#E91E63", "borderWidth": 1.5}, {"label": "Mistral", "type": "bubble", "data": [{"x": 0.75, "y": 23, "r": 14.315218406202998, "label": "Mistral Large 3", "price_raw": 0.75, "speed_raw": 50, "free": false, "est": false}, {"x": 0.26, "y": 28, "r": 20.450308943805616, "label": "Mistral Small 4", "price_raw": 0.26, "speed_raw": 151, "free": false, "est": false}], "backgroundColor": "#FA520FCC", "borderColor": "#FA520F", "borderWidth": 1.5}, {"label": "NVIDIA", "type": "bubble", "data": [{"x": 0.41, "y": 36, "r": 20.59314907756376, "label": "Nemotron 3 Super", "price_raw": 0.41, "speed_raw": 154, "free": false, "est": false}], "backgroundColor": "#76B900CC", "borderColor": "#76B900", "borderWidth": 1.5}, {"label": "OpenAI", "type": "bubble", "data": [{"x": 11.25, "y": 64, "r": 18.447301486093856, "label": "GPT-5.6 Sol", "price_raw": 11.25, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 60, "r": 18.447301486093856, "label": "GPT-5.6 Terra", "price_raw": 5.63, "speed_raw": null, "free": false, "est": true}, {"x": 2.25, "y": 56, "r": 18.447301486093856, "label": "GPT-5.6 Luna", "price_raw": 2.25, "speed_raw": null, "free": false, "est": true}, {"x": 11.25, "y": 60, "r": 18.447301486093856, "label": "GPT-5.5", "price_raw": 11.25, "speed_raw": null, "free": false, "est": false}, {"x": 67.5, "y": 60, "r": 18.447301486093856, "label": "GPT-5.5 Pro", "price_raw": 67.5, "speed_raw": null, "free": false, "est": true}, {"x": 5.63, "y": 57, "r": 16.452067464655702, "label": "GPT-5.4", "price_raw": 5.63, "speed_raw": 79, "free": false, "est": false}, {"x": 1.69, "y": 49, "r": 20.967393131165398, "label": "GPT-5.4 Mini", "price_raw": 1.69, "speed_raw": 162, "free": false, "est": false}, {"x": 0.46, "y": 44, "r": 20.734604556233307, "label": "GPT-5.4 Nano", "price_raw": 0.46, "speed_raw": 157, "free": false, "est": false}, {"x": 3.5, "y": 38, "r": 17.340445947391764, "label": "o3", "price_raw": 3.5, "speed_raw": 93, "free": false, "est": false}], "backgroundColor": "#10A37FCC", "borderColor": "#10A37F", "borderWidth": 1.5}, {"label": "Tencent", "type": "bubble", "data": [{"x": 0.25, "y": 35, "r": 18.447301486093856, "label": "Tencent Hy3", "price_raw": 0.25, "speed_raw": null, "free": false, "est": true}], "backgroundColor": "#00A1E0CC", "borderColor": "#00A1E0", "borderWidth": 1.5}, {"label": "Thinking Machines", "type": "bubble", "data": [{"x": 1.1, "y": 46, "r": 15.48080768108468, "label": "Inkling", "price_raw": 1.1, "speed_raw": 65, "free": false, "est": false}], "backgroundColor": "#F59E0BCC", "borderColor": "#F59E0B", "borderWidth": 1.5}, {"label": "Xiaomi", "type": "bubble", "data": [{"x": 1.5, "y": 49, "r": 18.447301486093856, "label": "Xiaomi MiMo-V2-Pro", "price_raw": null, "speed_raw": null, "free": false, "est": false}, {"x": 1.5, "y": 54, "r": 15.108865383319076, "label": "Xiaomi MiMo-V2.5-Pro", "price_raw": 1.5, "speed_raw": 60, "free": false, "est": false}], "backgroundColor": "#DC2626CC", "borderColor": "#DC2626", "borderWidth": 1.5}, {"label": "Z AI", "type": "bubble", "data": [{"x": 2.15, "y": 51, "r": 18.447301486093856, "label": "GLM-5.2", "price_raw": 2.15, "speed_raw": null, "free": false, "est": false}, {"x": 1.55, "y": 50, "r": 15.69712770434038, "label": "GLM-5", "price_raw": 1.55, "speed_raw": 68, "free": false, "est": false}], "backgroundColor": "#7B68EECC", "borderColor": "#7B68EE", "borderWidth": 1.5}, {"label": "inclusionAI", "type": "bubble", "data": [{"x": 0.01, "y": 34, "r": 15.69712770434038, "label": "Ling 2.6 1T", "price_raw": 0.85, "speed_raw": 68, "free": true, "est": false}, {"x": 0.01, "y": 26, "r": 22.588808619927214, "label": "Ling 2.6 Flash", "price_raw": 0.15, "speed_raw": 199, "free": true, "est": false}], "backgroundColor": "#00BCD4CC", "borderColor": "#00BCD4", "borderWidth": 1.5}, {"label": "xAI", "type": "bubble", "data": [{"x": 3.0, "y": 59, "r": 17.15603616241642, "label": "Grok 4.5", "price_raw": 3.0, "speed_raw": 90, "free": false, "est": true}, {"x": 3.0, "y": 49, "r": 21.013517718566632, "label": "Grok 4.20 Beta", "price_raw": 3.0, "speed_raw": 163, "free": false, "est": false}, {"x": 0.28, "y": 39, "r": 20.013055137467855, "label": "Grok 4.1 Fast", "price_raw": 0.28, "speed_raw": 142, "free": false, "est": false}, {"x": 0.35, "y": 32, "r": 22.91896653378771, "label": "Grok 3 Mini", "price_raw": 0.35, "speed_raw": 207, "free": false, "est": false}], "backgroundColor": "#FFD700CC", "borderColor": "#FFD700", "borderWidth": 1.5}];
       var ctx = document.getElementById('value-chart').getContext('2d');
       new Chart(ctx, {
         type: 'bubble',
@@ -7748,6 +7748,112 @@
         <div class="family-row">
             <div class="family-label">DeepSeek Flash</div>
             <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>DeepSeek V4 Flash 0731</h3>
+                        <span class="release">Released: Jul 2026</span>
+                    </div>
+                    <div class="card-meta"><span class="time">267.0s</span><span class="price">$0.14 / $0.28 /M</span></div>
+                </div>
+                <div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#e8f4f8"/>
+  <circle cx="680" cy="80" r="40" fill="#f1c40f"/>
+  <path d="M 100 80 Q 120 60 150 80 Q 170 70 190 90 Q 210 90 190 100 L 100 100 Z" fill="#ffffff" opacity="0.8"/>
+  <path d="M 500 60 Q 520 45 550 60 Q 570 55 580 70 L 500 70 Z" fill="#ffffff" opacity="0.7"/>
+  
+  <line x1="20" y1="430" x2="780" y2="430" stroke="#2ecc71" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 80 430 L 85 415 M 120 430 L 122 420 M 650 430 L 654 417 M 700 430 L 703 422" stroke="#27ae60" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <line x1="80" y1="320" x2="140" y2="320" stroke="#bbb" stroke-width="4" stroke-linecap="round"/>
+  <line x1="60" y1="345" x2="130" y2="345" stroke="#bbb" stroke-width="4" stroke-linecap="round"/>
+  <line x1="90" y1="370" x2="150" y2="370" stroke="#bbb" stroke-width="4" stroke-linecap="round"/>
+
+  <line x1="360" y1="260" x2="360" y2="350" stroke="#c0392b" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" dur="2s" repeatCount="indefinite" values="360;365.36;380;400;420;434.64;440;434.64;420;400;380;365.36;360"/>
+    <animate attributeName="y2" dur="2s" repeatCount="indefinite" values="350;330;315.36;310;315.36;330;350;370;384.64;390;384.64;370;350"/>
+  </line>
+
+  <g transform="translate(200,350)">
+    <circle r="80" fill="none" stroke="#333" stroke-width="8"/>
+    <circle r="72" fill="none" stroke="#888" stroke-width="2"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+      <line x1="0" y1="0" x2="0" y2="-72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="0" y2="72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+    </g>
+  </g>
+
+  <g transform="translate(560,350)">
+    <circle r="80" fill="none" stroke="#333" stroke-width="8"/>
+    <circle r="72" fill="none" stroke="#888" stroke-width="2"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+      <line x1="0" y1="0" x2="0" y2="-72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="0" y2="72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+    </g>
+  </g>
+
+  <path d="M 200 350 L 400 350 L 350 260 L 200 350" fill="none" stroke="#2980b9" stroke-width="8" stroke-linejoin="round"/>
+  <line x1="400" y1="350" x2="510" y2="240" stroke="#2980b9" stroke-width="8" stroke-linecap="round"/>
+  <line x1="350" y1="260" x2="520" y2="240" stroke="#2980b9" stroke-width="8" stroke-linecap="round"/>
+  <line x1="560" y1="350" x2="520" y2="240" stroke="#2980b9" stroke-width="8" stroke-linecap="round"/>
+  <line x1="520" y1="240" x2="535" y2="220" stroke="#2c3e50" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 535 220 Q 560 215 550 195" fill="none" stroke="#333" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="550" cy="195" r="6" fill="#222"/>
+  <ellipse cx="350" cy="258" rx="28" ry="8" fill="#222"/>
+  <circle cx="400" cy="350" r="28" fill="none" stroke="#888" stroke-width="5"/>
+  <circle cx="400" cy="350" r="10" fill="#555"/>
+
+  <g transform="translate(400,350)">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/>
+      <line x1="0" y1="0" x2="0" y2="-40" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+      <line x1="0" y1="0" x2="0" y2="40" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+      <g transform="translate(0,-40)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="2s" repeatCount="indefinite"/>
+          <rect x="-12" y="-5" width="24" height="10" rx="3" fill="#333"/>
+        </g>
+      </g>
+      <g transform="translate(0,40)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="2s" repeatCount="indefinite"/>
+          <rect x="-12" y="-5" width="24" height="10" rx="3" fill="#333"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <path d="M 285 220 L 240 235 L 280 250 Z" fill="#bdc3c7" stroke="#7f8c8d" stroke-width="3"/>
+  <path d="M 410 200 Q 450 180 470 130" fill="none" stroke="#333" stroke-width="38" stroke-linecap="round"/>
+  <path d="M 410 200 Q 450 180 470 130" fill="none" stroke="#ffffff" stroke-width="32" stroke-linecap="round"/>
+  <ellipse cx="360" cy="215" rx="80" ry="45" fill="#ffffff" stroke="#333" stroke-width="4"/>
+  <path d="M 300 200 Q 350 180 385 215 Q 350 245 300 200 Z" fill="#e8e8e8" stroke="#888" stroke-width="3"/>
+  <circle cx="460" cy="120" r="26" fill="#ffffff" stroke="#333" stroke-width="4"/>
+  <path d="M 480 112 L 610 128 L 480 122 Z" fill="#f39c12" stroke="#333" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M 480 122 Q 560 165 605 130 Q 550 135 480 115 Z" fill="#f5cba7" stroke="#333" stroke-width="2"/>
+  <circle cx="485" cy="112" r="4" fill="#111"/>
+  <path d="M 455 108 Q 475 90 495 108 L 485 100 Q 475 90 460 105 Z" fill="#e74c3c"/>
+
+  <line x1="360" y1="260" x2="440" y2="350" stroke="#e67e22" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" dur="2s" repeatCount="indefinite" values="440;434.64;420;400;380;365.36;360;365.36;380;400;420;434.64;440"/>
+    <animate attributeName="y2" dur="2s" repeatCount="indefinite" values="350;370;384.64;390;384.64;370;350;330;315.36;310;315.36;330;350"/>
+  </line>
+</svg></div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <div>
@@ -20668,7 +20774,103 @@
   
   <!-- Seat -->
   <path d="M150,120 Q160,100 170,120" stroke="#333" stroke-width="4" fill="none"/>
-</svg></div></td><td class="empty-cell"></td></tr><tr><td class="model-name">DeepSeek Flash</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Flash <span class="time">231.8s</span> <span class="price">$0.14 / $0.28 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+</svg></div></td><td class="empty-cell"></td></tr><tr><td class="model-name">DeepSeek Flash</td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Flash 0731 <span class="time">267.0s</span> <span class="price">$0.14 / $0.28 /M</span></div><div class="svg-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480">
+  <rect width="800" height="480" fill="#e8f4f8"/>
+  <circle cx="680" cy="80" r="40" fill="#f1c40f"/>
+  <path d="M 100 80 Q 120 60 150 80 Q 170 70 190 90 Q 210 90 190 100 L 100 100 Z" fill="#ffffff" opacity="0.8"/>
+  <path d="M 500 60 Q 520 45 550 60 Q 570 55 580 70 L 500 70 Z" fill="#ffffff" opacity="0.7"/>
+  
+  <line x1="20" y1="430" x2="780" y2="430" stroke="#2ecc71" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 80 430 L 85 415 M 120 430 L 122 420 M 650 430 L 654 417 M 700 430 L 703 422" stroke="#27ae60" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <line x1="80" y1="320" x2="140" y2="320" stroke="#bbb" stroke-width="4" stroke-linecap="round"/>
+  <line x1="60" y1="345" x2="130" y2="345" stroke="#bbb" stroke-width="4" stroke-linecap="round"/>
+  <line x1="90" y1="370" x2="150" y2="370" stroke="#bbb" stroke-width="4" stroke-linecap="round"/>
+
+  <line x1="360" y1="260" x2="360" y2="350" stroke="#c0392b" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" dur="2s" repeatCount="indefinite" values="360;365.36;380;400;420;434.64;440;434.64;420;400;380;365.36;360"/>
+    <animate attributeName="y2" dur="2s" repeatCount="indefinite" values="350;330;315.36;310;315.36;330;350;370;384.64;390;384.64;370;350"/>
+  </line>
+
+  <g transform="translate(200,350)">
+    <circle r="80" fill="none" stroke="#333" stroke-width="8"/>
+    <circle r="72" fill="none" stroke="#888" stroke-width="2"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+      <line x1="0" y1="0" x2="0" y2="-72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="0" y2="72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+    </g>
+  </g>
+
+  <g transform="translate(560,350)">
+    <circle r="80" fill="none" stroke="#333" stroke-width="8"/>
+    <circle r="72" fill="none" stroke="#888" stroke-width="2"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+      <line x1="0" y1="0" x2="0" y2="-72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="0" y2="72" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-72" y2="0" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="-50.9" stroke="#aaa" stroke-width="2"/>
+      <line x1="0" y1="0" x2="-50.9" y2="50.9" stroke="#aaa" stroke-width="2"/>
+    </g>
+  </g>
+
+  <path d="M 200 350 L 400 350 L 350 260 L 200 350" fill="none" stroke="#2980b9" stroke-width="8" stroke-linejoin="round"/>
+  <line x1="400" y1="350" x2="510" y2="240" stroke="#2980b9" stroke-width="8" stroke-linecap="round"/>
+  <line x1="350" y1="260" x2="520" y2="240" stroke="#2980b9" stroke-width="8" stroke-linecap="round"/>
+  <line x1="560" y1="350" x2="520" y2="240" stroke="#2980b9" stroke-width="8" stroke-linecap="round"/>
+  <line x1="520" y1="240" x2="535" y2="220" stroke="#2c3e50" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 535 220 Q 560 215 550 195" fill="none" stroke="#333" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="550" cy="195" r="6" fill="#222"/>
+  <ellipse cx="350" cy="258" rx="28" ry="8" fill="#222"/>
+  <circle cx="400" cy="350" r="28" fill="none" stroke="#888" stroke-width="5"/>
+  <circle cx="400" cy="350" r="10" fill="#555"/>
+
+  <g transform="translate(400,350)">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/>
+      <line x1="0" y1="0" x2="0" y2="-40" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+      <line x1="0" y1="0" x2="0" y2="40" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+      <g transform="translate(0,-40)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="2s" repeatCount="indefinite"/>
+          <rect x="-12" y="-5" width="24" height="10" rx="3" fill="#333"/>
+        </g>
+      </g>
+      <g transform="translate(0,40)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="2s" repeatCount="indefinite"/>
+          <rect x="-12" y="-5" width="24" height="10" rx="3" fill="#333"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <path d="M 285 220 L 240 235 L 280 250 Z" fill="#bdc3c7" stroke="#7f8c8d" stroke-width="3"/>
+  <path d="M 410 200 Q 450 180 470 130" fill="none" stroke="#333" stroke-width="38" stroke-linecap="round"/>
+  <path d="M 410 200 Q 450 180 470 130" fill="none" stroke="#ffffff" stroke-width="32" stroke-linecap="round"/>
+  <ellipse cx="360" cy="215" rx="80" ry="45" fill="#ffffff" stroke="#333" stroke-width="4"/>
+  <path d="M 300 200 Q 350 180 385 215 Q 350 245 300 200 Z" fill="#e8e8e8" stroke="#888" stroke-width="3"/>
+  <circle cx="460" cy="120" r="26" fill="#ffffff" stroke="#333" stroke-width="4"/>
+  <path d="M 480 112 L 610 128 L 480 122 Z" fill="#f39c12" stroke="#333" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M 480 122 Q 560 165 605 130 Q 550 135 480 115 Z" fill="#f5cba7" stroke="#333" stroke-width="2"/>
+  <circle cx="485" cy="112" r="4" fill="#111"/>
+  <path d="M 455 108 Q 475 90 495 108 L 485 100 Q 475 90 460 105 Z" fill="#e74c3c"/>
+
+  <line x1="360" y1="260" x2="440" y2="350" stroke="#e67e22" stroke-width="10" stroke-linecap="round">
+    <animate attributeName="x2" dur="2s" repeatCount="indefinite" values="440;434.64;420;400;380;365.36;360;365.36;380;400;420;434.64;440"/>
+    <animate attributeName="y2" dur="2s" repeatCount="indefinite" values="350;370;384.64;390;384.64;370;350;330;315.36;310;315.36;330;350"/>
+  </line>
+</svg></div></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="svg-cell"><div class="cell-label">DeepSeek V4 Flash <span class="time">231.8s</span> <span class="price">$0.14 / $0.28 /M</span></div><div class="svg-container"><svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <!-- Sky Gradient -->
     <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
