@@ -3,3 +3,5 @@
 *-full.png
 screenshot-*.png
 .claude/settings.local.json
+__pycache__/
+*.pyc
