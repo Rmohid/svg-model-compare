@@ -17,7 +17,7 @@ Compares animated SVG generation across many AI models by sending the same promp
 | Google | Gemini 3.1 Pro, 3 Pro, 3 Flash, 2.5 Pro, 2.5 Flash |
 | xAI | Grok 4.1 Fast, 4, 4 Fast, 3, 3 Mini |
 | Chinese | DeepSeek V3.2, V3.1, R1 / Kimi K2.5, K2 / MiniMax M2.5 |
-| Qwen (size scaling) | 3.5 397B, 3 235B, 32B, 14B, 8B / 2.5 7B |
+| Qwen (size scaling) | 3.8 Max, 3.5 397B, 3 235B, 32B, 14B, 8B / 2.5 7B |
 
 Each card shows the model name, release date, and response time.
 

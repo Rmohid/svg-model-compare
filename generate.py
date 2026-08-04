@@ -82,6 +82,11 @@ REASONING_EFFORT_OVERRIDES = {
     # -- it does no thinking at all unless asked. (Its sibling Gemini 3.6 Flash
     # tops out at "high"; 3.5 Flash and 3.5 Flash Lite differ from each other.)
     "Gemini 3.5 Flash Lite": "max",
+    # Qwen 3.8 Max: full ladder probe (2026-08-04) found medium was its
+    # highest effective effort (814 reasoning tokens; default 174, high 220,
+    # xhigh 154, max 123). The override also promotes the request to the 96K
+    # budget required for this model's mandatory reasoning to leave room for SVG.
+    "Qwen 3.8 Max": "medium",
 }
 
 # OpenRouter's unified reasoning.effort can claim up to ~95% of max_tokens for
@@ -238,6 +243,7 @@ MODELS = [
     ("Poolside Laguna XS 2.1", "poolside/laguna-xs-2.1", "Jul 2026"),
     ("Inkling", "thinkingmachines/inkling", "Jul 2026"),
     # --- Qwen: full model then smaller quantizations ---
+    ("Qwen 3.8 Max", "qwen/qwen3.8-max", "Aug 2026"),
     ("Qwen 3.7 Flash", "qwen/qwen3.7-flash", "Jul 2026"),
     ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
@@ -355,6 +361,7 @@ PRICING = {
     "Nex AGI Nex-N2-Mini": "$0.025 / $0.10 /M",
     "Poolside Laguna XS 2.1": "$0.06 / $0.12 /M",
     "Inkling": "$1 / $4.05 /M",
+    "Qwen 3.8 Max": "$2 / $6 /M",
     "Qwen 3.7 Flash": "$0.03 / $0.13 /M",
     "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
     "Qwen 3.7 Max": "$1.25 / $3.75 /M",
@@ -436,6 +443,7 @@ INTEL_DATA = {
     "Mistral Small 4":         (28, 0.26, 151),
     "Nova Premier":            (19, 5.00, 26),
     "Command A":               (13, 4.38, 40),
+    "Qwen 3.8 Max":            (58, 3.00, None, "est"),  # AA raw 53.4, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61); OR-blended price $3.00; no AA speed yet for 2026-08-03 launch
     "Qwen 3.7 Plus":           (39, 0.56, 51),
     "Qwen 3.7 Max":            (57, 1.88, 189),
     "Qwen 3.6 Plus":           (50, 1.13, 53),
@@ -576,7 +584,7 @@ CATEGORIES = [
         ("Inkling", ["Inkling"]),
     ]),
     ("Qwen", [
-        ("Qwen Max", ["Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
+        ("Qwen Max", ["Qwen 3.8 Max", "Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
         ("Qwen Plus", ["Qwen 3.7 Plus", "Qwen 3.6 Plus"]),
         ("Qwen Flash", ["Qwen 3.7 Flash", "Qwen 3.6 Flash"]),
         ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
