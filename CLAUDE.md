@@ -1,6 +1,8 @@
 # SVG Model Compare
 
 ## Rules
+- **Only providers with an AA intelligence ≥ 50 model are shown** (Robert's policy, 2026-08-19). A provider whose best model scores < 50 on the Artificial Analysis leaderboard is pruned entirely — no exceptions. Qualifying set (Aug 2026): Anthropic, OpenAI, xAI, Kimi, Z AI (GLM), Alibaba (Qwen), Meta, Google, DeepSeek. All models from non-qualifying providers are removed from `MODELS`, `PRICING`, `INTEL_DATA`, `CATEGORIES`, and `PROVIDER_COLORS`.
+- **New models from qualifying providers are added as they ship** (from the AA leaderboard / OpenRouter), even if that specific model scores below 50 — the provider gate is per-provider, not per-model.
 - **Never regenerate cached images.** The `cache.json` file stores SVG outputs from prior API calls. When adding new models, only call the API for models not already in the cache. The `generate.py` script already handles this via its cache mechanism — do not clear or rebuild the cache.
   - *Narrow exception:* a single entry generated at the wrong reasoning effort may be deleted and re-run. Back the old entry up first (max effort can produce a **worse** result — see below), and never bulk-clear.
 - When adding a new model, add it to both the `MODELS` list and the appropriate `CATEGORIES` section in `generate.py`, then run the script.
