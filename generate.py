@@ -66,7 +66,6 @@ CLAUDE_MAX_MODELS = {
 REASONING_EFFORT_OVERRIDES = {
     "GLM-5.2": "xhigh",
     "Gemini 3.6 Flash": "high",
-    "Inkling": "xhigh",
     "DeepSeek V4 Flash 0731": "xhigh",
     # GPT-5.6 family: "max" is the real ceiling, and nothing below it thinks much.
     # Probed 2026-07-31 (reasoning tokens on a reasoning-inducing prompt):
@@ -87,6 +86,15 @@ REASONING_EFFORT_OVERRIDES = {
     # xhigh 154, max 123). The override also promotes the request to the 96K
     # budget required for this model's mandatory reasoning to leave room for SVG.
     "Qwen 3.8 Max": "medium",
+    # Probed 2026-08-19: DeepSeek V4 Pro 0813 does 5377 reasoning tokens at "max"
+    # vs 709 at default; Gemini 3.7 Flash 452 at "max" vs ~0 (screen probe).
+    "DeepSeek V4 Pro 0813": "max",
+    "Gemini 3.7 Flash": "max",
+    # Big-model budget fix (2026-08-19): these truncate at DEFAULT_MAX_TOKENS (32k);
+    # 'medium' promotes them to REASONING_MAX_TOKENS (96k) so completion has room.
+    "GLM-5.3": "medium",
+    "Qwen 3.8 2.4T A95B": "medium",
+    "Qwen 3.8 27B": "medium",
 }
 
 # OpenRouter's unified reasoning.effort can claim up to ~95% of max_tokens for
@@ -135,7 +143,6 @@ Start with <svg and end with </svg>."""
 # delete one, and never spend a probe call re-checking it — the marker is the
 # record that it was already checked and found gone.
 MODELS = [
-    # --- Anthropic ---
     ("Claude Opus 5", "anthropic/claude-opus-5", "Jul 2026"),
     ("Claude Fable 5", "anthropic/claude-fable-5", "Jun 2026"),
     ("Claude Sonnet 5", "anthropic/claude-sonnet-5", "Jun 2026"),
@@ -150,7 +157,6 @@ MODELS = [
     ("Claude Opus 4.1", "anthropic/claude-opus-4.1", "Aug 2025"),
     ("Claude Sonnet 4", "anthropic/claude-sonnet-4", "May 2025"),
     ("Claude Opus 4", "anthropic/claude-opus-4", "May 2025"),
-    # --- OpenAI ---
     ("GPT-5.6 Sol", "openai/gpt-5.6-sol", "Jul 2026"),
     ("GPT-5.6 Terra", "openai/gpt-5.6-terra", "Jul 2026"),
     ("GPT-5.6 Luna", "openai/gpt-5.6-luna", "Jul 2026"),
@@ -167,88 +173,51 @@ MODELS = [
     ("GPT-4.1 Mini", "openai/gpt-4.1-mini", "Apr 2025"),
     ("o3", "openai/o3", "Apr 2025"),
     ("o4 Mini", "openai/o4-mini", "Apr 2025"),
-    # --- Google ---
     ("Gemini 3.1 Pro", "google/gemini-3.1-pro-preview", "Feb 2026"),
     ("Gemini 3.6 Flash", "google/gemini-3.6-flash", "Jul 2026"),
     ("Gemini 3.5 Flash Lite", "google/gemini-3.5-flash-lite", "Jul 2026"),
     ("Gemini 3.5 Flash", "google/gemini-3.5-flash", "May 2026"),
     ("Gemini 3.1 Flash Lite", "google/gemini-3.1-flash-lite-preview", "Mar 2026"),
-    ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),        # DELISTED 2026-07-31
+    ("Gemini 3 Pro", "google/gemini-3-pro-preview", "Nov 2025"),
     ("Gemini 3 Flash", "google/gemini-3-flash-preview", "Dec 2025"),
     ("Gemini 2.5 Pro", "google/gemini-2.5-pro", "Jun 2025"),
     ("Gemini 2.5 Flash", "google/gemini-2.5-flash", "Jun 2025"),
-    # --- Google (Open Weight) ---
     ("Gemma 4 31B", "google/gemma-4-31b-it", "Apr 2026"),
     ("Gemma 4 26B-A4B", "google/gemma-4-26b-a4b-it", "Apr 2026"),
-    # --- xAI / Grok ---
     ("Grok 4.5", "x-ai/grok-4.5", "Jul 2026"),
     ("Grok 4.3", "x-ai/grok-4.3", "Apr 2026"),
     ("Grok Build 0.1", "x-ai/grok-build-0.1", "May 2026"),
     ("Grok 4.20 Beta", "x-ai/grok-4.20-beta", "Mar 2026"),
-    ("Grok 4", "x-ai/grok-4", "Jul 2025"),                              # DELISTED 2026-07-31
-    ("Grok 4.1 Fast", "x-ai/grok-4.1-fast", "Nov 2025"),                # DELISTED 2026-07-31
-    ("Grok 4 Fast", "x-ai/grok-4-fast", "Sep 2025"),                    # DELISTED 2026-07-31
-    ("Grok 3", "x-ai/grok-3", "Jun 2025"),                              # DELISTED 2026-07-31
-    ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),                    # DELISTED 2026-07-31; 6mo ago fast
-    # --- Chinese Models ---
-    ("MiniMax M3", "minimax/minimax-m3", "Jun 2026"),
-    ("MiniMax M2.7", "minimax/minimax-m2.7", "Mar 2026"),
+    ("Grok 4", "x-ai/grok-4", "Jul 2025"),
+    ("Grok 4.1 Fast", "x-ai/grok-4.1-fast", "Nov 2025"),
+    ("Grok 4 Fast", "x-ai/grok-4-fast", "Sep 2025"),
+    ("Grok 3", "x-ai/grok-3", "Jun 2025"),
+    ("Grok 3 Mini", "x-ai/grok-3-mini", "Jun 2025"),
     ("GLM-5.2", "z-ai/glm-5.2", "Jun 2026"),
     ("GLM-5V-Turbo", "z-ai/glm-5v-turbo", "Apr 2026"),
     ("GLM-5.1", "z-ai/glm-5.1", "Apr 2026"),
     ("GLM-5 Turbo", "z-ai/glm-5-turbo", "Mar 2026"),
-    ("Xiaomi MiMo-V2.5-Pro", "xiaomi/mimo-v2.5-pro", "Apr 2026"),
-    ("Xiaomi MiMo-V2.5", "xiaomi/mimo-v2.5", "Apr 2026"),
-    ("Xiaomi MiMo-V2-Pro", "xiaomi/mimo-v2-pro", "Mar 2026"),           # DELISTED 2026-07-31
-    ("ByteDance Seed 2.0", "bytedance-seed/seed-2.0-lite", "Mar 2026"),
-    ("StepFun Step 3.7 Flash", "stepfun/step-3.7-flash", "May 2026"),
-    ("Tencent Hy3", "tencent/hy3", "Jul 2026"),
-    ("Tencent Hy3 Preview", "tencent/hy3-preview", "Apr 2026"),          # free tier retired 2026-07
-    ("Ring 2.6 1T", "inclusionai/ring-2.6-1t", "May 2026"),              # free tier retired 2026-07
-    ("Ling 2.6 1T", "inclusionai/ling-2.6-1t", "Apr 2026"),              # free tier retired 2026-07
-    ("Ling 2.6 Flash", "inclusionai/ling-2.6-flash", "Apr 2026"),        # free tier retired 2026-07
     ("DeepSeek V4 Pro", "deepseek/deepseek-v4-pro", "Apr 2026"),
     ("DeepSeek V4 Flash 0731", "deepseek/deepseek-v4-flash-0731", "Jul 2026"),
     ("DeepSeek V4 Flash", "deepseek/deepseek-v4-flash", "Apr 2026"),
-    ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),  # DELISTED 2026-07-31
+    ("DeepSeek V3.2 Speciale", "deepseek/deepseek-v3.2-speciale", "Dec 2025"),
     ("DeepSeek V3.2", "deepseek/deepseek-v3.2", "Oct 2025"),
     ("DeepSeek V3.1", "deepseek/deepseek-chat-v3.1", "Sep 2025"),
-    ("DeepSeek R1", "deepseek/deepseek-r1", "Jan 2025"),                 # 6mo ago SOTA
+    ("DeepSeek R1", "deepseek/deepseek-r1", "Jan 2025"),
     ("Kimi K3", "moonshotai/kimi-k3", "Jul 2026"),
     ("Kimi K2.7 Code", "moonshotai/kimi-k2.7-code", "Jun 2026"),
     ("Kimi K2.6", "moonshotai/kimi-k2.6", "Apr 2026"),
     ("Kimi K2.5", "moonshotai/kimi-k2.5", "Jan 2026"),
-    ("Kimi K2", "moonshotai/kimi-k2", "Jul 2025"),                       # 6mo ago SOTA
-    ("MiniMax M2.5", "minimax/minimax-m2.5", "Feb 2026"),
+    ("Kimi K2", "moonshotai/kimi-k2", "Jul 2025"),
     ("GLM-5", "z-ai/glm-5", "Feb 2026"),
-    # --- Meta ---
     ("Llama 4 Maverick", "meta-llama/llama-4-maverick", "Apr 2025"),
     ("Llama 4 Scout", "meta-llama/llama-4-scout", "Apr 2025"),
-    # --- NVIDIA ---
-    ("Nemotron 3 Super", "nvidia/nemotron-3-super-120b-a12b", "Mar 2026"),
-    ("Nemotron 3 Nano", "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free", "Apr 2026"),
-    # --- Mistral ---
-    ("Mistral Large 3", "mistralai/mistral-large-2512", "Dec 2025"),
-    ("Mistral Medium 3.5", "mistralai/mistral-medium-3-5", "Apr 2026"),
-    ("Mistral Small 4", "mistralai/mistral-small-2603", "Mar 2026"),
-    # --- Amazon ---
-    ("Nova Premier", "amazon/nova-premier-v1", "Oct 2025"),
-    # --- Cohere ---
-    ("Command A", "cohere/command-a", "Mar 2025"),
-    # --- IBM ---
-    ("IBM Granite 4.1 8B", "ibm-granite/granite-4.1-8b", "Apr 2026"),
-    # --- Emerging Labs ---
-    ("Sakana Fugu Ultra", "sakana/fugu-ultra", "Jun 2026"),
-    ("Nex AGI Nex-N2-Mini", "nex-agi/nex-n2-mini", "Jun 2026"),
-    ("Poolside Laguna XS 2.1", "poolside/laguna-xs-2.1", "Jul 2026"),
-    ("Inkling", "thinkingmachines/inkling", "Jul 2026"),
-    # --- Qwen: full model then smaller quantizations ---
     ("Qwen 3.8 Max", "qwen/qwen3.8-max", "Aug 2026"),
     ("Qwen 3.7 Flash", "qwen/qwen3.7-flash", "Jul 2026"),
     ("Qwen 3.7 Plus", "qwen/qwen3.7-plus", "Jun 2026"),
     ("Qwen 3.7 Max", "qwen/qwen3.7-max", "May 2026"),
     ("Qwen 3.6 Max", "qwen/qwen3.6-max-preview", "Apr 2026"),
-    ("Qwen 3.6 Plus", "qwen/qwen3.6-plus", "Apr 2026"),                 # free tier retired 2026-07
+    ("Qwen 3.6 Plus", "qwen/qwen3.6-plus", "Apr 2026"),
     ("Qwen 3.6 Flash", "qwen/qwen3.6-flash", "Apr 2026"),
     ("Qwen 3.6 35B", "qwen/qwen3.6-35b-a3b", "Apr 2026"),
     ("Qwen 3.6 27B", "qwen/qwen3.6-27b", "Apr 2026"),
@@ -263,6 +232,16 @@ MODELS = [
     ("Qwen3 8B", "qwen/qwen3-8b", "Apr 2025"),
     ("Qwen 3.5 9B", "qwen/qwen3.5-9b", "Mar 2026"),
     ("Qwen 2.5 7B", "qwen/qwen-2.5-7b-instruct", "Oct 2024"),
+    # Opus 5 Fast does not serve on Claude Max (probe 2026-07-02) — routes via OpenRouter.
+    ("Claude Opus 5 Fast", "anthropic/claude-opus-5-fast", "Jul 2026"),
+    ("Grok 4.6", "x-ai/grok-4.6", "Aug 2026"),
+    ("GLM-5.3", "z-ai/glm-5.3", "Aug 2026"),
+    ("Gemini 3.7 Flash", "google/gemini-3.7-flash", "Aug 2026"),
+    ("DeepSeek V4 Pro 0813", "deepseek/deepseek-v4-pro-0813", "Aug 2026"),
+    ("Qwen 3.8 2.4T A95B", "qwen/qwen3.8-2.4t-a95b", "Aug 2026"),
+    ("Qwen 3.8 27B", "qwen/qwen3.8-27b", "Aug 2026"),
+    # AGE-GATED 2026-08-19: OR blocks until 18+ attestation at openrouter.ai/settings/preferences (HTTP 403 missing_attestation).
+    ("Muse Spark 1.2", "meta/muse-spark-1.2", "Aug 2026"),
 ]
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
@@ -317,22 +296,10 @@ PRICING = {
     "Grok 4 Fast": "$0.20 / $0.50 /M",
     "Grok 3": "$3 / $15 /M",
     "Grok 3 Mini": "$0.30 / $0.50 /M",
-    "MiniMax M3": "$0.60 / $2.40 /M",
-    "MiniMax M2.7": "$0.30 / $1.20 /M",
     "GLM-5.2": "$1.40 / $4.40 /M",
     "GLM-5V-Turbo": "$1.20 / $4.00 /M",
     "GLM-5.1": "$0.95 / $3.15 /M",
     "GLM-5 Turbo": "$0.96 / $3.20 /M",
-    "Xiaomi MiMo-V2.5-Pro": "$1 / $3 /M",
-    "Xiaomi MiMo-V2.5": "$0.40 / $2 /M",
-    "Xiaomi MiMo-V2-Pro": "$1 / $3 /M",
-    "ByteDance Seed 2.0": "$0.25 / $2 /M",
-    "StepFun Step 3.7 Flash": "$0.20 / $1.15 /M",
-    "Tencent Hy3": "$0.14 / $0.58 /M",
-    "Tencent Hy3 Preview": "$0.063 / $0.21 /M",
-    "Ring 2.6 1T": "$0.075 / $0.625 /M",
-    "Ling 2.6 1T": "$0.075 / $0.625 /M",
-    "Ling 2.6 Flash": "$0.01 / $0.03 /M",
     "DeepSeek V4 Pro": "$1.74 / $3.48 /M",
     "DeepSeek V4 Flash 0731": "$0.14 / $0.28 /M",
     "DeepSeek V4 Flash": "$0.14 / $0.28 /M",
@@ -345,22 +312,9 @@ PRICING = {
     "Kimi K2.6": "$0.74 / $4.66 /M",
     "Kimi K2.5": "$0.45 / $2.20 /M",
     "Kimi K2": "$0.50 / $2.40 /M",
-    "MiniMax M2.5": "$0.30 / $1.10 /M",
     "GLM-5": "$0.95 / $2.55 /M",
     "Llama 4 Maverick": "$0.15 / $0.60 /M",
     "Llama 4 Scout": "$0.08 / $0.30 /M",
-    "Nemotron 3 Super": "$0.10 / $0.50 /M",
-    "Nemotron 3 Nano": "Free /M",
-    "Mistral Large 3": "$0.50 / $1.50 /M",
-    "Mistral Medium 3.5": "$1.50 / $7.50 /M",
-    "Mistral Small 4": "$0.15 / $0.60 /M",
-    "Nova Premier": "$2.50 / $12.50 /M",
-    "Command A": "$2.50 / $10 /M",
-    "IBM Granite 4.1 8B": "$0.05 / $0.10 /M",
-    "Sakana Fugu Ultra": "$5 / $30 /M",
-    "Nex AGI Nex-N2-Mini": "$0.025 / $0.10 /M",
-    "Poolside Laguna XS 2.1": "$0.06 / $0.12 /M",
-    "Inkling": "$1 / $4.05 /M",
     "Qwen 3.8 Max": "$2 / $6 /M",
     "Qwen 3.7 Flash": "$0.03 / $0.13 /M",
     "Qwen 3.7 Plus": "$0.32 / $1.28 /M",
@@ -381,77 +335,80 @@ PRICING = {
     "Qwen3 8B": "$0.05 / $0.40 /M",
     "Qwen 3.5 9B": "$0.05 / $0.15 /M",
     "Qwen 2.5 7B": "$0.04 / $0.10 /M",
+    "Claude Opus 5 Fast": "$1 / $5 /M",
+    "Grok 4.6": "$2 / $6 /M",
+    "GLM-5.3": "$1.4 / $4.4 /M",
+    "Gemini 3.7 Flash": "$0.375 / $1.875 /M",
+    "DeepSeek V4 Pro 0813": "$1.188 / $3.564 /M",
+    "Qwen 3.8 2.4T A95B": "$2 / $6 /M",
+    "Qwen 3.8 27B": "$0.45 / $3.2 /M",
+    "Muse Spark 1.2": "$0.4 / $1.2 /M",
 }
 
 # Intelligence / price / speed data sourced from the Artificial Analysis leaderboard.
 # (intel_index, blended_price_usd_per_Mtok, output_tokens_per_sec)
 # Models not in this dict are simply not plotted on the Chart view.
-AA_SNAPSHOT_DATE = "2026-05-31"
+AA_SNAPSHOT_DATE = "2026-08-19"
 INTEL_DATA = {
-    "Claude Opus 5":           (66, 10.00, 54),  # AA raw 61 (max effort), mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61); narrowly tops Fable 5 per AA 2026-07-25
-    "Claude Fable 5":          (65, 20.00, None, "est"),  # AA rescaled index mapped onto the 2026-05-31 scale (+4 vs Opus 4.8)
-    "Claude Sonnet 5":         (58, 6.00, 79, "est"),     # AA rescaled index mapped onto the 2026-05-31 scale (+6 vs Sonnet 4.6)
-    "Claude Opus 4.8":         (61, 10.00, 56),
-    "Claude Opus 4.7":         (57, 10.00, 46),
-    "Claude Sonnet 4.6":       (52, 6.00, 51),
-    "Claude Haiku 4.5":        (37, 2.00, 98),
-    "GPT-5.6 Sol":             (64, 11.25, None, "est"),  # AA max-mode index mapped onto the 2026-05-31 scale (1 below Fable 5)
-    "GPT-5.6 Terra":           (60, 5.63, None, "est"),   # ~GPT-5.5-class, mapped onto the 2026-05-31 scale
-    "GPT-5.6 Luna":            (56, 2.25, None, "est"),   # cheapest GPT-5.6 tier, AA max-mode mapped to the 2026-05-31 scale
-    "GPT-5.5":                 (60, 11.25, None),
-    "GPT-5.5 Pro":             (60, 67.50, None, "est"),  # Same model tier as GPT-5.5 xhigh; OR-blended pricing
-    "GPT-5.4":                 (57, 5.63, 79),
-    "GPT-5.4 Mini":            (49, 1.69, 162),
-    "GPT-5.4 Nano":            (44, 0.46, 157),
-    "o3":                      (38, 3.50, 93),
-    "Gemini 3.1 Pro":          (57, 4.50, 130),
-    "Gemini 3.6 Flash":        (55, 1.16, 244),  # AA raw 50, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
-    "Gemini 3.5 Flash Lite":   (41, 0.85, 350),  # AA raw 36 (high effort), mapped +5 vs Opus 4.8 anchor
-    "Gemini 3.5 Flash":        (55, 3.38, 176),
-    "Gemini 3.1 Flash Lite":   (34, 0.56, 321),
-    "Gemini 3 Pro":            (41, 4.50, None),
-    "Gemini 3 Flash":          (46, 1.13, 176),
-    "Gemini 2.5 Flash":        (30, 0.26, 250, "est"),  # Historical AA numbers; kept as Google Flash exception
-    "Gemma 4 31B":             (39, 0.00, 35),
-    "Gemma 4 26B-A4B":         (31, 0.20, None),
-    "Grok 4.5":                (59, 3.00, 90, "est"),  # AA rescaled index mapped onto the 2026-05-31 scale (Opus-class, ~2 below Opus 4.8)
-    "Grok 4.20 Beta":          (49, 3.00, 163),
-    "Grok 4.1 Fast":           (39, 0.28, 142),
-    "Grok 3 Mini":             (32, 0.35, 207),
-    "MiniMax M3":              (44, 1.05, 89),
-    "MiniMax M2.7":            (50, 0.53, 51),
-    "DeepSeek V4 Pro":         (52, 2.17, 33),
-    "DeepSeek V4 Flash 0731":  (55, 0.17, 114),  # AA raw 50, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
-    "DeepSeek V4 Flash":       (47, 0.17, 84),
-    "DeepSeek V3.2":           (42, 0.32, 63),
-    "DeepSeek V3.2 Speciale":  (29, None, None),
-    "Kimi K3":                 (62, 2.31, 33),  # AA raw 57, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
-"Kimi K2.7 Code":          (42, 1.23, None),
-    "Kimi K2.6":               (54, 1.71, 112),
-    "Kimi K2.5":               (37, 1.20, 38),
-    "GLM-5.2":                 (51, 2.15, None),
-    "GLM-5":                   (50, 1.55, 68),
-    "Tencent Hy3":             (35, 0.25, None, "est"),  # AA 33.6 (current scale) nudged onto the 2026-05-31 scale
-    "Xiaomi MiMo-V2-Pro":      (49, None, None),
-    "Xiaomi MiMo-V2.5-Pro":    (54, 1.50, 60),
-    "Ling 2.6 1T":             (34, 0.85, 68),
-    "Ling 2.6 Flash":          (26, 0.15, 199),
-    "Llama 4 Maverick":        (18, 0.47, 112),
-    "Llama 4 Scout":           (14, 0.29, 143),
-    "Nemotron 3 Super":        (36, 0.41, 154),
-    "Mistral Large 3":         (23, 0.75, 50),
-    "Mistral Small 4":         (28, 0.26, 151),
-    "Nova Premier":            (19, 5.00, 26),
-    "Command A":               (13, 4.38, 40),
-    "Qwen 3.8 Max":            (58, 3.00, None, "est"),  # AA raw 53.4, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61); OR-blended price $3.00; no AA speed yet for 2026-08-03 launch
-    "Qwen 3.7 Plus":           (39, 0.56, 51),
-    "Qwen 3.7 Max":            (57, 1.88, 189),
-    "Qwen 3.6 Plus":           (50, 1.13, 53),
-    "Qwen 3.5 397B":           (45, 1.35, 53),
-    "Qwen 3.5 122B":           (42, 1.10, 142),
-    "Qwen 3.5 35B":            (31, 0.69, 154),
-    "Qwen 3.5 9B":             (32, 0.11, 48),
-    "Inkling":                 (46, 1.10, 65),  # AA raw 41, mapped +5 vs Opus 4.8 anchor (raw 56 -> table 61)
+    "Claude Opus 5": (66, 10.0, 54),
+    "Claude Fable 5": (65, 20.0, None, "est"),
+    "Claude Sonnet 5": (58, 6.0, 79, "est"),
+    "Claude Opus 4.8": (61, 10.0, 56),
+    "Claude Opus 4.7": (57, 10.0, 46),
+    "Claude Sonnet 4.6": (52, 6.0, 51),
+    "Claude Haiku 4.5": (37, 2.0, 98),
+    "GPT-5.6 Sol": (64, 11.25, None, "est"),
+    "GPT-5.6 Terra": (60, 5.63, None, "est"),
+    "GPT-5.6 Luna": (56, 2.25, None, "est"),
+    "GPT-5.5": (60, 11.25, None),
+    "GPT-5.5 Pro": (60, 67.5, None, "est"),
+    "GPT-5.4": (57, 5.63, 79),
+    "GPT-5.4 Mini": (49, 1.69, 162),
+    "GPT-5.4 Nano": (44, 0.46, 157),
+    "o3": (38, 3.5, 93),
+    "Gemini 3.1 Pro": (57, 4.5, 130),
+    "Gemini 3.6 Flash": (55, 1.16, 244),
+    "Gemini 3.5 Flash Lite": (41, 0.85, 350),
+    "Gemini 3.5 Flash": (55, 3.38, 176),
+    "Gemini 3.1 Flash Lite": (34, 0.56, 321),
+    "Gemini 3 Pro": (41, 4.5, None),
+    "Gemini 3 Flash": (46, 1.13, 176),
+    "Gemini 2.5 Flash": (30, 0.26, 250, "est"),
+    "Gemma 4 31B": (39, 0.0, 35),
+    "Gemma 4 26B-A4B": (31, 0.2, None),
+    "Grok 4.5": (59, 3.0, 90, "est"),
+    "Grok 4.20 Beta": (49, 3.0, 163),
+    "Grok 4.1 Fast": (39, 0.28, 142),
+    "Grok 3 Mini": (32, 0.35, 207),
+    "DeepSeek V4 Pro": (52, 2.17, 33),
+    "DeepSeek V4 Flash 0731": (55, 0.17, 114),
+    "DeepSeek V4 Flash": (47, 0.17, 84),
+    "DeepSeek V3.2": (42, 0.32, 63),
+    "DeepSeek V3.2 Speciale": (29, None, None),
+    "Kimi K3": (62, 2.31, 33),
+    "Kimi K2.7 Code": (42, 1.23, None),
+    "Kimi K2.6": (54, 1.71, 112),
+    "Kimi K2.5": (37, 1.2, 38),
+    "GLM-5.2": (51, 2.15, None),
+    "GLM-5": (50, 1.55, 68),
+    "Llama 4 Maverick": (18, 0.47, 112),
+    "Llama 4 Scout": (14, 0.29, 143),
+    "Qwen 3.8 Max": (58, 3.0, None, "est"),
+    "Qwen 3.7 Plus": (39, 0.56, 51),
+    "Qwen 3.7 Max": (57, 1.88, 189),
+    "Qwen 3.6 Plus": (50, 1.13, 53),
+    "Qwen 3.5 397B": (45, 1.35, 53),
+    "Qwen 3.5 122B": (42, 1.1, 142),
+    "Qwen 3.5 35B": (31, 0.69, 154),
+    "Qwen 3.5 9B": (32, 0.11, 48),
+    "Claude Opus 5 Fast": (58, 2.00, None),   # OR $1/$5, blended $2.0/M
+    "Grok 4.6":           (61, 3.00, None),   # OR $2/$6, blended $3.0/M
+    "GLM-5.3":            (60, 2.15, None),   # OR $1.4/$4.4, blended $2.15/M
+    "Gemini 3.7 Flash":   (56, 0.75, None),   # OR $0.375/$1.875, blended $0.75/M
+    "DeepSeek V4 Pro 0813": (53, 1.78, None), # OR $1.188/$3.564, blended $1.78/M
+    "Qwen 3.8 2.4T A95B": (58, 3.00, None),   # OR $2/$6, blended $3.0/M
+    "Qwen 3.8 27B":       (52, 1.14, None),   # OR $0.45/$3.2, blended $1.14/M
+    "Muse Spark 1.2":     (57, 0.60, None),   # OR $0.4/$1.2, blended $0.6/M
 }
 
 # Models marked Free on OpenRouter snap to this x-value so log scale still works.
@@ -482,30 +439,16 @@ def model_provider(name):
     return "Other"
 
 PROVIDER_COLORS = {
-    # Western vendors — distinctive primary hues
-    "Anthropic":   "#D97757",  # terracotta (brand)
-    "OpenAI":      "#10A37F",  # jade teal (brand)
-    "Google":      "#4285F4",  # Google blue (brand)
-    "Meta":        "#8B5CF6",  # violet (differentiated from Google blue)
-    "xAI":         "#FFD700",  # gold
-    "Amazon":      "#FF9900",  # amazon orange (brand)
-    "NVIDIA":      "#76B900",  # nvidia green (brand)
-    "Mistral":     "#FA520F",  # vermillion (brand)
-    "Cohere":      "#39594D",  # forest green (brand)
-    "IBM":         "#0F62FE",  # IBM blue (brand)
-    # Chinese & other vendors — no orange to avoid colliding with Anthropic/Amazon
-    "Alibaba":     "#C026D3",  # magenta-purple (was orange)
-    "DeepSeek":    "#1E3A8A",  # deep navy (distinct from Google's bright blue)
-    "Z AI":        "#7B68EE",  # medium purple
-    "MiniMax":     "#E91E63",  # hot pink
-    "Kimi":        "#A78BFA",  # lavender
-    "Xiaomi":      "#DC2626",  # deep red (was orange)
-    "inclusionAI": "#00BCD4",  # cyan
-    "Tencent":     "#00A1E0",  # sky blue
-    "ByteDance":   "#FF3366",  # rose
-    "StepFun":     "#14B8A6",  # teal
-    "Thinking Machines": "#F59E0B",  # amber
-    "Other":       "#888888",
+    "Anthropic":   "#D97757",
+    "OpenAI":   "#10A37F",
+    "Google":   "#4285F4",
+    "Meta":   "#8B5CF6",
+    "xAI":   "#FFD700",
+    "Alibaba":   "#C026D3",
+    "DeepSeek":   "#1E3A8A",
+    "Z AI":   "#7B68EE",
+    "Kimi":   "#A78BFA",
+    "Other":   "#888888",
 }
 
 # Categories: (vendor_group, [(family_label, [model_names_newest_first]), ...])
@@ -513,7 +456,7 @@ PROVIDER_COLORS = {
 CATEGORIES = [
     ("Anthropic", [
         ("Claude Fable", ["Claude Fable 5"]),
-        ("Claude Opus", ["Claude Opus 5", "Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4"]),
+        ("Claude Opus", ["Claude Opus 5", "Claude Opus 4.8", "Claude Opus 4.8 Fast", "Claude Opus 4.7", "Claude Opus 4.6", "Claude Opus 4.5", "Claude Opus 4.1", "Claude Opus 4", "Claude Opus 5 Fast"]),
         ("Claude Sonnet", ["Claude Sonnet 5", "Claude Sonnet 4.6", "Claude Sonnet 4.5", "Claude Sonnet 4"]),
         ("Claude Haiku", ["Claude Haiku 4.5"]),
     ]),
@@ -526,70 +469,31 @@ CATEGORIES = [
     ]),
     ("Google", [
         ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
-        ("Gemini Flash", ["Gemini 3.6 Flash", "Gemini 3.5 Flash Lite", "Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash"]),
+        ("Gemini Flash", ["Gemini 3.6 Flash", "Gemini 3.5 Flash Lite", "Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash", "Gemini 3.7 Flash"]),
         ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
-        ("Grok (flagship)", ["Grok 4.5", "Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3"]),
+        ("Grok (flagship)", ["Grok 4.5", "Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3", "Grok 4.6"]),
         ("Grok Fast", ["Grok 4.1 Fast", "Grok 4 Fast"]),
         ("Grok Build", ["Grok Build 0.1"]),
         ("Grok Mini", ["Grok 3 Mini"]),
     ]),
     ("Chinese Models", [
-        ("DeepSeek", ["DeepSeek V4 Pro", "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1"]),
+        ("DeepSeek", ["DeepSeek V4 Pro", "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1", "DeepSeek V4 Pro 0813"]),
         ("DeepSeek Flash", ["DeepSeek V4 Flash 0731", "DeepSeek V4 Flash"]),
         ("Kimi", ["Kimi K3", "Kimi K2.7 Code", "Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
-        ("MiniMax", ["MiniMax M3", "MiniMax M2.7", "MiniMax M2.5"]),
-        ("GLM", ["GLM-5.2", "GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5"]),
-        ("Xiaomi Pro", ["Xiaomi MiMo-V2.5-Pro", "Xiaomi MiMo-V2-Pro"]),
-        ("Xiaomi", ["Xiaomi MiMo-V2.5"]),
-        ("ByteDance", ["ByteDance Seed 2.0"]),
-        ("StepFun", ["StepFun Step 3.7 Flash"]),
-        ("Tencent", ["Tencent Hy3", "Tencent Hy3 Preview"]),
-        ("inclusionAI Ling (1T)", ["Ling 2.6 1T"]),
-        ("inclusionAI Ling (Flash)", ["Ling 2.6 Flash"]),
-        ("inclusionAI Ring", ["Ring 2.6 1T"]),
+        ("GLM", ["GLM-5.2", "GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5", "GLM-5.3"]),
     ]),
     ("Meta", [
-        ("Llama 4", ["Llama 4 Maverick", "Llama 4 Scout"]),
-    ]),
-    ("NVIDIA", [
-        ("Nemotron", ["Nemotron 3 Super"]),
-        ("Nemotron Nano", ["Nemotron 3 Nano"]),
-    ]),
-    ("Mistral", [
-        ("Mistral Large", ["Mistral Large 3"]),
-        ("Mistral Medium", ["Mistral Medium 3.5"]),
-        ("Mistral Small", ["Mistral Small 4"]),
-    ]),
-    ("Amazon", [
-        ("Nova", ["Nova Premier"]),
-    ]),
-    ("Cohere", [
-        ("Command", ["Command A"]),
-    ]),
-    ("IBM", [
-        ("Granite", ["IBM Granite 4.1 8B"]),
-    ]),
-    ("Sakana AI", [
-        ("Fugu", ["Sakana Fugu Ultra"]),
-    ]),
-    ("Nex AGI", [
-        ("Nex-N2", ["Nex AGI Nex-N2-Mini"]),
-    ]),
-    ("Poolside", [
-        ("Laguna", ["Poolside Laguna XS 2.1"]),
-    ]),
-    ("Thinking Machines", [
-        ("Inkling", ["Inkling"]),
+        ("Llama 4", ["Llama 4 Maverick", "Llama 4 Scout", "Muse Spark 1.2"]),
     ]),
     ("Qwen", [
         ("Qwen Max", ["Qwen 3.8 Max", "Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
         ("Qwen Plus", ["Qwen 3.7 Plus", "Qwen 3.6 Plus"]),
         ("Qwen Flash", ["Qwen 3.7 Flash", "Qwen 3.6 Flash"]),
-        ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)"]),
+        ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)", "Qwen 3.8 2.4T A95B"]),
         ("Qwen 35B", ["Qwen 3.6 35B", "Qwen 3.5 35B"]),
-        ("Qwen 27-32B", ["Qwen 3.6 27B", "Qwen 3.5 27B", "Qwen3 32B"]),
+        ("Qwen 27-32B", ["Qwen 3.6 27B", "Qwen 3.5 27B", "Qwen3 32B", "Qwen 3.8 27B"]),
         ("Qwen 14B", ["Qwen3 14B"]),
         ("Qwen 8-9B", ["Qwen 3.5 9B", "Qwen3 8B"]),
         ("Qwen 7B", ["Qwen 2.5 7B"]),
