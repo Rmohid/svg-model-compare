@@ -26,6 +26,9 @@ CACHE_PATH = os.path.join(os.path.dirname(__file__), "cache.json")
 # data policy") but serves fine (provider: DeepSeek) on OPENROUTER_LLM_WIKI_KEY.
 OPENROUTER_KEY_OVERRIDES = {
     "DeepSeek V4 Flash 0731": "OPENROUTER_LLM_WIKI_KEY",
+    # 18+ age gate blocks Muse Spark on the 911 account (2026-08-19, user asked to use a different key);
+    # OPENROUTER_FREE_API_KEY's account has no such restriction (probed 2026-08-19).
+    "Muse Spark 1.2": "OPENROUTER_FREE_API_KEY",
 }
 _override_key_cache = {}
 
@@ -240,7 +243,7 @@ MODELS = [
     ("DeepSeek V4 Pro 0813", "deepseek/deepseek-v4-pro-0813", "Aug 2026"),
     ("Qwen 3.8 2.4T A95B", "qwen/qwen3.8-2.4t-a95b", "Aug 2026"),
     ("Qwen 3.8 27B", "qwen/qwen3.8-27b", "Aug 2026"),
-    # AGE-GATED 2026-08-19: OR blocks until 18+ attestation at openrouter.ai/settings/preferences (HTTP 403 missing_attestation).
+    # Age-gated on the 911 account — routes via OPENROUTER_FREE_API_KEY (override, 2026-08-19).
     ("Muse Spark 1.2", "meta/muse-spark-1.2", "Aug 2026"),
 ]
 
