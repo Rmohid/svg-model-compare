@@ -245,6 +245,8 @@ MODELS = [
     ("Qwen 3.8 27B", "qwen/qwen3.8-27b", "Aug 2026"),
     # Age-gated on the 911 account — routes via OPENROUTER_FREE_API_KEY (override, 2026-08-19).
     ("Muse Spark 1.2", "meta/muse-spark-1.2", "Aug 2026"),
+    # Stealth preview model (anonymous third-party provider, routed by OpenRouter).
+    ("Ox Alpha", "stealth/ox-alpha", "Aug 2026"),
 ]
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
@@ -346,6 +348,8 @@ PRICING = {
     "Qwen 3.8 2.4T A95B": "$2 / $6 /M",
     "Qwen 3.8 27B": "$0.45 / $3.2 /M",
     "Muse Spark 1.2": "$0.4 / $1.2 /M",
+    # Free on OpenRouter ($0 in/out) — chart snaps "Free" to FREE_PRICE_SENTINEL.
+    "Ox Alpha": "Free",
 }
 
 # Intelligence / price / speed data sourced from the Artificial Analysis leaderboard.
@@ -500,6 +504,9 @@ CATEGORIES = [
         ("Qwen 14B", ["Qwen3 14B"]),
         ("Qwen 8-9B", ["Qwen 3.5 9B", "Qwen3 8B"]),
         ("Qwen 7B", ["Qwen 2.5 7B"]),
+    ]),
+    ("Stealth", [
+        ("Ox Alpha", ["Ox Alpha"]),
     ]),
 ]
 
