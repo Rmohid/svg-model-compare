@@ -29,6 +29,7 @@ OPENROUTER_KEY_OVERRIDES = {
     # 18+ age gate blocks Muse Spark on the 911 account (2026-08-19, user asked to use a different key);
     # OPENROUTER_FREE_API_KEY's account has no such restriction (probed 2026-08-19).
     "Muse Spark 1.2": "OPENROUTER_FREE_API_KEY",
+    "Muse Spark 1.3": "OPENROUTER_FREE_API_KEY",
 }
 _override_key_cache = {}
 
@@ -98,6 +99,31 @@ REASONING_EFFORT_OVERRIDES = {
     "GLM-5.3": "medium",
     "Qwen 3.8 2.4T A95B": "medium",
     "Qwen 3.8 27B": "medium",
+    # GLM-5.3 Flash (2026-09-21): its first run truncated at DEFAULT_MAX_TOKENS (32k).
+    # Its provider default effort is already "max", so the fix is the BUDGET, not the
+    # effort -- "high" is the highest value it accepts below max, and any override
+    # promotes the request to REASONING_MAX_TOKENS (96k). Its sibling GLM-5.3 FlashX
+    # fits in 32k and keeps the plain default.
+    "GLM-5.3 Flash": "high",
+    # Qwen 3.8 Max 0902 (2026-09-21): same truncation at 32k. Its provider default is
+    # already "xhigh", so the override repeats that value rather than picking a new
+    # effort -- the observed failure is the budget, and the 96k promotion is what the
+    # override buys. (Its Aug sibling "Qwen 3.8 Max" uses "medium" on the strength of a
+    # full ladder probe; no such probe was run on this snapshot.)
+    "Qwen 3.8 Max 0902": "xhigh",
+    # --- 2026-09-21 update: the 8 models added then needed no effort override. ---
+    # Probed (reasoning tokens on the same probe prompt; "flat" = this repo's rule,
+    # best not > 3x default AND not > default + 500):
+    #   Gemini 3.8 Flash    default  772 | high 1137  -> flat
+    #   Grok 4.7            default  450 | xhigh 496  -> flat
+    #   DeepSeek V4.1 Flash default 1873 | max  1475  -> flat (default already higher)
+    #   Muse Spark 1.3      default  608 | max  1319  -> flat (2.2x, under the 3x bar)
+    # The other four needed NO probe: OpenRouter's free model metadata
+    # (/api/v1/models -> reasoning.default_effort) already reports their default AT
+    # the highest effort they expose -- GLM-5.3 Flash and GLM-5.3 FlashX default
+    # "max", Qwen 3.8 Max 0902 defaults "xhigh" (its own ceiling), and Qwen 3.8
+    # Flash exposes no effort values at all. Read that field BEFORE spending a
+    # probe call; it costs one free GET.
 }
 
 # OpenRouter's unified reasoning.effort can claim up to ~95% of max_tokens for
@@ -247,6 +273,33 @@ MODELS = [
     ("Muse Spark 1.2", "meta/muse-spark-1.2", "Aug 2026"),
     # Stealth preview model (anonymous third-party provider, routed by OpenRouter).
     ("Ox Alpha", "stealth/ox-alpha", "Aug 2026"),
+    # --- Added 2026-09-21 (models shipped since the Ox Alpha commit) ---
+    # Cost rule (Robert, 2026-09-21): never spend a generation call on a model priced
+    # above $6/M output tokens. Held out for that reason, so no row was added for
+    # them either (a row with no cached SVG would render as an empty card):
+    #   Claude Fable 5.1      $10 / $50 /M
+    #   GPT-6 Astra           $10 / $50 /M
+    #   GPT-6 Astra Pro       $10 / $50 /M
+    # Also skipped: the ":contributor" price tiers of Muse Spark 1.2/1.3 (same model,
+    # discounted data-sharing price, not a distinct model) and DeepSeek V4 Flash
+    # Vision Exp (image-input variant of DeepSeek V4 Flash, already shown).
+    ("Gemini 3.8 Flash", "google/gemini-3.8-flash", "Sep 2026"),
+    ("Grok 4.7", "x-ai/grok-4.7", "Sep 2026"),
+    ("GLM-5.3 Flash", "z-ai/glm-5.3-flash", "Aug 2026"),
+    ("GLM-5.3 FlashX", "z-ai/glm-5.3-flashx", "Sep 2026"),
+    # Qwen 3.8 Flash (qwen/qwen3.8-flash) is NOT listed as of 2026-09-21: its only
+    # provider, Alibaba, 429s it upstream ("temporarily rate-limited upstream") for
+    # every account key we hold — 9 attempts across three keys over ~25 minutes, on
+    # request sizes from 16 to 32000 max_tokens, so it is neither the key nor the
+    # request size. A failed call bills nothing, but a listed model with no cached SVG
+    # renders a red error card on the live page, so the row waits for a run where the
+    # throttle has cleared. Re-add it (row + PRICING + CATEGORIES) then; the weekly
+    # OpenRouter diff finds it again for free.
+    ("Qwen 3.8 Max 0902", "qwen/qwen3.8-max-0902", "Sep 2026"),
+    ("DeepSeek V4.1 Flash", "deepseek/deepseek-v4.1-flash", "Sep 2026"),
+    # Age-gated on the 911 account, same as Muse Spark 1.2 — routes via
+    # OPENROUTER_FREE_API_KEY (override below).
+    ("Muse Spark 1.3", "meta/muse-spark-1.3", "Sep 2026"),
 ]
 
 # Per-model pricing (input / output per million tokens) from OpenRouter
@@ -350,6 +403,14 @@ PRICING = {
     "Muse Spark 1.2": "$0.4 / $1.2 /M",
     # Free on OpenRouter ($0 in/out) — chart snaps "Free" to FREE_PRICE_SENTINEL.
     "Ox Alpha": "Free",
+    # Added 2026-09-21. All at or below the $6/M output cap.
+    "Gemini 3.8 Flash": "$0.75 / $3.75 /M",
+    "Grok 4.7": "$1.60 / $4.80 /M",
+    "GLM-5.3 Flash": "$0.075 / $0.25 /M",
+    "GLM-5.3 FlashX": "$0.37 / $1.25 /M",
+    "Qwen 3.8 Max 0902": "$2 / $6 /M",
+    "DeepSeek V4.1 Flash": "$0.15 / $0.60 /M",
+    "Muse Spark 1.3": "$1.25 / $4.25 /M",
 }
 
 # Intelligence / price / speed data sourced from the Artificial Analysis leaderboard.
@@ -416,6 +477,13 @@ INTEL_DATA = {
     "Qwen 3.8 2.4T A95B": (58, 3.00, None),   # OR $2/$6, blended $3.0/M
     "Qwen 3.8 27B":       (52, 1.14, None),   # OR $0.45/$3.2, blended $1.14/M
     "Muse Spark 1.2":     (57, 0.60, None),   # OR $0.4/$1.2, blended $0.6/M
+    # The 8 models added 2026-09-21 deliberately have NO row here. AA re-baselined its
+    # Intelligence Index after this 2026-08-19 snapshot: the same models now score far
+    # lower on it (Claude Opus 5: 66 here vs 51 on the 2026-09-21 leaderboard; GPT-5.6
+    # Sol: 64 vs 47). Mixing new-scale numbers into this old-scale table would plot the
+    # new models against a chart that no longer shares their units, so the whole table
+    # needs ONE coordinated re-baseline first. Until then they just don't appear on the
+    # Chart view (same as Ox Alpha). See worktracker-676.4.22.167.4.
 }
 
 # Models marked Free on OpenRouter snap to this x-value so log scale still works.
@@ -476,26 +544,26 @@ CATEGORIES = [
     ]),
     ("Google", [
         ("Gemini Pro", ["Gemini 3.1 Pro", "Gemini 3 Pro", "Gemini 2.5 Pro"]),
-        ("Gemini Flash", ["Gemini 3.6 Flash", "Gemini 3.5 Flash Lite", "Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash", "Gemini 3.7 Flash"]),
+        ("Gemini Flash", ["Gemini 3.8 Flash", "Gemini 3.6 Flash", "Gemini 3.5 Flash Lite", "Gemini 3.5 Flash", "Gemini 3.1 Flash Lite", "Gemini 3 Flash", "Gemini 2.5 Flash", "Gemini 3.7 Flash"]),
         ("Gemma", ["Gemma 4 31B", "Gemma 4 26B-A4B"]),
     ]),
     ("xAI / Grok", [
-        ("Grok (flagship)", ["Grok 4.5", "Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3", "Grok 4.6"]),
+        ("Grok (flagship)", ["Grok 4.7", "Grok 4.5", "Grok 4.3", "Grok 4.20 Beta", "Grok 4", "Grok 3", "Grok 4.6"]),
         ("Grok Fast", ["Grok 4.1 Fast", "Grok 4 Fast"]),
         ("Grok Build", ["Grok Build 0.1"]),
         ("Grok Mini", ["Grok 3 Mini"]),
     ]),
     ("Chinese Models", [
         ("DeepSeek", ["DeepSeek V4 Pro", "DeepSeek V3.2 Speciale", "DeepSeek V3.2", "DeepSeek V3.1", "DeepSeek R1", "DeepSeek V4 Pro 0813"]),
-        ("DeepSeek Flash", ["DeepSeek V4 Flash 0731", "DeepSeek V4 Flash"]),
+        ("DeepSeek Flash", ["DeepSeek V4.1 Flash", "DeepSeek V4 Flash 0731", "DeepSeek V4 Flash"]),
         ("Kimi", ["Kimi K3", "Kimi K2.7 Code", "Kimi K2.6", "Kimi K2.5", "Kimi K2"]),
-        ("GLM", ["GLM-5.2", "GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5", "GLM-5.3"]),
+        ("GLM", ["GLM-5.3", "GLM-5.3 Flash", "GLM-5.3 FlashX", "GLM-5.2", "GLM-5V-Turbo", "GLM-5.1", "GLM-5 Turbo", "GLM-5"]),
     ]),
     ("Meta", [
-        ("Llama 4", ["Llama 4 Maverick", "Llama 4 Scout", "Muse Spark 1.2"]),
+        ("Llama 4", ["Llama 4 Maverick", "Llama 4 Scout", "Muse Spark 1.3", "Muse Spark 1.2"]),
     ]),
     ("Qwen", [
-        ("Qwen Max", ["Qwen 3.8 Max", "Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
+        ("Qwen Max", ["Qwen 3.8 Max 0902", "Qwen 3.8 Max", "Qwen 3.7 Max", "Qwen 3.6 Max", "Qwen3 Max Thinking"]),
         ("Qwen Plus", ["Qwen 3.7 Plus", "Qwen 3.6 Plus"]),
         ("Qwen Flash", ["Qwen 3.7 Flash", "Qwen 3.6 Flash"]),
         ("Qwen Flagship", ["Qwen 3.5 397B", "Qwen 3.5 122B", "Qwen3 235B (Full)", "Qwen 3.8 2.4T A95B"]),
