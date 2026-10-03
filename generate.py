@@ -660,7 +660,8 @@ def call_openrouter(name, model_id):
     best = None  # (svg, elapsed, error, usage)
     total_elapsed = 0.0
 
-    for attempt in range(attempts):
+    attempt = 0
+    while attempt < attempts:
         label = f"attempt {attempt + 1}/{attempts}" if attempts > 1 else "Requesting"
         print(f"  [{name}] {label} via OpenRouter...", flush=True)
         svg, elapsed, error, usage = _openrouter_attempt(name, model_id, has_reasoning_override)
@@ -673,6 +674,10 @@ def call_openrouter(name, model_id):
             print(f"  [{name}] {label} failed in {elapsed:.1f}s: {error}", flush=True)
         elif attempt < attempts - 1:
             print(f"  [{name}] {label} suspiciously short ({len(svg)} chars), retrying...", flush=True)
+        # Non-override models get one extra attempt on truncation (finish_reason=length).
+        if not has_reasoning_override and error and error.startswith("Truncated:") and attempt == 0:
+            attempts += 1
+        attempt += 1
 
     if best:
         svg, _, _, usage = best
